@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard1.1</TargetFramework>
+		<Description>Common data-access definitions.</Description>
+	</PropertyGroup>
+
+	<Import Project="..\..\build\Production.props" />
+
+</Project>
