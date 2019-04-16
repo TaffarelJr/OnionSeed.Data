@@ -21,6 +21,132 @@
             Gets the unique identity value.
             </summary>
         </member>
+        <member name="T:OnionSeed.Data.IQueryService`2">
+            <summary>
+            Defines a mechanism that can be used to query entities from a data store.
+            </summary>
+            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
+        </member>
+        <member name="M:OnionSeed.Data.IQueryService`2.GetCount">
+            <summary>
+            Gets the number of entities in the data store.
+            </summary>
+            <returns>The number of entities in the data store.</returns>
+        </member>
+        <member name="M:OnionSeed.Data.IQueryService`2.GetAll">
+            <summary>
+            Begins an enumeration of all entities in the data store.
+            </summary>
+            <returns>An enumeration of all entities in the data store.</returns>
+        </member>
+        <member name="M:OnionSeed.Data.IQueryService`2.GetById(`1)">
+            <summary>
+            Gets a specific entity from the data store by its unique identity value.
+            </summary>
+            <param name="id">The unique identity value of the entity.</param>
+            <returns>The entity that has the given unique identity value.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="id"/> is <c>null</c>.</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">The specified unique identity value does not exist in the data store.</exception>
+        </member>
+        <member name="M:OnionSeed.Data.IQueryService`2.TryGetById(`1,`0@)">
+            <summary>
+            Attempts to get a specific entity from the data store by its unique identity value.
+            </summary>
+            <param name="id">The unique identity value of the entity.</param>
+            <param name="result">When this method returns, contains the entity that has the given unique identity value,
+            or <c>null</c> if the specified entity was not found. This parameter is passed uninitialized;
+            any value originally supplied in <paramref name="result"/> will be overwritten.</param>
+            <returns><c>true</c> if the specified entity was found; otherwise, <c>false</c>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="id"/> is <c>null</c>.</exception>
+        </member>
+        <member name="T:OnionSeed.Data.IRepository`2">
+            <inheritdoc />
+            <summary>
+            Defines a mechanism that can be used to store entities in a data store
+            and query them back out again.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.IRepository`2.Add(`0)">
+            <summary>
+            Adds an entity to the data store.
+            </summary>
+            <param name="item">The entity to be added to the data store.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="item"/> is <c>null</c>.
+            -or- <paramref name="item"/> was not assigned a unique identity value.</exception>
+            <exception cref="T:System.ArgumentException">The data store already contains an entity with a matching unique identity value.</exception>
+        </member>
+        <member name="M:OnionSeed.Data.IRepository`2.AddOrUpdate(`0)">
+            <summary>
+            Adds an entity to the data store, or updates it if it already exists in the data store.
+            </summary>
+            <param name="item">The entity to be added to or updated in the data store.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="item"/> is <c>null</c>.
+            -or- <paramref name="item"/> was not assigned a unique identity value.</exception>
+        </member>
+        <member name="M:OnionSeed.Data.IRepository`2.Update(`0)">
+            <summary>
+            Updates the specified entity in the data store.
+            </summary>
+            <param name="item">The entity to be updated in the data store.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="item"/> is <c>null</c>.
+            -or- <paramref name="item"/> has a <c>null</c> unique identity value.</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">The specified entity was not found in the data store.</exception>
+        </member>
+        <member name="M:OnionSeed.Data.IRepository`2.Remove(`0)">
+            <summary>
+            Removes the given entity from the data store.
+            </summary>
+            <param name="item">The entity to be removed from the data store.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="item"/> is <c>null</c>.
+            -or- <paramref name="item"/> has a <c>null</c> unique identity value.</exception>
+            <remarks>If the given entity is not found in the data store, this method is a no-op.</remarks>
+        </member>
+        <member name="M:OnionSeed.Data.IRepository`2.Remove(`1)">
+            <summary>
+            Removes the specified entity from the data store.
+            </summary>
+            <param name="id">The unique identity value of the entity to be removed from the data store.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="id"/> is <c>null</c>.</exception>
+            <remarks>If the specified entity is not found in the data store, this method is a no-op.</remarks>
+        </member>
+        <member name="M:OnionSeed.Data.IRepository`2.TryAdd(`0)">
+            <summary>
+            Attempts to add an entity to the data store.
+            </summary>
+            <param name="item">The entity to be added to the data store.</param>
+            <returns><c>true</c> if the entity was added successfully; otherwise, <c>false</c>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="item"/> is <c>null</c>.
+            -or- <paramref name="item"/> has a <c>null</c> unique identity value.</exception>
+        </member>
+        <member name="M:OnionSeed.Data.IRepository`2.TryUpdate(`0)">
+            <summary>
+            Attempts to update the specified entity in the data store.
+            </summary>
+            <param name="item">The entity to be updated in the data store.</param>
+            <returns><c>true</c> if the entity was updated successfully; otherwise, <c>false</c>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="item"/> is <c>null</c>.
+            -or- <paramref name="item"/> has a <c>null</c> unique identity value.</exception>
+        </member>
+        <member name="M:OnionSeed.Data.IRepository`2.TryRemove(`0)">
+            <summary>
+            Attempts to remove the given entity from the data store.
+            </summary>
+            <param name="item">The entity to be removed from the data store.</param>
+            <returns><c>true</c> if the entity was removed successfully, or <c>false</c> if it was not found.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="item"/> is <c>null</c>.
+            -or- <paramref name="item"/> has a <c>null</c> unique identity value.</exception>
+            <remarks>If the given entity is not found in the data store, this method is a no-op.</remarks>
+        </member>
+        <member name="M:OnionSeed.Data.IRepository`2.TryRemove(`1)">
+            <summary>
+            Attempts to remove the specified entity from the data store.
+            </summary>
+            <param name="id">The unique identity value of the entity to be removed from the data store.</param>
+            <returns><c>true</c> if the entity was removed successfully, or <c>false</c> if it was not found.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="id"/> is <c>null</c>.</exception>
+            <remarks>If the specified entity is not found in the data store, this method is a no-op.</remarks>
+        </member>
         <member name="T:OnionSeed.Data.IWritableEntity`1">
             <inheritdoc />
             <summary>
