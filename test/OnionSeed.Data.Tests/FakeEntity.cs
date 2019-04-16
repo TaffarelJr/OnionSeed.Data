@@ -1,12 +1,11 @@
 ﻿using System;
-using OnionSeed.Types;
 
-namespace OnionSeed
+namespace OnionSeed.Data
 {
-	public class FakeEntity<TKey> : IWritableEntity<TKey>
-		where TKey : IEquatable<TKey>, IComparable<TKey>
+	public class FakeEntity<TIdentity> : IWritableEntity<TIdentity>
+		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
-		public TKey Id { get; set; }
+		public TIdentity Id { get; set; }
 
 		public string Name { get; set; }
 	}

@@ -4,7 +4,7 @@
         <name>OnionSeed.Data</name>
     </assembly>
     <members>
-        <member name="T:OnionSeed.Types.IEntity`1">
+        <member name="T:OnionSeed.Data.IEntity`1">
             <summary>
             Defines an object that is not fundamentally identified by its attributes, but rather by a unique identity value.
             </summary>
@@ -16,19 +16,19 @@
             Mistaken identity in these cases can lead to data corruption; thus, a unique identity value is created
             for the entity so it can be tracked regardless of the state of its attributes.</remarks>
         </member>
-        <member name="P:OnionSeed.Types.IEntity`1.Id">
+        <member name="P:OnionSeed.Data.IEntity`1.Id">
             <summary>
             Gets the unique identity value.
             </summary>
         </member>
-        <member name="T:OnionSeed.Types.IWritableEntity`1">
+        <member name="T:OnionSeed.Data.IWritableEntity`1">
             <inheritdoc />
             <summary>
             Represents an entity in a state where it's unique identity value can be set
             (for example, when creating a new instance or re-hydrating an instance from a data store).
             </summary>
         </member>
-        <member name="P:OnionSeed.Types.IWritableEntity`1.Id">
+        <member name="P:OnionSeed.Data.IWritableEntity`1.Id">
             <summary>
             Gets or sets the unique identity value.
             </summary>

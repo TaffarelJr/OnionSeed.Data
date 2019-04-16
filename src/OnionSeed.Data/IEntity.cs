@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnionSeed.Types
+namespace OnionSeed.Data
 {
 	/// <summary>
 	/// Defines an object that is not fundamentally identified by its attributes, but rather by a unique identity value.

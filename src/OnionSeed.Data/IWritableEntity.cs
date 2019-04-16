@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnionSeed.Types
+namespace OnionSeed.Data
 {
 	/// <inheritdoc />
 	/// <summary>
