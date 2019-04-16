@@ -1,0 +1,38 @@
+@startuml Entities
+
+title Entity Interfaces
+
+interface IEntity<TIdentity> {
+	{read-only} Id : TIdentity
+}
+
+interface IWritableEntity<TIdentity> {
+	Id : TIdentity
+}
+
+note left of IEntity
+	This is the main interface,
+	forcing all entities to
+	have a read-only ID value
+	of some equatable type.
+end note
+
+note right of IWritableEntity
+	This interface is specifically
+	intended for situations where
+	entities need to be able to
+	have their ID values set,
+	such as when creating a brand
+	new entity or rehydrating one
+	from a data store.
+end note
+
+note bottom of IEntity
+	<i>TIdentity</i> is:
+		<i>IEquatable<TIdentity></i>
+		<i>IComparable<TIdentity></i>
+end note
+
+IEntity <|- IWritableEntity : extends
+
+@enduml

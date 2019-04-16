@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="286px" preserveAspectRatio="none" style="width:828px;height:286px;" version="1.1" viewBox="0 0 828 286" width="828px" zoomAndPan="magnify"><defs><filter height="300%" id="f1ivl5yvq371rw" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="128" x="353" y="18.6855">Entity Interfaces</text><!--class IEntity--><rect fill="#FEFECE" filter="url(#f1ivl5yvq371rw)" height="61.8359" id="IEntity" style="stroke: #A80036; stroke-width: 1.5;" width="126" x="211" y="61.6406"/><ellipse cx="230.05" cy="77.6406" fill="#B4A7E5" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M231.0031,74.2813 L231.0031,80.9375 L232.7219,80.9375 Q233.3313,80.9375 233.5969,81.1719 Q233.8625,81.4063 233.8625,81.7969 Q233.8625,82.1719 233.5969,82.4063 Q233.3313,82.6406 232.7219,82.6406 L227.5813,82.6406 Q226.9719,82.6406 226.7063,82.4063 Q226.4406,82.1719 226.4406,81.7813 Q226.4406,81.4063 226.7063,81.1719 Q226.9719,80.9375 227.5813,80.9375 L229.3,80.9375 L229.3,74.2813 L227.5813,74.2813 Q226.9719,74.2813 226.7063,74.0469 Q226.4406,73.8125 226.4406,73.4219 Q226.4406,73.0469 226.7063,72.8125 Q226.9719,72.5781 227.5813,72.5781 L232.7219,72.5781 Q233.3313,72.5781 233.5969,72.8125 Q233.8625,73.0469 233.8625,73.4219 Q233.8625,73.8125 233.5969,74.0469 Q233.3313,74.2813 232.7219,74.2813 L231.0031,74.2813 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="34" x="244.95" y="82.5508">IEntity</text><rect fill="#FFFFFF" height="17.0938" style="stroke: #000000; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" width="49" x="291" y="58.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="47" x="292" y="72.0977">TIdentity</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="212" x2="336" y1="93.6406" y2="93.6406"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="114" x="217" y="109.0596">{read-only} Id : TIdentity</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="212" x2="336" y1="115.4766" y2="115.4766"/><!--class IWritableEntity--><rect fill="#FEFECE" filter="url(#f1ivl5yvq371rw)" height="61.8359" id="IWritableEntity" style="stroke: #A80036; stroke-width: 1.5;" width="163" x="419.5" y="61.6406"/><ellipse cx="434.5" cy="77.6406" fill="#B4A7E5" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M435.4531,74.2813 L435.4531,80.9375 L437.1719,80.9375 Q437.7813,80.9375 438.0469,81.1719 Q438.3125,81.4063 438.3125,81.7969 Q438.3125,82.1719 438.0469,82.4063 Q437.7813,82.6406 437.1719,82.6406 L432.0313,82.6406 Q431.4219,82.6406 431.1563,82.4063 Q430.8906,82.1719 430.8906,81.7813 Q430.8906,81.4063 431.1563,81.1719 Q431.4219,80.9375 432.0313,80.9375 L433.75,80.9375 L433.75,74.2813 L432.0313,74.2813 Q431.4219,74.2813 431.1563,74.0469 Q430.8906,73.8125 430.8906,73.4219 Q430.8906,73.0469 431.1563,72.8125 Q431.4219,72.5781 432.0313,72.5781 L437.1719,72.5781 Q437.7813,72.5781 438.0469,72.8125 Q438.3125,73.0469 438.3125,73.4219 Q438.3125,73.8125 438.0469,74.0469 Q437.7813,74.2813 437.1719,74.2813 L435.4531,74.2813 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="80" x="448.5" y="82.5508">IWritableEntity</text><rect fill="#FFFFFF" height="17.0938" style="stroke: #000000; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" width="49" x="536.5" y="58.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="47" x="537.5" y="72.0977">TIdentity</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="420.5" x2="581.5" y1="93.6406" y2="93.6406"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="57" x="425.5" y="109.0596">Id : TIdentity</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="420.5" x2="581.5" y1="115.4766" y2="115.4766"/><path d="M6,55.1406 L6,130.5469 A0,0 0 0 0 6,130.5469 L176,130.5469 A0,0 0 0 0 176,130.5469 L176,96.6406 L210.879,92.6406 L176,88.6406 L176,65.1406 L166,55.1406 L6,55.1406 A0,0 0 0 0 6,55.1406 " fill="#FBFB77" filter="url(#f1ivl5yvq371rw)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M166,55.1406 L166,65.1406 L176,65.1406 L166,55.1406 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="149" x="12" y="73.6357">This is the main interface,</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="116" x="12" y="89.9873">forcing all entities to</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="143" x="12" y="106.3389">have a read-only ID value</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="139" x="12" y="122.6904">of some equatable type.</text><path d="M618,30.6406 L618,88.6406 L582.844,92.6406 L618,96.6406 L618,155.1016 A0,0 0 0 0 618,155.1016 L816,155.1016 A0,0 0 0 0 816,155.1016 L816,40.6406 L806,30.6406 L618,30.6406 A0,0 0 0 0 618,30.6406 " fill="#FBFB77" filter="url(#f1ivl5yvq371rw)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M806,30.6406 L806,40.6406 L816,40.6406 L806,30.6406 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="159" x="624" y="49.1357">This interface is specifically</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="165" x="624" y="65.4873">intended for situations where</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="150" x="624" y="81.8389">entities need to be able to</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="137" x="624" y="98.1904">have their ID values set,</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="177" x="624" y="114.542">such as when creating a brand</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="167" x="624" y="130.8936">new entity or rehydrating one</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="102" x="624" y="147.2451">from a data store.</text><path d="M177.5,215.6406 L177.5,274.6953 A0,0 0 0 0 177.5,274.6953 L370.5,274.6953 A0,0 0 0 0 370.5,274.6953 L370.5,225.6406 L360.5,215.6406 L278,215.6406 L274,123.7346 L270,215.6406 L177.5,215.6406 A0,0 0 0 0 177.5,215.6406 " fill="#FBFB77" filter="url(#f1ivl5yvq371rw)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M360.5,215.6406 L360.5,225.6406 L370.5,225.6406 L360.5,215.6406 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="50" x="183.5" y="234.1357">TIdentity</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="14" x="237.5" y="234.1357">is:</text><text fill="#000000" font-family="sans-serif" font-size="13" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="129" x="215.5" y="250.4873">IEquatable&lt;TIdentity&gt;</text><text fill="#000000" font-family="sans-serif" font-size="13" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="140" x="215.5" y="266.8389">IComparable&lt;TIdentity&gt;</text><!--link IEntity to IWritableEntity--><path d="M357.323,92.6406 C377.583,92.6406 399.225,92.6406 419.404,92.6406 " fill="none" id="IEntity-IWritableEntity" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="none" points="357.232,99.6406,337.232,92.6406,357.232,85.6406,357.232,99.6406" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="46" x="355.25" y="86.1357">extends</text><!--
+@startuml Entities
+
+title Entity Interfaces
+
+interface IEntity<TIdentity> {
+	{read-only} Id : TIdentity
+}
+
+interface IWritableEntity<TIdentity> {
+	Id : TIdentity
+}
+
+note left of IEntity
+	This is the main interface,
+	forcing all entities to
+	have a read-only ID value
+	of some equatable type.
+end note
+
+note right of IWritableEntity
+	This interface is specifically
+	intended for situations where
+	entities need to be able to
+	have their ID values set,
+	such as when creating a brand
+	new entity or rehydrating one
+	from a data store.
+end note
+
+note bottom of IEntity
+	<i>TIdentity</i> is:
+		<i>IEquatable<TIdentity></i>
+		<i>IComparable<TIdentity></i>
+end note
+
+IEntity <|- IWritableEntity : extends
+
+@enduml
+
+PlantUML version 1.2019.03(Sun Mar 10 05:04:44 MDT 2019)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 11.0.1+13-LTS
+Operating System: Windows 10
+OS Version: 10.0
+Default Encoding: Cp1252
+Language: en
+Country: US
+--></g></svg>
