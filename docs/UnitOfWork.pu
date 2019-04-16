@@ -1,0 +1,44 @@
+@startuml UnitOfWork
+
+!define Namespace #White
+
+title Unit of Work Pattern
+
+node "OnionSeed.Data.SqlServer.dll" as SqlServer #LightGreen {
+	class SqlUnitOfWork {
+		+ ctor(SqlConnection connection)
+	}
+}
+
+node "OnionSeed.Data.dll" as OnionSeed #LightBlue {
+	interface IUnitOfWork {
+		Commit()
+	}
+
+	interface IAsyncUnitOfWork {
+		CommitAsync() : Task
+	}
+}
+
+SqlUnitOfWork ..|> IUnitOfWork : implements
+SqlUnitOfWork ..|> IAsyncUnitOfWork : implements
+
+note as UnitOfWorkNote
+	An implementation of <i>IRepository</i> may very well
+	implement <i>IUnitOfWork</i> as well; both interfaces
+	often apply to the same construct (i.e. a database
+	connection object).
+
+	However there is no reason for the interfaces to be
+	related, as they are often used in different contexts.
+	For example, a web service might use an <i>IRepository</i>
+	to perform a set of operations, and then a global wrapper
+	around the web service may use the <i>IUnitOfWork</i> to
+	commit all the changes.
+
+	Keeping the interfaces separate gives maximum flexibility
+	in how they are consumed, while still allowing for a
+	single, shared implementation class.
+end note
+
+@enduml
