@@ -141,6 +141,17 @@
             <exception cref="T:System.ArgumentNullException"><paramref name="id"/> is <c>null</c>.</exception>
             <remarks>If the specified entity is not found in the data store, this method is a no-op.</remarks>
         </member>
+        <member name="T:OnionSeed.Data.IAsyncUnitOfWork">
+            <summary>
+            Defines an atomic transaction whose changes are to be asynchronously committed as a collective whole.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.IAsyncUnitOfWork.CommitAsync">
+            <summary>
+            Commits any pending changes.
+            </summary>
+            <returns>A task representing the operation.</returns>
+        </member>
         <member name="T:OnionSeed.Data.IEntity`1">
             <summary>
             Defines an object that is not fundamentally identified by its attributes, but rather by a unique identity value.
@@ -283,6 +294,16 @@
             <returns><c>true</c> if the entity was removed successfully, or <c>false</c> if it was not found.</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="id"/> is <c>null</c>.</exception>
             <remarks>If the specified entity is not found in the data store, this method is a no-op.</remarks>
+        </member>
+        <member name="T:OnionSeed.Data.IUnitOfWork">
+            <summary>
+            Defines an atomic transaction whose changes are to be committed as a collective whole.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.IUnitOfWork.Commit">
+            <summary>
+            Commits any pending changes.
+            </summary>
         </member>
         <member name="T:OnionSeed.Data.IWritableEntity`1">
             <inheritdoc />
