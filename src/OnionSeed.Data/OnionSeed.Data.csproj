@@ -2,7 +2,8 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard1.1</TargetFramework>
-		<Description>Common data-access definitions.</Description>
+		<Description>Common data-access components.</Description>
+		<RepositoryUrl>https://github.com/TaffarelJr/OnionSeed.Data.git</RepositoryUrl>
 	</PropertyGroup>
 
 	<Import Project="..\..\build\Production.props" />
