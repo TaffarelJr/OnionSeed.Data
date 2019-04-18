@@ -35,7 +35,7 @@
         <member name="M:OnionSeed.Data.Decorators.AsyncQueryServiceDecorator`2.TryGetByIdAsync(`1)">
             <inheritdoc/>
         </member>
-        <member name="T:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandler`3">
+        <member name="T:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandlerDecorator`3">
             <inheritdoc/>
             <summary>
             Wraps a given <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> and handles any exceptions of the specified type.
@@ -44,31 +44,33 @@
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <typeparam name="TException">"The type of exception to be handled.</typeparam>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandler`3.#ctor(OnionSeed.Data.IAsyncQueryService{`0,`1},System.Func{`2,System.Boolean})">
+        <member name="M:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandlerDecorator`3.#ctor(OnionSeed.Data.IAsyncQueryService{`0,`1},System.Func{`2,System.Boolean})">
             <summary>
-            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandler`3"/> class,
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandlerDecorator`3"/> class,
             decorating the given <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/>.
             </summary>
             <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> to be decorated.</param>
-            <param name="handler">The handler that will be called when an exception is caught.</param>
+            <param name="handler">The handler that will be called when an exception is caught.
+            This delegate must return a flag indicating if the exception was handled.
+            If it wasn't, it will be re-thrown after processing.</param>
             <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
             -or- <paramref name="handler"/> is <c>null</c>.</exception>
         </member>
-        <member name="P:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandler`3.Handler">
+        <member name="P:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandlerDecorator`3.Handler">
             <summary>
             Gets a reference to the handler that will be called when an exception is caught.
             </summary>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandler`3.GetCountAsync">
+        <member name="M:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandlerDecorator`3.GetCountAsync">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandler`3.GetAllAsync">
+        <member name="M:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandlerDecorator`3.GetAllAsync">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandler`3.GetByIdAsync(`1)">
+        <member name="M:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandlerDecorator`3.GetByIdAsync(`1)">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandler`3.TryGetByIdAsync(`1)">
+        <member name="M:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandlerDecorator`3.TryGetByIdAsync(`1)">
             <inheritdoc/>
         </member>
         <member name="T:OnionSeed.Data.Decorators.AsyncRepositoryDecorator`2">
@@ -129,52 +131,69 @@
         <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryDecorator`2.TryRemoveAsync(`1)">
             <inheritdoc/>
         </member>
-        <member name="T:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandler`3">
+        <member name="T:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3">
             <inheritdoc/>
             <summary>
             Wraps a given <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> and handles any exceptions of the specified type.
             </summary>
+            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
+            <typeparam name="TException">"The type of exception to be handled.</typeparam>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandler`3.#ctor(OnionSeed.Data.IAsyncRepository{`0,`1},System.Func{`2,System.Boolean})">
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3.#ctor(OnionSeed.Data.IAsyncRepository{`0,`1},System.Func{`2,System.Boolean})">
             <summary>
-            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandler`3"/> class,
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3"/> class,
             decorating the given <see cref="T:OnionSeed.Data.IAsyncRepository`2"/>.
             </summary>
             <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> to be decorated.</param>
-            <param name="handler">The handler that will be called when an exception is caught.</param>
+            <param name="handler">The handler that will be called when an exception is caught.
+            This delegate must return a flag indicating if the exception was handled.
+            If it wasn't, it will be re-thrown after processing.</param>
             <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
             -or- <paramref name="handler"/> is <c>null</c>.</exception>
         </member>
-        <member name="P:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandler`3.Inner">
+        <member name="P:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3.Handler">
             <summary>
-            Gets a reference to the <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> being decorated.
+            Gets a reference to the handler that will be called when an exception is caught.
             </summary>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandler`3.AddAsync(`0)">
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3.GetCountAsync">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandler`3.AddOrUpdateAsync(`0)">
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3.GetAllAsync">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandler`3.UpdateAsync(`0)">
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3.GetByIdAsync(`1)">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandler`3.RemoveAsync(`0)">
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3.TryGetByIdAsync(`1)">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandler`3.RemoveAsync(`1)">
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3.AddAsync(`0)">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandler`3.TryAddAsync(`0)">
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3.AddOrUpdateAsync(`0)">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandler`3.TryUpdateAsync(`0)">
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3.UpdateAsync(`0)">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandler`3.TryRemoveAsync(`0)">
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3.RemoveAsync(`0)">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandler`3.TryRemoveAsync(`1)">
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3.RemoveAsync(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3.TryAddAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3.TryUpdateAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3.TryRemoveAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3.TryRemoveAsync(`1)">
             <inheritdoc/>
         </member>
         <member name="T:OnionSeed.Data.Decorators.AsyncUnitOfWorkDecorator">
@@ -199,29 +218,31 @@
         <member name="M:OnionSeed.Data.Decorators.AsyncUnitOfWorkDecorator.CommitAsync">
             <inheritdoc/>
         </member>
-        <member name="T:OnionSeed.Data.Decorators.AsyncUnitOfWorkExceptionHandler`1">
+        <member name="T:OnionSeed.Data.Decorators.AsyncUnitOfWorkExceptionHandlerDecorator`1">
             <inheritdoc/>
             <summary>
             Wraps a given <see cref="T:OnionSeed.Data.IAsyncUnitOfWork"/> and handles any exceptions of the specified type.
             </summary>
             <typeparam name="TException">"The type of exception to be handled.</typeparam>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.AsyncUnitOfWorkExceptionHandler`1.#ctor(OnionSeed.Data.IAsyncUnitOfWork,System.Func{`0,System.Boolean})">
+        <member name="M:OnionSeed.Data.Decorators.AsyncUnitOfWorkExceptionHandlerDecorator`1.#ctor(OnionSeed.Data.IAsyncUnitOfWork,System.Func{`0,System.Boolean})">
             <summary>
-            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.AsyncUnitOfWorkExceptionHandler`1"/> class,
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.AsyncUnitOfWorkExceptionHandlerDecorator`1"/> class,
             decorating the given <see cref="T:OnionSeed.Data.IAsyncUnitOfWork"/>.
             </summary>
             <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncUnitOfWork"/> to be decorated.</param>
-            <param name="handler">The handler that will be called when an exception is caught.</param>
+            <param name="handler">The handler that will be called when an exception is caught.
+            This delegate must return a flag indicating if the exception was handled.
+            If it wasn't, it will be re-thrown after processing.</param>
             <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
             -or- <paramref name="handler"/> is <c>null</c>.</exception>
         </member>
-        <member name="P:OnionSeed.Data.Decorators.AsyncUnitOfWorkExceptionHandler`1.Handler">
+        <member name="P:OnionSeed.Data.Decorators.AsyncUnitOfWorkExceptionHandlerDecorator`1.Handler">
             <summary>
             Gets a reference to the handler that will be called when an exception is caught.
             </summary>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.AsyncUnitOfWorkExceptionHandler`1.CommitAsync">
+        <member name="M:OnionSeed.Data.Decorators.AsyncUnitOfWorkExceptionHandlerDecorator`1.CommitAsync">
             <inheritdoc/>
         </member>
         <member name="T:OnionSeed.Data.Decorators.QueryServiceDecorator`2">
@@ -255,7 +276,7 @@
         <member name="M:OnionSeed.Data.Decorators.QueryServiceDecorator`2.TryGetById(`1,`0@)">
             <inheritdoc/>
         </member>
-        <member name="T:OnionSeed.Data.Decorators.QueryServiceExceptionHandler`3">
+        <member name="T:OnionSeed.Data.Decorators.QueryServiceExceptionHandlerDecorator`3">
             <inheritdoc/>
             <summary>
             Wraps a given <see cref="T:OnionSeed.Data.IQueryService`2"/> and handles any exceptions of the specified type.
@@ -264,9 +285,9 @@
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <typeparam name="TException">"The type of exception to be handled.</typeparam>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.QueryServiceExceptionHandler`3.#ctor(OnionSeed.Data.IQueryService{`0,`1},System.Func{`2,System.Boolean})">
+        <member name="M:OnionSeed.Data.Decorators.QueryServiceExceptionHandlerDecorator`3.#ctor(OnionSeed.Data.IQueryService{`0,`1},System.Func{`2,System.Boolean})">
             <summary>
-            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.QueryServiceExceptionHandler`3"/> class,
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.QueryServiceExceptionHandlerDecorator`3"/> class,
             decorating the given <see cref="T:OnionSeed.Data.IQueryService`2"/>.
             </summary>
             <param name="inner">The <see cref="T:OnionSeed.Data.IQueryService`2"/> to be decorated.</param>
@@ -276,21 +297,21 @@
             <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
             -or- <paramref name="handler"/> is <c>null</c>.</exception>
         </member>
-        <member name="P:OnionSeed.Data.Decorators.QueryServiceExceptionHandler`3.Handler">
+        <member name="P:OnionSeed.Data.Decorators.QueryServiceExceptionHandlerDecorator`3.Handler">
             <summary>
             Gets a reference to the handler that will be called when an exception is caught.
             </summary>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.QueryServiceExceptionHandler`3.GetCount">
+        <member name="M:OnionSeed.Data.Decorators.QueryServiceExceptionHandlerDecorator`3.GetCount">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.QueryServiceExceptionHandler`3.GetAll">
+        <member name="M:OnionSeed.Data.Decorators.QueryServiceExceptionHandlerDecorator`3.GetAll">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.QueryServiceExceptionHandler`3.GetById(`1)">
+        <member name="M:OnionSeed.Data.Decorators.QueryServiceExceptionHandlerDecorator`3.GetById(`1)">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.QueryServiceExceptionHandler`3.TryGetById(`1,`0@)">
+        <member name="M:OnionSeed.Data.Decorators.QueryServiceExceptionHandlerDecorator`3.TryGetById(`1,`0@)">
             <inheritdoc/>
         </member>
         <member name="T:OnionSeed.Data.Decorators.RepositoryDecorator`2">
@@ -351,52 +372,69 @@
         <member name="M:OnionSeed.Data.Decorators.RepositoryDecorator`2.TryRemove(`1)">
             <inheritdoc/>
         </member>
-        <member name="T:OnionSeed.Data.Decorators.RepositoryExceptionHandler`3">
+        <member name="T:OnionSeed.Data.Decorators.RepositoryExceptionHandlerDecorator`3">
             <inheritdoc/>
             <summary>
             Wraps a given <see cref="T:OnionSeed.Data.IRepository`2"/> and handles any exceptions of the specified type.
             </summary>
+            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
+            <typeparam name="TException">"The type of exception to be handled.</typeparam>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandler`3.#ctor(OnionSeed.Data.IRepository{`0,`1},System.Func{`2,System.Boolean})">
+        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandlerDecorator`3.#ctor(OnionSeed.Data.IRepository{`0,`1},System.Func{`2,System.Boolean})">
             <summary>
-            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.RepositoryExceptionHandler`3"/> class,
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.RepositoryExceptionHandlerDecorator`3"/> class,
             decorating the given <see cref="T:OnionSeed.Data.IRepository`2"/>.
             </summary>
             <param name="inner">The <see cref="T:OnionSeed.Data.IRepository`2"/> to be decorated.</param>
-            <param name="handler">The handler that will be called when an exception is caught.</param>
+            <param name="handler">The handler that will be called when an exception is caught.
+            This delegate must return a flag indicating if the exception was handled.
+            If it wasn't, it will be re-thrown after processing.</param>
             <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
             -or- <paramref name="handler"/> is <c>null</c>.</exception>
         </member>
-        <member name="P:OnionSeed.Data.Decorators.RepositoryExceptionHandler`3.Inner">
+        <member name="P:OnionSeed.Data.Decorators.RepositoryExceptionHandlerDecorator`3.Handler">
             <summary>
-            Gets a reference to the <see cref="T:OnionSeed.Data.IRepository`2"/> being decorated.
+            Gets a reference to the handler that will be called when an exception is caught.
             </summary>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandler`3.Add(`0)">
+        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandlerDecorator`3.GetCount">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandler`3.AddOrUpdate(`0)">
+        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandlerDecorator`3.GetAll">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandler`3.Update(`0)">
+        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandlerDecorator`3.GetById(`1)">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandler`3.Remove(`0)">
+        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandlerDecorator`3.TryGetById(`1,`0@)">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandler`3.Remove(`1)">
+        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandlerDecorator`3.Add(`0)">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandler`3.TryAdd(`0)">
+        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandlerDecorator`3.AddOrUpdate(`0)">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandler`3.TryUpdate(`0)">
+        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandlerDecorator`3.Update(`0)">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandler`3.TryRemove(`0)">
+        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandlerDecorator`3.Remove(`0)">
             <inheritdoc/>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandler`3.TryRemove(`1)">
+        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandlerDecorator`3.Remove(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandlerDecorator`3.TryAdd(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandlerDecorator`3.TryUpdate(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandlerDecorator`3.TryRemove(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandlerDecorator`3.TryRemove(`1)">
             <inheritdoc/>
         </member>
         <member name="T:OnionSeed.Data.Decorators.UnitOfWorkDecorator">
@@ -421,16 +459,16 @@
         <member name="M:OnionSeed.Data.Decorators.UnitOfWorkDecorator.Commit">
             <inheritdoc/>
         </member>
-        <member name="T:OnionSeed.Data.Decorators.UnitOfWorkExceptionHandler`1">
+        <member name="T:OnionSeed.Data.Decorators.UnitOfWorkExceptionHandlerDecorator`1">
             <inheritdoc/>
             <summary>
             Wraps a given <see cref="T:OnionSeed.Data.IUnitOfWork"/> and handles any exceptions of the specified type.
             </summary>
             <typeparam name="TException">"The type of exception to be handled.</typeparam>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.UnitOfWorkExceptionHandler`1.#ctor(OnionSeed.Data.IUnitOfWork,System.Func{`0,System.Boolean})">
+        <member name="M:OnionSeed.Data.Decorators.UnitOfWorkExceptionHandlerDecorator`1.#ctor(OnionSeed.Data.IUnitOfWork,System.Func{`0,System.Boolean})">
             <summary>
-            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.UnitOfWorkExceptionHandler`1"/> class,
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.UnitOfWorkExceptionHandlerDecorator`1"/> class,
             decorating the given <see cref="T:OnionSeed.Data.IUnitOfWork"/>.
             </summary>
             <param name="inner">The <see cref="T:OnionSeed.Data.IUnitOfWork"/> to be decorated.</param>
@@ -440,12 +478,12 @@
             <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
             -or- <paramref name="handler"/> is <c>null</c>.</exception>
         </member>
-        <member name="P:OnionSeed.Data.Decorators.UnitOfWorkExceptionHandler`1.Handler">
+        <member name="P:OnionSeed.Data.Decorators.UnitOfWorkExceptionHandlerDecorator`1.Handler">
             <summary>
             Gets a reference to the handler that will be called when an exception is caught.
             </summary>
         </member>
-        <member name="M:OnionSeed.Data.Decorators.UnitOfWorkExceptionHandler`1.Commit">
+        <member name="M:OnionSeed.Data.Decorators.UnitOfWorkExceptionHandlerDecorator`1.Commit">
             <inheritdoc/>
         </member>
         <member name="T:OnionSeed.Data.IAsyncQueryService`2">
