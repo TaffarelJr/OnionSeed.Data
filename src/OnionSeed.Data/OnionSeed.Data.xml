@@ -201,6 +201,69 @@
         <member name="M:OnionSeed.Data.Decorators.AsyncCommandServiceExceptionHandlerDecorator`3.TryRemoveAsync(`1)">
             <inheritdoc/>
         </member>
+        <member name="T:OnionSeed.Data.Decorators.AsyncCommandServiceTapDecorator`2">
+            <inheritdoc/>
+            <summary>
+            Decorates an <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>, mirroring commands to a secondary, "tap" <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>.
+            </summary>
+            <remarks>This decorator functions like a network tap: commands are executed first against the inner command service;
+            if they succeed, they are then executed against the tap command service as well.
+            Any values returned or exceptions thrown from the tap command service are ignored.
+            <para>This essentially allows for the creation of a duplicate copy of the data,
+            and is intended to be used for things like caching, backup, or reporting.</para></remarks>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncCommandServiceTapDecorator`2.#ctor(OnionSeed.Data.IAsyncCommandService{`0,`1},OnionSeed.Data.IAsyncCommandService{`0,`1},Microsoft.Extensions.Logging.ILogger,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.AsyncCommandServiceTapDecorator`2"/> class.
+            </summary>
+            <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> to be decorated.</param>
+            <param name="tap">The tap <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>, where commands will be duplicated.</param>
+            <param name="logger">The logger where tap exceptions should be written. Optional.</param>
+            <param name="parallelMode">A value indicating whether the inner and tap should be called simultaneously.
+            This behavior gives better performance, as both command services are executing in parallel. However it is
+            also riskier because if an exception is thrown from one of them, they can become out-of-sync.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
+            -or- <paramref name="tap"/> is <c>null</c>.</exception>
+        </member>
+        <member name="P:OnionSeed.Data.Decorators.AsyncCommandServiceTapDecorator`2.Tap">
+            <summary>
+            Gets a reference to the tap <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>.
+            </summary>
+        </member>
+        <member name="P:OnionSeed.Data.Decorators.AsyncCommandServiceTapDecorator`2.ParallelMode">
+            <summary>
+            Gets a value indicating whether the inner and tap should be called simultaneously.
+            </summary>
+            <remarks>This behavior gives better performance, as both command services are executing in parallel.
+            However it is also riskier because if an exception is thrown from one of them, they can become out-of-sync.</remarks>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncCommandServiceTapDecorator`2.AddAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncCommandServiceTapDecorator`2.AddOrUpdateAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncCommandServiceTapDecorator`2.UpdateAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncCommandServiceTapDecorator`2.RemoveAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncCommandServiceTapDecorator`2.RemoveAsync(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncCommandServiceTapDecorator`2.TryAddAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncCommandServiceTapDecorator`2.TryUpdateAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncCommandServiceTapDecorator`2.TryRemoveAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncCommandServiceTapDecorator`2.TryRemoveAsync(`1)">
+            <inheritdoc/>
+        </member>
         <member name="T:OnionSeed.Data.Decorators.AsyncQueryServiceDecorator`2">
             <inheritdoc/>
             <summary>
@@ -393,6 +456,69 @@
         <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3.TryRemoveAsync(`1)">
             <inheritdoc/>
         </member>
+        <member name="T:OnionSeed.Data.Decorators.AsyncRepositoryTapDecorator`2">
+            <inheritdoc/>
+            <summary>
+            Decorates an <see cref="T:OnionSeed.Data.IAsyncRepository`2"/>, mirroring commands to a secondary, "tap" <see cref="T:OnionSeed.Data.IAsyncRepository`2"/>.
+            </summary>
+            <remarks>This decorator functions like a network tap: commands are executed first against the inner repository;
+            if they succeed, they are then executed against the tap repository as well.
+            Any values returned or exceptions thrown from the tap repository are ignored.
+            <para>This essentially allows for the creation of a duplicate copy of the data,
+            and is intended to be used for things like caching, backup, or reporting.</para></remarks>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryTapDecorator`2.#ctor(OnionSeed.Data.IAsyncRepository{`0,`1},OnionSeed.Data.IAsyncRepository{`0,`1},Microsoft.Extensions.Logging.ILogger,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.AsyncRepositoryTapDecorator`2"/> class.
+            </summary>
+            <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> to be decorated.</param>
+            <param name="tap">The tap <see cref="T:OnionSeed.Data.IAsyncRepository`2"/>, where commands will be duplicated.</param>
+            <param name="logger">The logger where tap exceptions should be written. Optional.</param>
+            <param name="parallelMode">A value indicating whether the inner and tap should be called simultaneously.
+            This behavior gives better performance, as both repositories are executing in parallel. However it is
+            also riskier because if an exception is thrown from one of them, they can become out-of-sync.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
+            -or- <paramref name="tap"/> is <c>null</c>.</exception>
+        </member>
+        <member name="P:OnionSeed.Data.Decorators.AsyncRepositoryTapDecorator`2.Tap">
+            <summary>
+            Gets a reference to the tap <see cref="T:OnionSeed.Data.IAsyncRepository`2"/>.
+            </summary>
+        </member>
+        <member name="P:OnionSeed.Data.Decorators.AsyncRepositoryTapDecorator`2.ParallelMode">
+            <summary>
+            Gets a value indicating whether the inner and tap should be called simultaneously.
+            </summary>
+            <remarks>This behavior gives better performance, as both repositories are executing in parallel.
+            However it is also riskier because if an exception is thrown from one of them, they can become out-of-sync.</remarks>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryTapDecorator`2.AddAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryTapDecorator`2.AddOrUpdateAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryTapDecorator`2.UpdateAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryTapDecorator`2.RemoveAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryTapDecorator`2.RemoveAsync(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryTapDecorator`2.TryAddAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryTapDecorator`2.TryUpdateAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryTapDecorator`2.TryRemoveAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncRepositoryTapDecorator`2.TryRemoveAsync(`1)">
+            <inheritdoc/>
+        </member>
         <member name="T:OnionSeed.Data.Decorators.AsyncUnitOfWorkDecorator">
             <inheritdoc/>
             <summary>
@@ -440,6 +566,45 @@
             </summary>
         </member>
         <member name="M:OnionSeed.Data.Decorators.AsyncUnitOfWorkExceptionHandlerDecorator`1.CommitAsync">
+            <inheritdoc/>
+        </member>
+        <member name="T:OnionSeed.Data.Decorators.AsyncUnitOfWorkTapDecorator">
+            <inheritdoc/>
+            <summary>
+            Decorates an <see cref="T:OnionSeed.Data.IAsyncUnitOfWork"/>, mirroring commands to a secondary, "tap" <see cref="T:OnionSeed.Data.IAsyncUnitOfWork"/>.
+            </summary>
+            <remarks>This decorator functions like a network tap: commands are executed first against the inner unit of work;
+            if they succeed, they are then executed against the tap unit of work as well.
+            Any values returned or exceptions thrown from the tap unit of work are ignored.
+            <para>This essentially allows for the creation of a duplicate copy of the data,
+            and is intended to be used for things like caching, backup, or reporting.</para></remarks>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncUnitOfWorkTapDecorator.#ctor(OnionSeed.Data.IAsyncUnitOfWork,OnionSeed.Data.IAsyncUnitOfWork,Microsoft.Extensions.Logging.ILogger,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.AsyncUnitOfWorkTapDecorator"/> class.
+            </summary>
+            <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncUnitOfWork"/> to be decorated.</param>
+            <param name="tap">The tap <see cref="T:OnionSeed.Data.IAsyncUnitOfWork"/>, where commands will be mirrored.</param>
+            <param name="logger">The logger where tap exceptions should be written. Optional.</param>
+            <param name="parallelMode">A value indicating whether the inner and tap should be called simultaneously.
+            This behavior gives better performance, as both units of work are executing in parallel. However it is
+            also riskier because if an exception is thrown from one of them, they can become out-of-sync.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
+            -or- <paramref name="tap"/> is <c>null</c>.</exception>
+        </member>
+        <member name="P:OnionSeed.Data.Decorators.AsyncUnitOfWorkTapDecorator.Tap">
+            <summary>
+            Gets a reference to the tap <see cref="T:OnionSeed.Data.IAsyncUnitOfWork"/>.
+            </summary>
+        </member>
+        <member name="P:OnionSeed.Data.Decorators.AsyncUnitOfWorkTapDecorator.ParallelMode">
+            <summary>
+            Gets a value indicating whether the inner and tap should be called simultaneously.
+            </summary>
+            <remarks>This behavior gives better performance, as both units of work are executing in parallel.
+            However it is also riskier because if an exception is thrown from one of them, they can become out-of-sync.</remarks>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.AsyncUnitOfWorkTapDecorator.CommitAsync">
             <inheritdoc/>
         </member>
         <member name="T:OnionSeed.Data.Decorators.CommandServiceDecorator`2">
@@ -539,6 +704,59 @@
             <inheritdoc/>
         </member>
         <member name="M:OnionSeed.Data.Decorators.CommandServiceExceptionHandlerDecorator`3.TryRemove(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="T:OnionSeed.Data.Decorators.CommandServiceTapDecorator`2">
+            <inheritdoc/>
+            <summary>
+            Decorates an <see cref="T:OnionSeed.Data.ICommandService`2"/>, mirroring commands to a secondary, "tap" <see cref="T:OnionSeed.Data.ICommandService`2"/>.
+            </summary>
+            <remarks>This decorator functions like a network tap: commands are executed first against the inner command service;
+            if they succeed, they are then executed against the tap command service as well.
+            Any values returned or exceptions thrown from the tap command service are ignored.
+            <para>This essentially allows for the creation of a duplicate copy of the data,
+            and is intended to be used for things like caching, backup, or reporting.</para></remarks>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.CommandServiceTapDecorator`2.#ctor(OnionSeed.Data.ICommandService{`0,`1},OnionSeed.Data.ICommandService{`0,`1},Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.CommandServiceTapDecorator`2"/> class.
+            </summary>
+            <param name="inner">The <see cref="T:OnionSeed.Data.ICommandService`2"/> to be decorated.</param>
+            <param name="tap">The tap <see cref="T:OnionSeed.Data.ICommandService`2"/>, where commands will be mirrored.</param>
+            <param name="logger">The logger where tap exceptions should be written. Optional.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
+            -or- <paramref name="tap"/> is <c>null</c>.</exception>
+        </member>
+        <member name="P:OnionSeed.Data.Decorators.CommandServiceTapDecorator`2.Tap">
+            <summary>
+            Gets a reference to the tap <see cref="T:OnionSeed.Data.ICommandService`2"/>.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.CommandServiceTapDecorator`2.Add(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.CommandServiceTapDecorator`2.AddOrUpdate(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.CommandServiceTapDecorator`2.Update(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.CommandServiceTapDecorator`2.Remove(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.CommandServiceTapDecorator`2.Remove(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.CommandServiceTapDecorator`2.TryAdd(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.CommandServiceTapDecorator`2.TryUpdate(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.CommandServiceTapDecorator`2.TryRemove(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.CommandServiceTapDecorator`2.TryRemove(`1)">
             <inheritdoc/>
         </member>
         <member name="T:OnionSeed.Data.Decorators.QueryServiceDecorator`2">
@@ -733,6 +951,59 @@
         <member name="M:OnionSeed.Data.Decorators.RepositoryExceptionHandlerDecorator`3.TryRemove(`1)">
             <inheritdoc/>
         </member>
+        <member name="T:OnionSeed.Data.Decorators.RepositoryTapDecorator`2">
+            <inheritdoc/>
+            <summary>
+            Decorates an <see cref="T:OnionSeed.Data.IRepository`2"/>, mirroring commands to a secondary, "tap" <see cref="T:OnionSeed.Data.IRepository`2"/>.
+            </summary>
+            <remarks>This decorator functions like a network tap: commands are executed first against the inner repository;
+            if they succeed, they are then executed against the tap repository as well.
+            Any values returned or exceptions thrown from the tap repository are ignored.
+            <para>This essentially allows for the creation of a duplicate copy of the data,
+            and is intended to be used for things like caching, backup, or reporting.</para></remarks>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.RepositoryTapDecorator`2.#ctor(OnionSeed.Data.IRepository{`0,`1},OnionSeed.Data.IRepository{`0,`1},Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.RepositoryTapDecorator`2"/> class.
+            </summary>
+            <param name="inner">The <see cref="T:OnionSeed.Data.IRepository`2"/> to be decorated.</param>
+            <param name="tap">The tap <see cref="T:OnionSeed.Data.IRepository`2"/>, where commands will be mirrored.</param>
+            <param name="logger">The logger where tap exceptions should be written. Optional.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
+            -or- <paramref name="tap"/> is <c>null</c>.</exception>
+        </member>
+        <member name="P:OnionSeed.Data.Decorators.RepositoryTapDecorator`2.Tap">
+            <summary>
+            Gets a reference to the tap <see cref="T:OnionSeed.Data.IRepository`2"/>.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.RepositoryTapDecorator`2.Add(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.RepositoryTapDecorator`2.AddOrUpdate(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.RepositoryTapDecorator`2.Update(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.RepositoryTapDecorator`2.Remove(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.RepositoryTapDecorator`2.Remove(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.RepositoryTapDecorator`2.TryAdd(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.RepositoryTapDecorator`2.TryUpdate(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.RepositoryTapDecorator`2.TryRemove(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.RepositoryTapDecorator`2.TryRemove(`1)">
+            <inheritdoc/>
+        </member>
         <member name="T:OnionSeed.Data.Decorators.UnitOfWorkDecorator">
             <inheritdoc/>
             <summary>
@@ -780,6 +1051,35 @@
             </summary>
         </member>
         <member name="M:OnionSeed.Data.Decorators.UnitOfWorkExceptionHandlerDecorator`1.Commit">
+            <inheritdoc/>
+        </member>
+        <member name="T:OnionSeed.Data.Decorators.UnitOfWorkTapDecorator">
+            <inheritdoc/>
+            <summary>
+            Decorates an <see cref="T:OnionSeed.Data.IUnitOfWork"/>, mirroring commands to a secondary, "tap" <see cref="T:OnionSeed.Data.IUnitOfWork"/>.
+            </summary>
+            <remarks>This decorator functions like a network tap: commands are executed first against the inner unit of work;
+            if they succeed, they are then executed against the tap unit of work as well.
+            Any values returned or exceptions thrown from the tap unit of work are ignored.
+            <para>This essentially allows for the creation of a duplicate copy of the data,
+            and is intended to be used for things like caching, backup, or reporting.</para></remarks>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.UnitOfWorkTapDecorator.#ctor(OnionSeed.Data.IUnitOfWork,OnionSeed.Data.IUnitOfWork,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.UnitOfWorkTapDecorator"/> class.
+            </summary>
+            <param name="inner">The <see cref="T:OnionSeed.Data.IUnitOfWork"/> to be decorated.</param>
+            <param name="tap">The tap <see cref="T:OnionSeed.Data.IUnitOfWork"/>, where commands will be mirrored.</param>
+            <param name="logger">The logger where tap exceptions should be written. Optional.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
+            -or- <paramref name="tap"/> is <c>null</c>.</exception>
+        </member>
+        <member name="P:OnionSeed.Data.Decorators.UnitOfWorkTapDecorator.Tap">
+            <summary>
+            Gets a reference to the tap <see cref="T:OnionSeed.Data.IUnitOfWork"/>.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.UnitOfWorkTapDecorator.Commit">
             <inheritdoc/>
         </member>
         <member name="T:OnionSeed.Data.IAsyncCommandService`2">
