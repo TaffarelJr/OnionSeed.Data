@@ -1405,6 +1405,143 @@
         <member name="M:OnionSeed.Data.Decorators.RepositoryTap`2.TryRemove(`1)">
             <inheritdoc/>
         </member>
+        <member name="T:OnionSeed.Data.Decorators.SyncCommandServiceAdapter`2">
+            <inheritdoc/>
+            <summary>
+            Adapts an <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> to work like an <see cref="T:OnionSeed.Data.ICommandService`2"/>.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncCommandServiceAdapter`2.#ctor(OnionSeed.Data.IAsyncCommandService{`0,`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.SyncCommandServiceAdapter`2"/> class,
+            wrapping the given <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>.
+            </summary>
+            <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> to be wrapped.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncCommandServiceAdapter`2.Add(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncCommandServiceAdapter`2.AddOrUpdate(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncCommandServiceAdapter`2.Update(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncCommandServiceAdapter`2.Remove(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncCommandServiceAdapter`2.Remove(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncCommandServiceAdapter`2.TryAdd(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncCommandServiceAdapter`2.TryUpdate(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncCommandServiceAdapter`2.TryRemove(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncCommandServiceAdapter`2.TryRemove(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="T:OnionSeed.Data.Decorators.SyncQueryServiceAdapter`2">
+            <inheritdoc/>
+            <summary>
+            Adapts an <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> to work like an <see cref="T:OnionSeed.Data.IQueryService`2"/>.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncQueryServiceAdapter`2.#ctor(OnionSeed.Data.IAsyncQueryService{`0,`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.SyncQueryServiceAdapter`2"/> class,
+            wrapping the given <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/>.
+            </summary>
+            <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> to be wrapped.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncQueryServiceAdapter`2.GetCount">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncQueryServiceAdapter`2.GetAll">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncQueryServiceAdapter`2.GetById(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncQueryServiceAdapter`2.TryGetById(`1,`0@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:OnionSeed.Data.Decorators.SyncRepositoryAdapter`2">
+            <inheritdoc/>
+            <summary>
+            Adapts an <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> to work like an <see cref="T:OnionSeed.Data.IRepository`2"/>.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncRepositoryAdapter`2.#ctor(OnionSeed.Data.IAsyncRepository{`0,`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.SyncRepositoryAdapter`2"/> class,
+            wrapping the given <see cref="T:OnionSeed.Data.IAsyncRepository`2"/>.
+            </summary>
+            <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> to be wrapped.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncRepositoryAdapter`2.GetCount">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncRepositoryAdapter`2.GetAll">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncRepositoryAdapter`2.GetById(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncRepositoryAdapter`2.TryGetById(`1,`0@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncRepositoryAdapter`2.Add(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncRepositoryAdapter`2.AddOrUpdate(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncRepositoryAdapter`2.Update(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncRepositoryAdapter`2.Remove(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncRepositoryAdapter`2.Remove(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncRepositoryAdapter`2.TryAdd(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncRepositoryAdapter`2.TryUpdate(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncRepositoryAdapter`2.TryRemove(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncRepositoryAdapter`2.TryRemove(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="T:OnionSeed.Data.Decorators.SyncUnitOfWorkAdapter">
+            <inheritdoc/>
+            <summary>
+            Adapts an <see cref="T:OnionSeed.Data.IAsyncUnitOfWork"/> to work like an <see cref="T:OnionSeed.Data.IUnitOfWork"/>.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncUnitOfWorkAdapter.#ctor(OnionSeed.Data.IAsyncUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.SyncUnitOfWorkAdapter"/> class,
+            wrapping the given <see cref="T:OnionSeed.Data.IAsyncUnitOfWork"/>.
+            </summary>
+            <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncUnitOfWork"/> to be wrapped.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.SyncUnitOfWorkAdapter.Commit">
+            <inheritdoc/>
+        </member>
         <member name="T:OnionSeed.Data.Decorators.UnitOfWorkDecorator">
             <inheritdoc/>
             <summary>
