@@ -6,9 +6,9 @@ using Xunit;
 
 namespace OnionSeed.Data
 {
-	public class ICommandServiceExtensionsTests
+	public class UnitOfWorkExtensionsTests
 	{
-		private readonly Mock<ICommandService<FakeEntity<int>, int>> _mockInner = new Mock<ICommandService<FakeEntity<int>, int>>(MockBehavior.Strict);
+		private readonly Mock<IUnitOfWork> _mockInner = new Mock<IUnitOfWork>(MockBehavior.Strict);
 
 		[Theory]
 		[InlineData(false, false)]
@@ -32,12 +32,11 @@ namespace OnionSeed.Data
 		public void Catch_ShouldWrapInner()
 		{
 			// Arrange
-			const int id = 5;
 			var expectedException = new InvalidOperationException();
 			InvalidOperationException actualException = null;
 
 			_mockInner
-				.Setup(i => i.Remove(id))
+				.Setup(i => i.Commit())
 				.Throws(expectedException);
 
 			// Act
@@ -49,9 +48,9 @@ namespace OnionSeed.Data
 
 			// Assert
 			result.Should().NotBeNull();
-			result.Should().BeOfType<CommandServiceExceptionHandlerDecorator<FakeEntity<int>, int, InvalidOperationException>>();
+			result.Should().BeOfType<UnitOfWorkExceptionHandlerDecorator<InvalidOperationException>>();
 
-			result.Remove(id);
+			result.Commit();
 			actualException.Should().BeSameAs(expectedException);
 
 			_mockInner.VerifyAll();

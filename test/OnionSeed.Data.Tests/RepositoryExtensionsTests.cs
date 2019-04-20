@@ -6,9 +6,9 @@ using Xunit;
 
 namespace OnionSeed.Data
 {
-	public class IQueryServiceExtensionsTests
+	public class RepositoryExtensionsTests
 	{
-		private readonly Mock<IQueryService<FakeEntity<int>, int>> _mockInner = new Mock<IQueryService<FakeEntity<int>, int>>(MockBehavior.Strict);
+		private readonly Mock<IRepository<FakeEntity<int>, int>> _mockInner = new Mock<IRepository<FakeEntity<int>, int>>(MockBehavior.Strict);
 
 		[Theory]
 		[InlineData(false, false)]
@@ -48,7 +48,7 @@ namespace OnionSeed.Data
 
 			// Assert
 			result.Should().NotBeNull();
-			result.Should().BeOfType<QueryServiceExceptionHandlerDecorator<FakeEntity<int>, int, InvalidOperationException>>();
+			result.Should().BeOfType<RepositoryExceptionHandlerDecorator<FakeEntity<int>, int, InvalidOperationException>>();
 
 			var testResult = result.GetCount();
 			testResult.Should().Be(default);

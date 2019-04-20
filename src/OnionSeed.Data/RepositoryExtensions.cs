@@ -4,29 +4,29 @@ using OnionSeed.Data.Decorators;
 namespace OnionSeed.Data
 {
 	/// <summary>
-	/// Contains extension methods for <see cref="IAsyncCommandService{TEntity, TIdentity}"/>.
+	/// Contains extension methods for <see cref="IRepository{TEntity, TIdentity}"/>.
 	/// </summary>
-	public static class IAsyncCommandServiceExtensions
+	public static class RepositoryExtensions
 	{
 		/// <summary>
-		/// Wraps the given <see cref="IAsyncCommandService{TEntity, TIdentity}"/> in a <see cref="AsyncCommandServiceExceptionHandlerDecorator{TEntity, TIdentity, TException}"/>.
+		/// Wraps the given <see cref="IRepository{TEntity, TIdentity}"/> in a <see cref="RepositoryExceptionHandlerDecorator{TEntity, TIdentity, TException}"/>.
 		/// </summary>
 		/// <typeparam name="TEntity">The type of entities in the data store.</typeparam>
 		/// <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
 		/// <typeparam name="TException">"The type of exception to be handled.</typeparam>
-		/// <param name="inner">The <see cref="IAsyncCommandService{TEntity, TIdentity}"/> to be wrapped.</param>
+		/// <param name="inner">The <see cref="IRepository{TEntity, TIdentity}"/> to be wrapped.</param>
 		/// <param name="handler">The handler that will be called when an exception is caught.
 		/// This delegate must return a flag indicating if the exception was handled.
 		/// If it wasn't, it will be re-thrown after processing.</param>
-		/// <returns>A new <see cref="AsyncCommandServiceExceptionHandlerDecorator{TEntity, TIdentity, TException}"/> wrapping the given <see cref="IAsyncCommandService{TEntity, TIdentity}"/>.</returns>
+		/// <returns>A new <see cref="RepositoryExceptionHandlerDecorator{TEntity, TIdentity, TException}"/> wrapping the given <see cref="IRepository{TEntity, TIdentity}"/>.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="handler"/> is <c>null</c>.</exception>
-		public static IAsyncCommandService<TEntity, TIdentity> Catch<TEntity, TIdentity, TException>(this IAsyncCommandService<TEntity, TIdentity> inner, Func<TException, bool> handler)
+		public static IRepository<TEntity, TIdentity> Catch<TEntity, TIdentity, TException>(this IRepository<TEntity, TIdentity> inner, Func<TException, bool> handler)
 			where TEntity : IEntity<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 			where TException : Exception
 		{
-			return new AsyncCommandServiceExceptionHandlerDecorator<TEntity, TIdentity, TException>(inner, handler);
+			return new RepositoryExceptionHandlerDecorator<TEntity, TIdentity, TException>(inner, handler);
 		}
 	}
 }

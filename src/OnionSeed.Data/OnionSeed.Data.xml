@@ -4,6 +4,104 @@
         <name>OnionSeed.Data</name>
     </assembly>
     <members>
+        <member name="T:OnionSeed.Data.AsyncCommandServiceExtensions">
+            <summary>
+            Contains extension methods for <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.AsyncCommandServiceExtensions.Catch``3(OnionSeed.Data.IAsyncCommandService{``0,``1},System.Func{``2,System.Boolean})">
+            <summary>
+            Wraps the given <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> in a <see cref="T:OnionSeed.Data.Decorators.AsyncCommandServiceExceptionHandlerDecorator`3"/>.
+            </summary>
+            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
+            <typeparam name="TException">"The type of exception to be handled.</typeparam>
+            <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> to be wrapped.</param>
+            <param name="handler">The handler that will be called when an exception is caught.
+            This delegate must return a flag indicating if the exception was handled.
+            If it wasn't, it will be re-thrown after processing.</param>
+            <returns>A new <see cref="T:OnionSeed.Data.Decorators.AsyncCommandServiceExceptionHandlerDecorator`3"/> wrapping the given <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
+            -or- <paramref name="handler"/> is <c>null</c>.</exception>
+        </member>
+        <member name="T:OnionSeed.Data.AsyncQueryServiceExtensions">
+            <summary>
+            Contains extension methods for <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/>.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.AsyncQueryServiceExtensions.Catch``3(OnionSeed.Data.IAsyncQueryService{``0,``1},System.Func{``2,System.Boolean})">
+            <summary>
+            Wraps the given <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> in a <see cref="T:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandlerDecorator`3"/>.
+            </summary>
+            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
+            <typeparam name="TException">"The type of exception to be handled.</typeparam>
+            <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> to be wrapped.</param>
+            <param name="handler">The handler that will be called when an exception is caught.
+            This delegate must return a flag indicating if the exception was handled.
+            If it wasn't, it will be re-thrown after processing.</param>
+            <returns>A new <see cref="T:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandlerDecorator`3"/> wrapping the given <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
+            -or- <paramref name="handler"/> is <c>null</c>.</exception>
+        </member>
+        <member name="T:OnionSeed.Data.AsyncRepositoryExtensions">
+            <summary>
+            Contains extension methods for <see cref="T:OnionSeed.Data.IAsyncRepository`2"/>.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.AsyncRepositoryExtensions.Catch``3(OnionSeed.Data.IAsyncRepository{``0,``1},System.Func{``2,System.Boolean})">
+            <summary>
+            Wraps the given <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> in a <see cref="T:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3"/>.
+            </summary>
+            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
+            <typeparam name="TException">"The type of exception to be handled.</typeparam>
+            <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> to be wrapped.</param>
+            <param name="handler">The handler that will be called when an exception is caught.
+            This delegate must return a flag indicating if the exception was handled.
+            If it wasn't, it will be re-thrown after processing.</param>
+            <returns>A new <see cref="T:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3"/> wrapping the given <see cref="T:OnionSeed.Data.IAsyncRepository`2"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
+            -or- <paramref name="handler"/> is <c>null</c>.</exception>
+        </member>
+        <member name="T:OnionSeed.Data.AsyncUnitOfWorkExtensions">
+            <summary>
+            Contains extension methods for <see cref="T:OnionSeed.Data.IAsyncUnitOfWork"/>.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.AsyncUnitOfWorkExtensions.Catch``1(OnionSeed.Data.IAsyncUnitOfWork,System.Func{``0,System.Boolean})">
+            <summary>
+            Wraps the given <see cref="T:OnionSeed.Data.IAsyncUnitOfWork"/> in a <see cref="T:OnionSeed.Data.Decorators.AsyncUnitOfWorkExceptionHandlerDecorator`1"/>.
+            </summary>
+            <typeparam name="TException">"The type of exception to be handled.</typeparam>
+            <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncUnitOfWork"/> to be wrapped.</param>
+            <param name="handler">The handler that will be called when an exception is caught.
+            This delegate must return a flag indicating if the exception was handled.
+            If it wasn't, it will be re-thrown after processing.</param>
+            <returns>A new <see cref="T:OnionSeed.Data.Decorators.AsyncUnitOfWorkExceptionHandlerDecorator`1"/> wrapping the given <see cref="T:OnionSeed.Data.IAsyncUnitOfWork"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
+            -or- <paramref name="handler"/> is <c>null</c>.</exception>
+        </member>
+        <member name="T:OnionSeed.Data.CommandServiceExtensions">
+            <summary>
+            Contains extension methods for <see cref="T:OnionSeed.Data.ICommandService`2"/>.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.CommandServiceExtensions.Catch``3(OnionSeed.Data.ICommandService{``0,``1},System.Func{``2,System.Boolean})">
+            <summary>
+            Wraps the given <see cref="T:OnionSeed.Data.ICommandService`2"/> in a <see cref="T:OnionSeed.Data.Decorators.CommandServiceExceptionHandlerDecorator`3"/>.
+            </summary>
+            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
+            <typeparam name="TException">"The type of exception to be handled.</typeparam>
+            <param name="inner">The <see cref="T:OnionSeed.Data.ICommandService`2"/> to be wrapped.</param>
+            <param name="handler">The handler that will be called when an exception is caught.
+            This delegate must return a flag indicating if the exception was handled.
+            If it wasn't, it will be re-thrown after processing.</param>
+            <returns>A new <see cref="T:OnionSeed.Data.Decorators.CommandServiceExceptionHandlerDecorator`3"/> wrapping the given <see cref="T:OnionSeed.Data.ICommandService`2"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
+            -or- <paramref name="handler"/> is <c>null</c>.</exception>
+        </member>
         <member name="T:OnionSeed.Data.Decorators.AsyncCommandServiceDecorator`2">
             <inheritdoc/>
             <summary>
@@ -780,26 +878,6 @@
             <exception cref="T:System.ArgumentNullException"><paramref name="id"/> is <c>null</c>.</exception>
             <remarks>If the specified entity is not found in the data store, this method is a no-op.</remarks>
         </member>
-        <member name="T:OnionSeed.Data.IAsyncCommandServiceExtensions">
-            <summary>
-            Contains extension methods for <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>.
-            </summary>
-        </member>
-        <member name="M:OnionSeed.Data.IAsyncCommandServiceExtensions.Catch``3(OnionSeed.Data.IAsyncCommandService{``0,``1},System.Func{``2,System.Boolean})">
-            <summary>
-            Wraps the given <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> in a <see cref="T:OnionSeed.Data.Decorators.AsyncCommandServiceExceptionHandlerDecorator`3"/>.
-            </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
-            <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
-            <typeparam name="TException">"The type of exception to be handled.</typeparam>
-            <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> to be wrapped.</param>
-            <param name="handler">The handler that will be called when an exception is caught.
-            This delegate must return a flag indicating if the exception was handled.
-            If it wasn't, it will be re-thrown after processing.</param>
-            <returns>A new <see cref="T:OnionSeed.Data.Decorators.AsyncCommandServiceExceptionHandlerDecorator`3"/> wrapping the given <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>.</returns>
-            <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
-            -or- <paramref name="handler"/> is <c>null</c>.</exception>
-        </member>
         <member name="T:OnionSeed.Data.IAsyncQueryService`2">
             <summary>
             Defines a mechanism that can be used to asynchronously query entities from a data store.
@@ -841,52 +919,12 @@
             or <c>null</c> if the specified entity was not found.</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="id"/> is <c>null</c>.</exception>
         </member>
-        <member name="T:OnionSeed.Data.IAsyncQueryServiceExtensions">
-            <summary>
-            Contains extension methods for <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/>.
-            </summary>
-        </member>
-        <member name="M:OnionSeed.Data.IAsyncQueryServiceExtensions.Catch``3(OnionSeed.Data.IAsyncQueryService{``0,``1},System.Func{``2,System.Boolean})">
-            <summary>
-            Wraps the given <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> in a <see cref="T:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandlerDecorator`3"/>.
-            </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
-            <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
-            <typeparam name="TException">"The type of exception to be handled.</typeparam>
-            <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> to be wrapped.</param>
-            <param name="handler">The handler that will be called when an exception is caught.
-            This delegate must return a flag indicating if the exception was handled.
-            If it wasn't, it will be re-thrown after processing.</param>
-            <returns>A new <see cref="T:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandlerDecorator`3"/> wrapping the given <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/>.</returns>
-            <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
-            -or- <paramref name="handler"/> is <c>null</c>.</exception>
-        </member>
         <member name="T:OnionSeed.Data.IAsyncRepository`2">
             <inheritdoc />
             <summary>
             Defines a mechanism that can be used to asynchronously store entities in a data store
             and query them back out again.
             </summary>
-        </member>
-        <member name="T:OnionSeed.Data.IAsyncRepositoryExtensions">
-            <summary>
-            Contains extension methods for <see cref="T:OnionSeed.Data.IAsyncRepository`2"/>.
-            </summary>
-        </member>
-        <member name="M:OnionSeed.Data.IAsyncRepositoryExtensions.Catch``3(OnionSeed.Data.IAsyncRepository{``0,``1},System.Func{``2,System.Boolean})">
-            <summary>
-            Wraps the given <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> in a <see cref="T:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3"/>.
-            </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
-            <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
-            <typeparam name="TException">"The type of exception to be handled.</typeparam>
-            <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> to be wrapped.</param>
-            <param name="handler">The handler that will be called when an exception is caught.
-            This delegate must return a flag indicating if the exception was handled.
-            If it wasn't, it will be re-thrown after processing.</param>
-            <returns>A new <see cref="T:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandlerDecorator`3"/> wrapping the given <see cref="T:OnionSeed.Data.IAsyncRepository`2"/>.</returns>
-            <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
-            -or- <paramref name="handler"/> is <c>null</c>.</exception>
         </member>
         <member name="T:OnionSeed.Data.IAsyncUnitOfWork">
             <summary>
@@ -898,24 +936,6 @@
             Commits any pending changes.
             </summary>
             <returns>A task representing the operation.</returns>
-        </member>
-        <member name="T:OnionSeed.Data.IAsyncUnitOfWorkExtensions">
-            <summary>
-            Contains extension methods for <see cref="T:OnionSeed.Data.IAsyncUnitOfWork"/>.
-            </summary>
-        </member>
-        <member name="M:OnionSeed.Data.IAsyncUnitOfWorkExtensions.Catch``1(OnionSeed.Data.IAsyncUnitOfWork,System.Func{``0,System.Boolean})">
-            <summary>
-            Wraps the given <see cref="T:OnionSeed.Data.IAsyncUnitOfWork"/> in a <see cref="T:OnionSeed.Data.Decorators.AsyncUnitOfWorkExceptionHandlerDecorator`1"/>.
-            </summary>
-            <typeparam name="TException">"The type of exception to be handled.</typeparam>
-            <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncUnitOfWork"/> to be wrapped.</param>
-            <param name="handler">The handler that will be called when an exception is caught.
-            This delegate must return a flag indicating if the exception was handled.
-            If it wasn't, it will be re-thrown after processing.</param>
-            <returns>A new <see cref="T:OnionSeed.Data.Decorators.AsyncUnitOfWorkExceptionHandlerDecorator`1"/> wrapping the given <see cref="T:OnionSeed.Data.IAsyncUnitOfWork"/>.</returns>
-            <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
-            -or- <paramref name="handler"/> is <c>null</c>.</exception>
         </member>
         <member name="T:OnionSeed.Data.ICommandService`2">
             <summary>
@@ -1004,26 +1024,6 @@
             <exception cref="T:System.ArgumentNullException"><paramref name="id"/> is <c>null</c>.</exception>
             <remarks>If the specified entity is not found in the data store, this method is a no-op.</remarks>
         </member>
-        <member name="T:OnionSeed.Data.ICommandServiceExtensions">
-            <summary>
-            Contains extension methods for <see cref="T:OnionSeed.Data.ICommandService`2"/>.
-            </summary>
-        </member>
-        <member name="M:OnionSeed.Data.ICommandServiceExtensions.Catch``3(OnionSeed.Data.ICommandService{``0,``1},System.Func{``2,System.Boolean})">
-            <summary>
-            Wraps the given <see cref="T:OnionSeed.Data.ICommandService`2"/> in a <see cref="T:OnionSeed.Data.Decorators.CommandServiceExceptionHandlerDecorator`3"/>.
-            </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
-            <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
-            <typeparam name="TException">"The type of exception to be handled.</typeparam>
-            <param name="inner">The <see cref="T:OnionSeed.Data.ICommandService`2"/> to be wrapped.</param>
-            <param name="handler">The handler that will be called when an exception is caught.
-            This delegate must return a flag indicating if the exception was handled.
-            If it wasn't, it will be re-thrown after processing.</param>
-            <returns>A new <see cref="T:OnionSeed.Data.Decorators.CommandServiceExceptionHandlerDecorator`3"/> wrapping the given <see cref="T:OnionSeed.Data.ICommandService`2"/>.</returns>
-            <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
-            -or- <paramref name="handler"/> is <c>null</c>.</exception>
-        </member>
         <member name="T:OnionSeed.Data.IEntity`1">
             <summary>
             Defines an object that is not fundamentally identified by its attributes, but rather by a unique identity value.
@@ -1080,12 +1080,41 @@
             <returns><c>true</c> if the specified entity was found; otherwise, <c>false</c>.</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="id"/> is <c>null</c>.</exception>
         </member>
-        <member name="T:OnionSeed.Data.IQueryServiceExtensions">
+        <member name="T:OnionSeed.Data.IRepository`2">
+            <inheritdoc />
+            <summary>
+            Defines a mechanism that can be used to store entities in a data store
+            and query them back out again.
+            </summary>
+        </member>
+        <member name="T:OnionSeed.Data.IUnitOfWork">
+            <summary>
+            Defines an atomic transaction whose changes are to be committed as a collective whole.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.IUnitOfWork.Commit">
+            <summary>
+            Commits any pending changes.
+            </summary>
+        </member>
+        <member name="T:OnionSeed.Data.IWritableEntity`1">
+            <inheritdoc />
+            <summary>
+            Represents an entity in a state where it's unique identity value can be set
+            (for example, when creating a new instance or re-hydrating an instance from a data store).
+            </summary>
+        </member>
+        <member name="P:OnionSeed.Data.IWritableEntity`1.Id">
+            <summary>
+            Gets or sets the unique identity value.
+            </summary>
+        </member>
+        <member name="T:OnionSeed.Data.QueryServiceExtensions">
             <summary>
             Contains extension methods for <see cref="T:OnionSeed.Data.IQueryService`2"/>.
             </summary>
         </member>
-        <member name="M:OnionSeed.Data.IQueryServiceExtensions.Catch``3(OnionSeed.Data.IQueryService{``0,``1},System.Func{``2,System.Boolean})">
+        <member name="M:OnionSeed.Data.QueryServiceExtensions.Catch``3(OnionSeed.Data.IQueryService{``0,``1},System.Func{``2,System.Boolean})">
             <summary>
             Wraps the given <see cref="T:OnionSeed.Data.IQueryService`2"/> in a <see cref="T:OnionSeed.Data.Decorators.QueryServiceExceptionHandlerDecorator`3"/>.
             </summary>
@@ -1100,19 +1129,12 @@
             <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
             -or- <paramref name="handler"/> is <c>null</c>.</exception>
         </member>
-        <member name="T:OnionSeed.Data.IRepository`2">
-            <inheritdoc />
-            <summary>
-            Defines a mechanism that can be used to store entities in a data store
-            and query them back out again.
-            </summary>
-        </member>
-        <member name="T:OnionSeed.Data.IRepositoryExtensions">
+        <member name="T:OnionSeed.Data.RepositoryExtensions">
             <summary>
             Contains extension methods for <see cref="T:OnionSeed.Data.IRepository`2"/>.
             </summary>
         </member>
-        <member name="M:OnionSeed.Data.IRepositoryExtensions.Catch``3(OnionSeed.Data.IRepository{``0,``1},System.Func{``2,System.Boolean})">
+        <member name="M:OnionSeed.Data.RepositoryExtensions.Catch``3(OnionSeed.Data.IRepository{``0,``1},System.Func{``2,System.Boolean})">
             <summary>
             Wraps the given <see cref="T:OnionSeed.Data.IRepository`2"/> in a <see cref="T:OnionSeed.Data.Decorators.RepositoryExceptionHandlerDecorator`3"/>.
             </summary>
@@ -1127,22 +1149,12 @@
             <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
             -or- <paramref name="handler"/> is <c>null</c>.</exception>
         </member>
-        <member name="T:OnionSeed.Data.IUnitOfWork">
-            <summary>
-            Defines an atomic transaction whose changes are to be committed as a collective whole.
-            </summary>
-        </member>
-        <member name="M:OnionSeed.Data.IUnitOfWork.Commit">
-            <summary>
-            Commits any pending changes.
-            </summary>
-        </member>
-        <member name="T:OnionSeed.Data.IUnitOfWorkExtensions">
+        <member name="T:OnionSeed.Data.UnitOfWorkExtensions">
             <summary>
             Contains extension methods for <see cref="T:OnionSeed.Data.IUnitOfWork"/>.
             </summary>
         </member>
-        <member name="M:OnionSeed.Data.IUnitOfWorkExtensions.Catch``1(OnionSeed.Data.IUnitOfWork,System.Func{``0,System.Boolean})">
+        <member name="M:OnionSeed.Data.UnitOfWorkExtensions.Catch``1(OnionSeed.Data.IUnitOfWork,System.Func{``0,System.Boolean})">
             <summary>
             Wraps the given <see cref="T:OnionSeed.Data.IUnitOfWork"/> in a <see cref="T:OnionSeed.Data.Decorators.UnitOfWorkExceptionHandlerDecorator`1"/>.
             </summary>
@@ -1154,18 +1166,6 @@
             <returns>A new <see cref="T:OnionSeed.Data.Decorators.UnitOfWorkExceptionHandlerDecorator`1"/> wrapping the given <see cref="T:OnionSeed.Data.IUnitOfWork"/>.</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
             -or- <paramref name="handler"/> is <c>null</c>.</exception>
-        </member>
-        <member name="T:OnionSeed.Data.IWritableEntity`1">
-            <inheritdoc />
-            <summary>
-            Represents an entity in a state where it's unique identity value can be set
-            (for example, when creating a new instance or re-hydrating an instance from a data store).
-            </summary>
-        </member>
-        <member name="P:OnionSeed.Data.IWritableEntity`1.Id">
-            <summary>
-            Gets or sets the unique identity value.
-            </summary>
         </member>
     </members>
 </doc>

@@ -9,9 +9,9 @@ using Xunit;
 namespace OnionSeed.Data
 {
 	[SuppressMessage("AsyncUsage.CSharp.Naming", "UseAsyncSuffix:Use Async suffix", Justification = "Test methods don't need to end in 'Async'.")]
-	public class IAsyncRepositoryExtensionsTests
+	public class AsyncUnitOfWorkExtensionsTests
 	{
-		private readonly Mock<IAsyncRepository<FakeEntity<int>, int>> _mockInner = new Mock<IAsyncRepository<FakeEntity<int>, int>>(MockBehavior.Strict);
+		private readonly Mock<IAsyncUnitOfWork> _mockInner = new Mock<IAsyncUnitOfWork>(MockBehavior.Strict);
 
 		[Theory]
 		[InlineData(false, false)]
@@ -39,7 +39,7 @@ namespace OnionSeed.Data
 			InvalidOperationException actualException = null;
 
 			_mockInner
-				.Setup(i => i.GetCountAsync())
+				.Setup(i => i.CommitAsync())
 				.ThrowsAsync(expectedException);
 
 			// Act
@@ -51,10 +51,9 @@ namespace OnionSeed.Data
 
 			// Assert
 			result.Should().NotBeNull();
-			result.Should().BeOfType<AsyncRepositoryExceptionHandlerDecorator<FakeEntity<int>, int, InvalidOperationException>>();
+			result.Should().BeOfType<AsyncUnitOfWorkExceptionHandlerDecorator<InvalidOperationException>>();
 
-			var testResult = await result.GetCountAsync().ConfigureAwait(false);
-			testResult.Should().Be(default);
+			await result.CommitAsync().ConfigureAwait(false);
 			actualException.Should().BeSameAs(expectedException);
 
 			_mockInner.VerifyAll();

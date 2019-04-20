@@ -6,7 +6,7 @@ namespace OnionSeed.Data
 	/// <summary>
 	/// Contains extension methods for <see cref="IUnitOfWork"/>.
 	/// </summary>
-	public static class IUnitOfWorkExtensions
+	public static class UnitOfWorkExtensions
 	{
 		/// <summary>
 		/// Wraps the given <see cref="IUnitOfWork"/> in a <see cref="UnitOfWorkExceptionHandlerDecorator{TException}"/>.
