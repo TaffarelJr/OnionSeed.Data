@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
 using OnionSeed.Data.Decorators;
@@ -6,9 +8,10 @@ using Xunit;
 
 namespace OnionSeed.Data
 {
-	public class IUnitOfWorkExtensionsTests
+	[SuppressMessage("AsyncUsage.CSharp.Naming", "UseAsyncSuffix:Use Async suffix", Justification = "Test methods don't need to end in 'Async'.")]
+	public class AsyncCommandServiceExtensionsTests
 	{
-		private readonly Mock<IUnitOfWork> _mockInner = new Mock<IUnitOfWork>(MockBehavior.Strict);
+		private readonly Mock<IAsyncCommandService<FakeEntity<int>, int>> _mockInner = new Mock<IAsyncCommandService<FakeEntity<int>, int>>(MockBehavior.Strict);
 
 		[Theory]
 		[InlineData(false, false)]
@@ -29,15 +32,16 @@ namespace OnionSeed.Data
 		}
 
 		[Fact]
-		public void Catch_ShouldWrapInner()
+		public async Task Catch_ShouldWrapInner()
 		{
 			// Arrange
+			const int id = 5;
 			var expectedException = new InvalidOperationException();
 			InvalidOperationException actualException = null;
 
 			_mockInner
-				.Setup(i => i.Commit())
-				.Throws(expectedException);
+				.Setup(i => i.TryRemoveAsync(id))
+				.ThrowsAsync(expectedException);
 
 			// Act
 			var result = _mockInner.Object.Catch((InvalidOperationException ex) =>
@@ -48,9 +52,10 @@ namespace OnionSeed.Data
 
 			// Assert
 			result.Should().NotBeNull();
-			result.Should().BeOfType<UnitOfWorkExceptionHandlerDecorator<InvalidOperationException>>();
+			result.Should().BeOfType<AsyncCommandServiceExceptionHandlerDecorator<FakeEntity<int>, int, InvalidOperationException>>();
 
-			result.Commit();
+			var testResult = await result.TryRemoveAsync(id).ConfigureAwait(false);
+			testResult.Should().Be(default);
 			actualException.Should().BeSameAs(expectedException);
 
 			_mockInner.VerifyAll();

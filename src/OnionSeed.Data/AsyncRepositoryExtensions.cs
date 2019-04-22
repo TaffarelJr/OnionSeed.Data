@@ -6,7 +6,7 @@ namespace OnionSeed.Data
 	/// <summary>
 	/// Contains extension methods for <see cref="IAsyncRepository{TEntity, TIdentity}"/>.
 	/// </summary>
-	public static class IAsyncRepositoryExtensions
+	public static class AsyncRepositoryExtensions
 	{
 		/// <summary>
 		/// Wraps the given <see cref="IAsyncRepository{TEntity, TIdentity}"/> in a <see cref="AsyncRepositoryExceptionHandlerDecorator{TEntity, TIdentity, TException}"/>.

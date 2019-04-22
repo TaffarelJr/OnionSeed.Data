@@ -41,23 +41,27 @@ node "OnionSeed.Data.SqlServer.dll" as SqlServer #LightGreen {
 }
 
 node "OnionSeed.Data.dll" as OnionSeed #LightBlue {
-	interface IRepository<TEntity,TIdentity> {
-		AddAsync(TEntity item) : Task
-		AddOrUpdateAsync(TEntity item) : Task
-		UpdateAsync(TEntity item) : Task
-		RemoveAsync(TEntity item) : Task
-		RemoveAsync(TIdentity id) : Task
-		TryAddAsync(TEntity item) : Task<bool>
-		TryUpdateAsync(TEntity item) : Task<bool>
-		TryRemoveAsync(TEntity item) : Task<bool>
-		TryRemoveAsync(TIdentity id) : Task<bool>
-	}
+	rectangle "(choose your strategy)" as DataAccess NamespaceColor {
+		interface IRepository<TEntity,TIdentity>
 
-	interface IQueryService<TEntity,TIdentity> {
-		GetCountAsync() : Task<long>
-		GetAllAsync() : Task<IEnumerable<TEntity>>
-		GetByIdAsync(TIdentity id) : Task<TEntity>
-		TryGetByIdAsync(TIdentity id) : Task<TEntity>
+		interface IQueryService<TEntity,TIdentity> {
+			GetCountAsync() : Task<long>
+			GetAllAsync() : Task<IEnumerable<TEntity>>
+			GetByIdAsync(TIdentity id) : Task<TEntity>
+			TryGetByIdAsync(TIdentity id) : Task<TEntity>
+		}
+
+		interface ICommandService<TEntity,TIdentity> {
+			AddAsync(TEntity item) : Task
+			AddOrUpdateAsync(TEntity item) : Task
+			UpdateAsync(TEntity item) : Task
+			RemoveAsync(TEntity item) : Task
+			RemoveAsync(TIdentity id) : Task
+			TryAddAsync(TEntity item) : Task<bool>
+			TryUpdateAsync(TEntity item) : Task<bool>
+			TryRemoveAsync(TEntity item) : Task<bool>
+			TryRemoveAsync(TIdentity id) : Task<bool>
+		}
 	}
 
 	interface IEntity<TIdentity> {
@@ -67,10 +71,12 @@ node "OnionSeed.Data.dll" as OnionSeed #LightBlue {
 
 note left of SqlRepository
 	Provides base implementations
-	of the <i>IRepository</i> and <i>IQueryService</i>
-	interfaces, specifically targeting
-	SQL Server. These base classes
-	are to be extended by applications.
+	of the <i>IRepository</i>, <i>IQueryService</i>,
+	and <i>ICommandService</i> interfaces,
+	specifically targeting SQL Server.
+
+	Base classes like this are meant
+	to be extended by applications.
 end note
 
 SqlRepository <|- DomainServices.CarRepository : extends\n<i><Car, Guid></i>
@@ -87,13 +93,17 @@ DomainServices.ICarRepository --|> IRepository : extends\n<i><ICar, Guid></i>
 Domain.ICar --|> IEntity : extends\n<i><Guid></i>
 
 IRepository -|> IQueryService : extends
+IRepository --|> ICommandService : extends
+
+IQueryService -[hidden]- ICommandService
 
 IQueryService o- IEntity : contains
+IEntity --o ICommandService : contains
 
 note top of DomainServices.CarRepository
-	<i>ICarRepository</i> can extend <i>IRepository</i> or <i>IQueryService</i>
-	as needed, and the <i>SqlRepository</i> base class provides
-	default implementations for all that functionality.
+	<i>ICarRepository</i> can extend <i>IRepository</i>, <i>IQueryService</i> or
+	<i>ICommandService</i> as needed, and the <i>SqlRepository</i> base
+	class provides default implementations for all that functionality.
 
 	Because of this, <i>ICarRepository</i> and <i>CarRepository</i> only
 	need to define and implement custom queries and operations,
@@ -103,8 +113,7 @@ end note
 note right of Domain.Car
 	<i>Car</i> is built to address specific
 	implementation requiremets for
-	things like serialization or
-	database persistance.
+	things like DB persistance.
 end note
 
 note right of Domain.ICar
@@ -114,38 +123,24 @@ note right of Domain.ICar
 	(Read-only properties, no constructor, etc.)
 end note
 
-note bottom of IRepository
-	A <i>Repository</i> is an
-	unordered collection
-	of unique entities.
+note bottom of ICommandService
+	A <i>Repository</i> is an unordered collection of unique entities.
+	A <i>QueryService</i> is the "read-only" portion of a <i>Repository</i>.
+	A <i>CommandService</i> is the "write-only" portion of a <i>Repository</i>.
 
-	There are both sync-
-	and async- versions
-	of this interface.
+	This separation helps when implementing CQ(R)S patterns.
+	There are both sync- and async- versions of these interfaces.
 end note
 
-note bottom of IQueryService
-	A <i>QueryService</i> is
-	only the "read-only"
-	portion of a <i>Repository</i>.
-	This separation helps 
-	when implementing
-	CQ(R)S patterns.
-
-	There are both sync-
-	and async- versions
-	of this interface.
-end note
-
-note bottom of IQueryService
-	<i>TEntity</i> is:
-		<i>IEntity<TIdentity></i>
-end note
-
-note bottom of IEntity
+note right of IEntity
 	<i>TIdentity</i> is:
 		<i>IEquatable<TIdentity></i>
 		<i>IComparable<TIdentity></i>
+end note
+
+note right of ICommandService
+	<i>TEntity</i> is:
+		<i>IEntity<TIdentity></i>
 end note
 
 @enduml
