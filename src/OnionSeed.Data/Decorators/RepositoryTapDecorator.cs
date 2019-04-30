@@ -39,10 +39,11 @@ namespace OnionSeed.Data.Decorators
 		public RepositoryTapDecorator(IRepository<TEntity, TIdentity> inner, IRepository<TEntity, TIdentity> tap, ILogger logger)
 			: base(inner)
 		{
+			Logger = logger;
 			Tap = (tap ?? throw new ArgumentNullException(nameof(tap)))
 				.Catch((Exception ex) =>
 				{
-					logger?.LogWarning(0, ex, "An exception ocurred in the 'tap' repository.");
+					Logger?.LogWarning(0, ex, "An exception ocurred in the 'tap' repository.");
 					return true;
 				});
 		}
@@ -51,6 +52,11 @@ namespace OnionSeed.Data.Decorators
 		/// Gets a reference to the tap <see cref="IRepository{TEntity, TIdentity}"/>.
 		/// </summary>
 		public IRepository<TEntity, TIdentity> Tap { get; }
+
+		/// <summary>
+		/// Gets a reference to the <see cref="ILogger"/>, if any, where tap exceptions should be written.
+		/// </summary>
+		public ILogger Logger { get; }
 
 		/// <inheritdoc/>
 		public override void Add(TEntity item)

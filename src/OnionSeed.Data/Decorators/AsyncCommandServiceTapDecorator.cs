@@ -40,10 +40,11 @@ namespace OnionSeed.Data.Decorators
 		public AsyncCommandServiceTapDecorator(IAsyncCommandService<TEntity, TIdentity> inner, IAsyncCommandService<TEntity, TIdentity> tap, ILogger logger)
 			: base(inner)
 		{
+			Logger = logger;
 			Tap = (tap ?? throw new ArgumentNullException(nameof(tap)))
 				.Catch((Exception ex) =>
 				{
-					logger?.LogWarning(0, ex, "An exception ocurred in the 'tap' command service.");
+					Logger?.LogWarning(0, ex, "An exception ocurred in the 'tap' command service.");
 					return true;
 				});
 		}
@@ -52,6 +53,11 @@ namespace OnionSeed.Data.Decorators
 		/// Gets a reference to the tap <see cref="IAsyncCommandService{TEntity, TIdentity}"/>.
 		/// </summary>
 		public IAsyncCommandService<TEntity, TIdentity> Tap { get; }
+
+		/// <summary>
+		/// Gets a reference to the <see cref="ILogger"/>, if any, where tap exceptions should be written.
+		/// </summary>
+		public ILogger Logger { get; }
 
 		/// <inheritdoc/>
 		public override async Task AddAsync(TEntity item)

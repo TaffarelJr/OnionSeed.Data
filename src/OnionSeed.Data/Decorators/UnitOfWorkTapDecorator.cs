@@ -37,10 +37,11 @@ namespace OnionSeed.Data.Decorators
 		public UnitOfWorkTapDecorator(IUnitOfWork inner, IUnitOfWork tap, ILogger logger)
 			: base(inner)
 		{
+			Logger = logger;
 			Tap = (tap ?? throw new ArgumentNullException(nameof(tap)))
 				.Catch((Exception ex) =>
 				{
-					logger?.LogWarning(0, ex, "An exception ocurred in the 'tap' unit of work.");
+					Logger?.LogWarning(0, ex, "An exception ocurred in the 'tap' unit of work.");
 					return true;
 				});
 		}
@@ -49,6 +50,11 @@ namespace OnionSeed.Data.Decorators
 		/// Gets a reference to the tap <see cref="IUnitOfWork"/>.
 		/// </summary>
 		public IUnitOfWork Tap { get; }
+
+		/// <summary>
+		/// Gets a reference to the <see cref="ILogger"/>, if any, where tap exceptions should be written.
+		/// </summary>
+		public ILogger Logger { get; }
 
 		/// <inheritdoc/>
 		public override void Commit()
