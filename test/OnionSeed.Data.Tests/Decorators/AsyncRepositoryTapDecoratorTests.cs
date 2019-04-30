@@ -192,7 +192,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.AddOrUpdateAsync(entity))
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			await subject.AddAsync(entity).ConfigureAwait(false);
@@ -216,7 +216,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.AddOrUpdateAsync(entity))
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			Func<Task> action = async () => await subject.AddAsync(entity).ConfigureAwait(false);
@@ -242,7 +242,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(u => u.AddOrUpdateAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			await subject.AddAsync(entity).ConfigureAwait(false);
@@ -266,7 +266,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.AddOrUpdateAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			Func<Task> action = async () => await subject.AddAsync(entity).ConfigureAwait(false);
@@ -537,7 +537,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.AddOrUpdateAsync(entity))
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			await subject.AddOrUpdateAsync(entity).ConfigureAwait(false);
@@ -561,7 +561,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.AddOrUpdateAsync(entity))
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			Func<Task> action = async () => await subject.AddOrUpdateAsync(entity).ConfigureAwait(false);
@@ -587,7 +587,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(u => u.AddOrUpdateAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			await subject.AddOrUpdateAsync(entity).ConfigureAwait(false);
@@ -611,7 +611,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.AddOrUpdateAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			Func<Task> action = async () => await subject.AddOrUpdateAsync(entity).ConfigureAwait(false);
@@ -882,7 +882,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.AddOrUpdateAsync(entity))
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			await subject.UpdateAsync(entity).ConfigureAwait(false);
@@ -906,7 +906,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.AddOrUpdateAsync(entity))
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			Func<Task> action = async () => await subject.UpdateAsync(entity).ConfigureAwait(false);
@@ -932,7 +932,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(u => u.AddOrUpdateAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			await subject.UpdateAsync(entity).ConfigureAwait(false);
@@ -956,7 +956,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.AddOrUpdateAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			Func<Task> action = async () => await subject.UpdateAsync(entity).ConfigureAwait(false);
@@ -1227,7 +1227,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.RemoveAsync(entity))
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			await subject.RemoveAsync(entity).ConfigureAwait(false);
@@ -1251,7 +1251,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.RemoveAsync(entity))
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			Func<Task> action = async () => await subject.RemoveAsync(entity).ConfigureAwait(false);
@@ -1277,7 +1277,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(u => u.RemoveAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			await subject.RemoveAsync(entity).ConfigureAwait(false);
@@ -1301,7 +1301,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.RemoveAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			Func<Task> action = async () => await subject.RemoveAsync(entity).ConfigureAwait(false);
@@ -1572,7 +1572,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.RemoveAsync(id))
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			await subject.RemoveAsync(id).ConfigureAwait(false);
@@ -1596,7 +1596,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.RemoveAsync(id))
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			Func<Task> action = async () => await subject.RemoveAsync(id).ConfigureAwait(false);
@@ -1622,7 +1622,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(u => u.RemoveAsync(id))
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			await subject.RemoveAsync(id).ConfigureAwait(false);
@@ -1646,7 +1646,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.RemoveAsync(id))
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			Func<Task> action = async () => await subject.RemoveAsync(id).ConfigureAwait(false);
@@ -1930,7 +1930,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.AddOrUpdateAsync(entity))
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			var actualResult = await subject.TryAddAsync(entity).ConfigureAwait(false);
@@ -1956,7 +1956,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.AddOrUpdateAsync(entity))
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			Func<Task> action = async () => await subject.TryAddAsync(entity).ConfigureAwait(false);
@@ -1983,7 +1983,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(u => u.AddOrUpdateAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			var actualResult = await subject.TryAddAsync(entity).ConfigureAwait(false);
@@ -2009,7 +2009,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.AddOrUpdateAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			Func<Task> action = async () => await subject.TryAddAsync(entity).ConfigureAwait(false);
@@ -2299,7 +2299,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.AddOrUpdateAsync(entity))
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			var actualResult = await subject.TryUpdateAsync(entity).ConfigureAwait(false);
@@ -2325,7 +2325,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.AddOrUpdateAsync(entity))
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			Func<Task> action = async () => await subject.TryUpdateAsync(entity).ConfigureAwait(false);
@@ -2352,7 +2352,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(u => u.AddOrUpdateAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			var actualResult = await subject.TryUpdateAsync(entity).ConfigureAwait(false);
@@ -2378,7 +2378,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.AddOrUpdateAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			Func<Task> action = async () => await subject.TryUpdateAsync(entity).ConfigureAwait(false);
@@ -2673,7 +2673,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.RemoveAsync(entity))
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			var actualResult = await subject.TryRemoveAsync(entity).ConfigureAwait(false);
@@ -2699,7 +2699,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.RemoveAsync(entity))
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			Func<Task> action = async () => await subject.TryRemoveAsync(entity).ConfigureAwait(false);
@@ -2727,7 +2727,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(u => u.RemoveAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			var actualResult = await subject.TryRemoveAsync(entity).ConfigureAwait(false);
@@ -2753,7 +2753,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.RemoveAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			Func<Task> action = async () => await subject.TryRemoveAsync(entity).ConfigureAwait(false);
@@ -3050,7 +3050,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.RemoveAsync(id))
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			var actualResult = await subject.TryRemoveAsync(id).ConfigureAwait(false);
@@ -3076,7 +3076,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.RemoveAsync(id))
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			Func<Task> action = async () => await subject.TryRemoveAsync(id).ConfigureAwait(false);
@@ -3104,7 +3104,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(u => u.RemoveAsync(id))
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			var actualResult = await subject.TryRemoveAsync(id).ConfigureAwait(false);
@@ -3130,7 +3130,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.RemoveAsync(id))
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncRepositoryTapDecorator<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			Func<Task> action = async () => await subject.TryRemoveAsync(id).ConfigureAwait(false);

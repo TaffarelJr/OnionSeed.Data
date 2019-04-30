@@ -178,7 +178,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.CommitAsync())
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncUnitOfWorkTapDecorator(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncUnitOfWorkTapDecorator(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			await subject.CommitAsync().ConfigureAwait(false);
@@ -200,7 +200,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.CommitAsync())
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncUnitOfWorkTapDecorator(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncUnitOfWorkTapDecorator(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			Func<Task> action = async () => await subject.CommitAsync().ConfigureAwait(false);
@@ -224,7 +224,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(u => u.CommitAsync())
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncUnitOfWorkTapDecorator(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncUnitOfWorkTapDecorator(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			await subject.CommitAsync().ConfigureAwait(false);
@@ -246,7 +246,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.CommitAsync())
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncUnitOfWorkTapDecorator(_mockInner.Object, _mockTap.Object, parallelMode: true);
+			var subject = new AsyncUnitOfWorkTapDecorator(_mockInner.Object, _mockTap.Object, true);
 
 			// Act
 			Func<Task> action = async () => await subject.CommitAsync().ConfigureAwait(false);

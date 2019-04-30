@@ -22,13 +22,53 @@ namespace OnionSeed.Data.Decorators
 		/// </summary>
 		/// <param name="inner">The <see cref="IAsyncRepository{TEntity, TIdentity}"/> to be decorated.</param>
 		/// <param name="tap">The tap <see cref="IAsyncRepository{TEntity, TIdentity}"/>, where commands will be duplicated.</param>
-		/// <param name="logger">The logger where tap exceptions should be written. Optional.</param>
+		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
+		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
+		public AsyncRepositoryTapDecorator(IAsyncRepository<TEntity, TIdentity> inner, IAsyncRepository<TEntity, TIdentity> tap)
+			: this(inner, tap, null, false)
+		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AsyncRepositoryTapDecorator{TEntity,TKey}"/> class.
+		/// </summary>
+		/// <param name="inner">The <see cref="IAsyncRepository{TEntity, TIdentity}"/> to be decorated.</param>
+		/// <param name="tap">The tap <see cref="IAsyncRepository{TEntity, TIdentity}"/>, where commands will be duplicated.</param>
+		/// <param name="logger">The logger where tap exceptions should be written.</param>
+		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
+		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
+		public AsyncRepositoryTapDecorator(IAsyncRepository<TEntity, TIdentity> inner, IAsyncRepository<TEntity, TIdentity> tap, ILogger logger)
+			: this(inner, tap, logger, false)
+		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AsyncRepositoryTapDecorator{TEntity,TKey}"/> class.
+		/// </summary>
+		/// <param name="inner">The <see cref="IAsyncRepository{TEntity, TIdentity}"/> to be decorated.</param>
+		/// <param name="tap">The tap <see cref="IAsyncRepository{TEntity, TIdentity}"/>, where commands will be duplicated.</param>
 		/// <param name="parallelMode">A value indicating whether the inner and tap should be called simultaneously.
 		/// This behavior gives better performance, as both repositories are executing in parallel. However it is
 		/// also riskier because if an exception is thrown from one of them, they can become out-of-sync.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
-		public AsyncRepositoryTapDecorator(IAsyncRepository<TEntity, TIdentity> inner, IAsyncRepository<TEntity, TIdentity> tap, ILogger logger = null, bool parallelMode = false)
+		public AsyncRepositoryTapDecorator(IAsyncRepository<TEntity, TIdentity> inner, IAsyncRepository<TEntity, TIdentity> tap, bool parallelMode)
+			: this(inner, tap, null, parallelMode)
+		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AsyncRepositoryTapDecorator{TEntity,TKey}"/> class.
+		/// </summary>
+		/// <param name="inner">The <see cref="IAsyncRepository{TEntity, TIdentity}"/> to be decorated.</param>
+		/// <param name="tap">The tap <see cref="IAsyncRepository{TEntity, TIdentity}"/>, where commands will be duplicated.</param>
+		/// <param name="logger">The logger where tap exceptions should be written.</param>
+		/// <param name="parallelMode">A value indicating whether the inner and tap should be called simultaneously.
+		/// This behavior gives better performance, as both repositories are executing in parallel. However it is
+		/// also riskier because if an exception is thrown from one of them, they can become out-of-sync.</param>
+		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
+		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
+		public AsyncRepositoryTapDecorator(IAsyncRepository<TEntity, TIdentity> inner, IAsyncRepository<TEntity, TIdentity> tap, ILogger logger, bool parallelMode)
 			: base(inner)
 		{
 			ParallelMode = parallelMode;

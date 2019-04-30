@@ -21,10 +21,22 @@ namespace OnionSeed.Data.Decorators
 		/// </summary>
 		/// <param name="inner">The <see cref="IRepository{TEntity, TIdentity}"/> to be decorated.</param>
 		/// <param name="tap">The tap <see cref="IRepository{TEntity, TIdentity}"/>, where commands will be mirrored.</param>
-		/// <param name="logger">The logger where tap exceptions should be written. Optional.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
-		public RepositoryTapDecorator(IRepository<TEntity, TIdentity> inner, IRepository<TEntity, TIdentity> tap, ILogger logger = null)
+		public RepositoryTapDecorator(IRepository<TEntity, TIdentity> inner, IRepository<TEntity, TIdentity> tap)
+			: this(inner, tap, null)
+		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="RepositoryTapDecorator{TEntity,TKey}"/> class.
+		/// </summary>
+		/// <param name="inner">The <see cref="IRepository{TEntity, TIdentity}"/> to be decorated.</param>
+		/// <param name="tap">The tap <see cref="IRepository{TEntity, TIdentity}"/>, where commands will be mirrored.</param>
+		/// <param name="logger">The logger where tap exceptions should be written.</param>
+		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
+		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
+		public RepositoryTapDecorator(IRepository<TEntity, TIdentity> inner, IRepository<TEntity, TIdentity> tap, ILogger logger)
 			: base(inner)
 		{
 			Tap = (tap ?? throw new ArgumentNullException(nameof(tap)))

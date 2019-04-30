@@ -19,10 +19,22 @@ namespace OnionSeed.Data.Decorators
 		/// </summary>
 		/// <param name="inner">The <see cref="IUnitOfWork"/> to be decorated.</param>
 		/// <param name="tap">The tap <see cref="IUnitOfWork"/>, where commands will be mirrored.</param>
-		/// <param name="logger">The logger where tap exceptions should be written. Optional.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
-		public UnitOfWorkTapDecorator(IUnitOfWork inner, IUnitOfWork tap, ILogger logger = null)
+		public UnitOfWorkTapDecorator(IUnitOfWork inner, IUnitOfWork tap)
+			: this(inner, tap, null)
+		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="UnitOfWorkTapDecorator"/> class.
+		/// </summary>
+		/// <param name="inner">The <see cref="IUnitOfWork"/> to be decorated.</param>
+		/// <param name="tap">The tap <see cref="IUnitOfWork"/>, where commands will be mirrored.</param>
+		/// <param name="logger">The logger where tap exceptions should be written.</param>
+		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
+		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
+		public UnitOfWorkTapDecorator(IUnitOfWork inner, IUnitOfWork tap, ILogger logger)
 			: base(inner)
 		{
 			Tap = (tap ?? throw new ArgumentNullException(nameof(tap)))
