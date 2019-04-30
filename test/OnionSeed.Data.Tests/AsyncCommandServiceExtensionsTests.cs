@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
 using OnionSeed.Data.Decorators;
@@ -32,31 +31,21 @@ namespace OnionSeed.Data
 		}
 
 		[Fact]
-		public async Task Catch_ShouldWrapInner()
+		public void Catch_ShouldWrapInner()
 		{
 			// Arrange
-			const int id = 5;
-			var expectedException = new InvalidOperationException();
-			InvalidOperationException actualException = null;
-
-			_mockInner
-				.Setup(i => i.TryRemoveAsync(id))
-				.ThrowsAsync(expectedException);
+			Func<InvalidOperationException, bool> handler = (InvalidOperationException ex) => false;
 
 			// Act
-			var result = _mockInner.Object.Catch((InvalidOperationException ex) =>
-			{
-				actualException = ex;
-				return true;
-			});
+			var result = _mockInner.Object.Catch(handler);
 
 			// Assert
 			result.Should().NotBeNull();
 			result.Should().BeOfType<AsyncCommandServiceExceptionHandlerDecorator<FakeEntity<int>, int, InvalidOperationException>>();
 
-			var testResult = await result.TryRemoveAsync(id).ConfigureAwait(false);
-			testResult.Should().Be(default);
-			actualException.Should().BeSameAs(expectedException);
+			var typedResult = (AsyncCommandServiceExceptionHandlerDecorator<FakeEntity<int>, int, InvalidOperationException>)result;
+			typedResult.Inner.Should().BeSameAs(_mockInner.Object);
+			typedResult.Handler.Should().BeSameAs(handler);
 
 			_mockInner.VerifyAll();
 		}

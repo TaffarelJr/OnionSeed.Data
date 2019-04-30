@@ -32,27 +32,18 @@ namespace OnionSeed.Data
 		public void Catch_ShouldWrapInner()
 		{
 			// Arrange
-			var expectedException = new InvalidOperationException();
-			InvalidOperationException actualException = null;
-
-			_mockInner
-				.Setup(i => i.GetCount())
-				.Throws(expectedException);
+			Func<InvalidOperationException, bool> handler = (InvalidOperationException ex) => false;
 
 			// Act
-			var result = _mockInner.Object.Catch((InvalidOperationException ex) =>
-			{
-				actualException = ex;
-				return true;
-			});
+			var result = _mockInner.Object.Catch(handler);
 
 			// Assert
 			result.Should().NotBeNull();
 			result.Should().BeOfType<QueryServiceExceptionHandlerDecorator<FakeEntity<int>, int, InvalidOperationException>>();
 
-			var testResult = result.GetCount();
-			testResult.Should().Be(default);
-			actualException.Should().BeSameAs(expectedException);
+			var typedResult = (QueryServiceExceptionHandlerDecorator<FakeEntity<int>, int, InvalidOperationException>)result;
+			typedResult.Inner.Should().BeSameAs(_mockInner.Object);
+			typedResult.Handler.Should().BeSameAs(handler);
 
 			_mockInner.VerifyAll();
 		}
