@@ -22,7 +22,7 @@ namespace OnionSeed.Data.Decorators
 		/// <summary>
 		/// Gets a reference to the <see cref="IUnitOfWork"/> being decorated.
 		/// </summary>
-		protected IUnitOfWork Inner { get; }
+		public IUnitOfWork Inner { get; }
 
 		/// <inheritdoc/>
 		public virtual void Commit() => Inner.Commit();

@@ -25,7 +25,7 @@ namespace OnionSeed.Data.Decorators
 		/// <summary>
 		/// Gets a reference to the <see cref="IQueryService{TEntity, TIdentity}"/> being decorated.
 		/// </summary>
-		protected IQueryService<TEntity, TIdentity> Inner { get; }
+		public IQueryService<TEntity, TIdentity> Inner { get; }
 
 		/// <inheritdoc/>
 		public virtual long GetCount() => Inner.GetCount();

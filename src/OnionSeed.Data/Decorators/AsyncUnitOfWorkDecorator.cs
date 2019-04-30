@@ -23,7 +23,7 @@ namespace OnionSeed.Data.Decorators
 		/// <summary>
 		/// Gets a reference to the <see cref="IAsyncUnitOfWork"/> being decorated.
 		/// </summary>
-		protected IAsyncUnitOfWork Inner { get; }
+		public IAsyncUnitOfWork Inner { get; }
 
 		/// <inheritdoc/>
 		public virtual Task CommitAsync() => Inner.CommitAsync();

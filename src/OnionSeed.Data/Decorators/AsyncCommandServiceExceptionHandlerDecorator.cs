@@ -34,7 +34,7 @@ namespace OnionSeed.Data.Decorators
 		/// <summary>
 		/// Gets a reference to the handler that will be called when an exception is caught.
 		/// </summary>
-		protected Func<TException, bool> Handler { get; }
+		public Func<TException, bool> Handler { get; }
 
 		/// <inheritdoc/>
 		public override async Task AddAsync(TEntity item)
