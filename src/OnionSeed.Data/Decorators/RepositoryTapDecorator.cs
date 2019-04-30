@@ -9,7 +9,7 @@ namespace OnionSeed.Data.Decorators
 	/// </summary>
 	/// <remarks>This decorator functions like a network tap: commands are executed first against the inner repository;
 	/// if they succeed, they are then executed against the tap repository as well.
-	/// Any values returned or exceptions thrown from the tap repository are ignored.
+	/// <para>Any values returned or exceptions thrown from the tap repository are ignored.</para>
 	/// <para>This essentially allows for the creation of a duplicate copy of the data,
 	/// and is intended to be used for things like caching, backup, or reporting.</para></remarks>
 	public class RepositoryTapDecorator<TEntity, TIdentity> : RepositoryDecorator<TEntity, TIdentity>

@@ -8,34 +8,35 @@ namespace OnionSeed.Data.Decorators
 	/// <summary>
 	/// Decorates an <see cref="IAsyncUnitOfWork"/>, mirroring commands to a secondary, "tap" <see cref="IAsyncUnitOfWork"/>.
 	/// </summary>
-	/// <remarks>This decorator functions like a network tap: commands are executed first against the inner unit of work;
-	/// if they succeed, they are then executed against the tap unit of work as well.
+	/// <remarks>This decorator functions like a parallel network tap: commands are executed against the inner unit of work
+	/// and the tap unit of work at the same time. This can be more performant than the regular, sequential type of tap;
+	/// but it is also inherently riskier because if an exception is thrown from either unit of work, they can become out-of-sync.
 	/// <para>Any values returned or exceptions thrown from the tap unit of work are ignored.</para>
 	/// <para>This essentially allows for the creation of a duplicate copy of the data,
 	/// and is intended to be used for things like caching, backup, or reporting.</para></remarks>
-	public class AsyncUnitOfWorkTapDecorator : AsyncUnitOfWorkDecorator
+	public class AsyncUnitOfWorkParallelTapDecorator : AsyncUnitOfWorkDecorator
 	{
 		/// <summary>
-		/// Initializes a new instance of the <see cref="AsyncUnitOfWorkTapDecorator"/> class.
+		/// Initializes a new instance of the <see cref="AsyncUnitOfWorkParallelTapDecorator"/> class.
 		/// </summary>
 		/// <param name="inner">The <see cref="IAsyncUnitOfWork"/> to be decorated.</param>
 		/// <param name="tap">The tap <see cref="IAsyncUnitOfWork"/>, where commands will be mirrored.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
-		public AsyncUnitOfWorkTapDecorator(IAsyncUnitOfWork inner, IAsyncUnitOfWork tap)
+		public AsyncUnitOfWorkParallelTapDecorator(IAsyncUnitOfWork inner, IAsyncUnitOfWork tap)
 			: this(inner, tap, null)
 		{
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="AsyncUnitOfWorkTapDecorator"/> class.
+		/// Initializes a new instance of the <see cref="AsyncUnitOfWorkParallelTapDecorator"/> class.
 		/// </summary>
 		/// <param name="inner">The <see cref="IAsyncUnitOfWork"/> to be decorated.</param>
 		/// <param name="tap">The tap <see cref="IAsyncUnitOfWork"/>, where commands will be mirrored.</param>
 		/// <param name="logger">The logger where tap exceptions should be written.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
-		public AsyncUnitOfWorkTapDecorator(IAsyncUnitOfWork inner, IAsyncUnitOfWork tap, ILogger logger)
+		public AsyncUnitOfWorkParallelTapDecorator(IAsyncUnitOfWork inner, IAsyncUnitOfWork tap, ILogger logger)
 			: base(inner)
 		{
 			Tap = (tap ?? throw new ArgumentNullException(nameof(tap)))
@@ -54,8 +55,9 @@ namespace OnionSeed.Data.Decorators
 		/// <inheritdoc/>
 		public override async Task CommitAsync()
 		{
-			await Inner.CommitAsync().ConfigureAwait(false);
-			await Tap.CommitAsync().ConfigureAwait(false);
+			await Task.WhenAll(
+				Inner.CommitAsync(),
+				Tap.CommitAsync()).ConfigureAwait(false);
 		}
 	}
 }

@@ -9,7 +9,7 @@ namespace OnionSeed.Data.Decorators
 	/// </summary>
 	/// <remarks>This decorator functions like a network tap: commands are executed first against the inner unit of work;
 	/// if they succeed, they are then executed against the tap unit of work as well.
-	/// Any values returned or exceptions thrown from the tap unit of work are ignored.
+	/// <para>Any values returned or exceptions thrown from the tap unit of work are ignored.</para>
 	/// <para>This essentially allows for the creation of a duplicate copy of the data,
 	/// and is intended to be used for things like caching, backup, or reporting.</para></remarks>
 	public class UnitOfWorkTapDecorator : UnitOfWorkDecorator

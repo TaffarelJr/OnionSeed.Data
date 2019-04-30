@@ -9,7 +9,7 @@ using Xunit;
 namespace OnionSeed.Data.Decorators
 {
 	[SuppressMessage("AsyncUsage.CSharp.Naming", "UseAsyncSuffix:Use Async suffix", Justification = "Test methods don't need to end in 'Async'.")]
-	public class AsyncUnitOfWorkTapDecoratorTests
+	public class AsyncUnitOfWorkParallelTapDecoratorTests
 	{
 		private readonly Mock<IAsyncUnitOfWork> _mockInner = new Mock<IAsyncUnitOfWork>(MockBehavior.Strict);
 		private readonly Mock<IAsyncUnitOfWork> _mockTap = new Mock<IAsyncUnitOfWork>(MockBehavior.Strict);
@@ -26,7 +26,7 @@ namespace OnionSeed.Data.Decorators
 			var tap = includeTap ? _mockTap.Object : null;
 
 			// Act
-			Action action = () => new AsyncUnitOfWorkTapDecorator(inner, tap);
+			Action action = () => new AsyncUnitOfWorkParallelTapDecorator(inner, tap);
 
 			// Assert
 			action.Should().Throw<ArgumentNullException>();
@@ -47,7 +47,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.CommitAsync())
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncUnitOfWorkTapDecorator(_mockInner.Object, _mockTap.Object);
+			var subject = new AsyncUnitOfWorkParallelTapDecorator(_mockInner.Object, _mockTap.Object);
 
 			// Act
 			await subject.CommitAsync().ConfigureAwait(false);
@@ -59,14 +59,17 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		[Fact]
-		public void CommitAsync_ShouldSkipTap_WhenInnerThrowsException()
+		public void CommitAsync_ShouldThrowException_WhenInnerThrowsException()
 		{
 			// Arrange
 			_mockInner
 				.Setup(r => r.CommitAsync())
 				.ThrowsAsync(new InvalidOperationException());
+			_mockTap
+				.Setup(r => r.CommitAsync())
+				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncUnitOfWorkTapDecorator(_mockInner.Object, _mockTap.Object);
+			var subject = new AsyncUnitOfWorkParallelTapDecorator(_mockInner.Object, _mockTap.Object);
 
 			// Act
 			Func<Task> action = async () => await subject.CommitAsync().ConfigureAwait(false);
@@ -90,7 +93,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(u => u.CommitAsync())
 				.ThrowsAsync(new InvalidOperationException());
 
-			var subject = new AsyncUnitOfWorkTapDecorator(_mockInner.Object, _mockTap.Object);
+			var subject = new AsyncUnitOfWorkParallelTapDecorator(_mockInner.Object, _mockTap.Object);
 
 			// Act
 			await subject.CommitAsync().ConfigureAwait(false);
@@ -99,6 +102,30 @@ namespace OnionSeed.Data.Decorators
 			_mockInner.VerifyAll();
 			_mockTap.VerifyAll();
 			_mockLogger.VerifyAll();
+		}
+
+		[Fact]
+		public void CommitAsync_ShouldThrowException_WhenBothThrowExceptions()
+		{
+			// Arrange
+			_mockInner
+				.Setup(r => r.CommitAsync())
+				.ThrowsAsync(new IndexOutOfRangeException());
+			_mockTap
+				.Setup(r => r.CommitAsync())
+				.ThrowsAsync(new InvalidOperationException());
+
+			var subject = new AsyncUnitOfWorkParallelTapDecorator(_mockInner.Object, _mockTap.Object);
+
+			// Act
+			Func<Task> action = async () => await subject.CommitAsync().ConfigureAwait(false);
+
+			// Assert
+			action.Should().Throw<IndexOutOfRangeException>();
+
+			_mockInner.VerifyAll();
+			_mockTap.VerifyAll();
+			_mockTap.VerifyAll();
 		}
 
 		[Fact]
@@ -112,7 +139,7 @@ namespace OnionSeed.Data.Decorators
 				.Setup(r => r.CommitAsync())
 				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncUnitOfWorkTapDecorator(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
+			var subject = new AsyncUnitOfWorkParallelTapDecorator(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
 			// Act
 			await subject.CommitAsync().ConfigureAwait(false);
@@ -124,14 +151,17 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		[Fact]
-		public void CommitAsync_ShouldSkipTap_WhenLoggerIsGiven_AndInnerThrowsException()
+		public void CommitAsync_ShouldThrowException_WhenLoggerIsGiven_AndInnerThrowsException()
 		{
 			// Arrange
 			_mockInner
 				.Setup(r => r.CommitAsync())
 				.ThrowsAsync(new InvalidOperationException());
+			_mockTap
+				.Setup(r => r.CommitAsync())
+				.Returns(Task.FromResult(0));
 
-			var subject = new AsyncUnitOfWorkTapDecorator(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
+			var subject = new AsyncUnitOfWorkParallelTapDecorator(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
 			// Act
 			Func<Task> action = async () => await subject.CommitAsync().ConfigureAwait(false);
@@ -156,7 +186,7 @@ namespace OnionSeed.Data.Decorators
 				.ThrowsAsync(new InvalidOperationException());
 			_mockLogger.Setup(l => l.Log(LogLevel.Warning, 0, It.IsAny<object>(), It.IsAny<InvalidOperationException>(), It.IsAny<Func<object, Exception, string>>()));
 
-			var subject = new AsyncUnitOfWorkTapDecorator(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
+			var subject = new AsyncUnitOfWorkParallelTapDecorator(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
 			// Act
 			await subject.CommitAsync().ConfigureAwait(false);
@@ -165,6 +195,31 @@ namespace OnionSeed.Data.Decorators
 			_mockInner.VerifyAll();
 			_mockTap.VerifyAll();
 			_mockLogger.VerifyAll();
+		}
+
+		[Fact]
+		public void CommitAsync_ShouldThrowException_AndLogException_WhenLoggerIsGiven_AndBothThrowExceptions()
+		{
+			// Arrange
+			_mockInner
+				.Setup(r => r.CommitAsync())
+				.ThrowsAsync(new IndexOutOfRangeException());
+			_mockTap
+				.Setup(r => r.CommitAsync())
+				.ThrowsAsync(new InvalidOperationException());
+			_mockLogger.Setup(l => l.Log(LogLevel.Warning, 0, It.IsAny<object>(), It.IsAny<InvalidOperationException>(), It.IsAny<Func<object, Exception, string>>()));
+
+			var subject = new AsyncUnitOfWorkParallelTapDecorator(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
+
+			// Act
+			Func<Task> action = async () => await subject.CommitAsync().ConfigureAwait(false);
+
+			// Assert
+			action.Should().Throw<IndexOutOfRangeException>();
+
+			_mockInner.VerifyAll();
+			_mockTap.VerifyAll();
+			_mockTap.VerifyAll();
 		}
 	}
 }
