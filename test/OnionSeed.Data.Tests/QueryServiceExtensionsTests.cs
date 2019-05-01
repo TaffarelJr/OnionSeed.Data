@@ -39,9 +39,9 @@ namespace OnionSeed.Data
 
 			// Assert
 			result.Should().NotBeNull();
-			result.Should().BeOfType<QueryServiceExceptionHandlerDecorator<FakeEntity<int>, int, InvalidOperationException>>();
+			result.Should().BeOfType<QueryServiceExceptionHandler<FakeEntity<int>, int, InvalidOperationException>>();
 
-			var typedResult = (QueryServiceExceptionHandlerDecorator<FakeEntity<int>, int, InvalidOperationException>)result;
+			var typedResult = (QueryServiceExceptionHandler<FakeEntity<int>, int, InvalidOperationException>)result;
 			typedResult.Inner.Should().BeSameAs(_mockInner.Object);
 			typedResult.Handler.Should().BeSameAs(handler);
 

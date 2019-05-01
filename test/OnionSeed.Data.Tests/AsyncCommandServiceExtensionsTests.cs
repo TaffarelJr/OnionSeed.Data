@@ -44,9 +44,9 @@ namespace OnionSeed.Data
 
 			// Assert
 			result.Should().NotBeNull();
-			result.Should().BeOfType<AsyncCommandServiceExceptionHandlerDecorator<FakeEntity<int>, int, InvalidOperationException>>();
+			result.Should().BeOfType<AsyncCommandServiceExceptionHandler<FakeEntity<int>, int, InvalidOperationException>>();
 
-			var typedResult = (AsyncCommandServiceExceptionHandlerDecorator<FakeEntity<int>, int, InvalidOperationException>)result;
+			var typedResult = (AsyncCommandServiceExceptionHandler<FakeEntity<int>, int, InvalidOperationException>)result;
 			typedResult.Inner.Should().BeSameAs(_mockInner.Object);
 			typedResult.Handler.Should().BeSameAs(handler);
 
@@ -82,15 +82,15 @@ namespace OnionSeed.Data
 
 			// Assert
 			result.Should().NotBeNull();
-			result.Should().BeOfType<AsyncCommandServiceTapDecorator<FakeEntity<int>, int>>();
+			result.Should().BeOfType<AsyncCommandServiceTap<FakeEntity<int>, int>>();
 
-			var decorator = (AsyncCommandServiceTapDecorator<FakeEntity<int>, int>)result;
+			var decorator = (AsyncCommandServiceTap<FakeEntity<int>, int>)result;
 			decorator.Inner.Should().BeSameAs(_mockInner.Object);
 			decorator.Logger.Should().BeNull();
 			decorator.Tap.Should().NotBeNull();
-			decorator.Tap.Should().BeOfType<AsyncCommandServiceExceptionHandlerDecorator<FakeEntity<int>, int, Exception>>();
+			decorator.Tap.Should().BeOfType<AsyncCommandServiceExceptionHandler<FakeEntity<int>, int, Exception>>();
 
-			var exDecorator = (AsyncCommandServiceExceptionHandlerDecorator<FakeEntity<int>, int, Exception>)decorator.Tap;
+			var exDecorator = (AsyncCommandServiceExceptionHandler<FakeEntity<int>, int, Exception>)decorator.Tap;
 			exDecorator.Inner.Should().BeSameAs(_mockTap.Object);
 
 			_mockInner.VerifyAll();
@@ -131,15 +131,15 @@ namespace OnionSeed.Data
 
 			// Assert
 			result.Should().NotBeNull();
-			result.Should().BeOfType<AsyncCommandServiceTapDecorator<FakeEntity<int>, int>>();
+			result.Should().BeOfType<AsyncCommandServiceTap<FakeEntity<int>, int>>();
 
-			var decorator = (AsyncCommandServiceTapDecorator<FakeEntity<int>, int>)result;
+			var decorator = (AsyncCommandServiceTap<FakeEntity<int>, int>)result;
 			decorator.Inner.Should().BeSameAs(_mockInner.Object);
 			decorator.Logger.Should().BeSameAs(_mockLogger.Object);
 			decorator.Tap.Should().NotBeNull();
-			decorator.Tap.Should().BeOfType<AsyncCommandServiceExceptionHandlerDecorator<FakeEntity<int>, int, Exception>>();
+			decorator.Tap.Should().BeOfType<AsyncCommandServiceExceptionHandler<FakeEntity<int>, int, Exception>>();
 
-			var exDecorator = (AsyncCommandServiceExceptionHandlerDecorator<FakeEntity<int>, int, Exception>)decorator.Tap;
+			var exDecorator = (AsyncCommandServiceExceptionHandler<FakeEntity<int>, int, Exception>)decorator.Tap;
 			exDecorator.Inner.Should().BeSameAs(_mockTap.Object);
 
 			_mockInner.VerifyAll();
@@ -176,15 +176,15 @@ namespace OnionSeed.Data
 
 			// Assert
 			result.Should().NotBeNull();
-			result.Should().BeOfType<AsyncCommandServiceParallelTapDecorator<FakeEntity<int>, int>>();
+			result.Should().BeOfType<AsyncCommandServiceParallelTap<FakeEntity<int>, int>>();
 
-			var decorator = (AsyncCommandServiceParallelTapDecorator<FakeEntity<int>, int>)result;
+			var decorator = (AsyncCommandServiceParallelTap<FakeEntity<int>, int>)result;
 			decorator.Inner.Should().BeSameAs(_mockInner.Object);
 			decorator.Logger.Should().BeNull();
 			decorator.Tap.Should().NotBeNull();
-			decorator.Tap.Should().BeOfType<AsyncCommandServiceExceptionHandlerDecorator<FakeEntity<int>, int, Exception>>();
+			decorator.Tap.Should().BeOfType<AsyncCommandServiceExceptionHandler<FakeEntity<int>, int, Exception>>();
 
-			var exDecorator = (AsyncCommandServiceExceptionHandlerDecorator<FakeEntity<int>, int, Exception>)decorator.Tap;
+			var exDecorator = (AsyncCommandServiceExceptionHandler<FakeEntity<int>, int, Exception>)decorator.Tap;
 			exDecorator.Inner.Should().BeSameAs(_mockTap.Object);
 
 			_mockInner.VerifyAll();
@@ -225,15 +225,15 @@ namespace OnionSeed.Data
 
 			// Assert
 			result.Should().NotBeNull();
-			result.Should().BeOfType<AsyncCommandServiceParallelTapDecorator<FakeEntity<int>, int>>();
+			result.Should().BeOfType<AsyncCommandServiceParallelTap<FakeEntity<int>, int>>();
 
-			var decorator = (AsyncCommandServiceParallelTapDecorator<FakeEntity<int>, int>)result;
+			var decorator = (AsyncCommandServiceParallelTap<FakeEntity<int>, int>)result;
 			decorator.Inner.Should().BeSameAs(_mockInner.Object);
 			decorator.Logger.Should().BeSameAs(_mockLogger.Object);
 			decorator.Tap.Should().NotBeNull();
-			decorator.Tap.Should().BeOfType<AsyncCommandServiceExceptionHandlerDecorator<FakeEntity<int>, int, Exception>>();
+			decorator.Tap.Should().BeOfType<AsyncCommandServiceExceptionHandler<FakeEntity<int>, int, Exception>>();
 
-			var exDecorator = (AsyncCommandServiceExceptionHandlerDecorator<FakeEntity<int>, int, Exception>)decorator.Tap;
+			var exDecorator = (AsyncCommandServiceExceptionHandler<FakeEntity<int>, int, Exception>)decorator.Tap;
 			exDecorator.Inner.Should().BeSameAs(_mockTap.Object);
 
 			_mockInner.VerifyAll();

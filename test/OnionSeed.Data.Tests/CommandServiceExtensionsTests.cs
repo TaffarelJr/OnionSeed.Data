@@ -42,9 +42,9 @@ namespace OnionSeed.Data
 
 			// Assert
 			result.Should().NotBeNull();
-			result.Should().BeOfType<CommandServiceExceptionHandlerDecorator<FakeEntity<int>, int, InvalidOperationException>>();
+			result.Should().BeOfType<CommandServiceExceptionHandler<FakeEntity<int>, int, InvalidOperationException>>();
 
-			var typedResult = (CommandServiceExceptionHandlerDecorator<FakeEntity<int>, int, InvalidOperationException>)result;
+			var typedResult = (CommandServiceExceptionHandler<FakeEntity<int>, int, InvalidOperationException>)result;
 			typedResult.Inner.Should().BeSameAs(_mockInner.Object);
 			typedResult.Handler.Should().BeSameAs(handler);
 
@@ -80,15 +80,15 @@ namespace OnionSeed.Data
 
 			// Assert
 			result.Should().NotBeNull();
-			result.Should().BeOfType<CommandServiceTapDecorator<FakeEntity<int>, int>>();
+			result.Should().BeOfType<CommandServiceTap<FakeEntity<int>, int>>();
 
-			var decorator = (CommandServiceTapDecorator<FakeEntity<int>, int>)result;
+			var decorator = (CommandServiceTap<FakeEntity<int>, int>)result;
 			decorator.Inner.Should().BeSameAs(_mockInner.Object);
 			decorator.Logger.Should().BeNull();
 			decorator.Tap.Should().NotBeNull();
-			decorator.Tap.Should().BeOfType<CommandServiceExceptionHandlerDecorator<FakeEntity<int>, int, Exception>>();
+			decorator.Tap.Should().BeOfType<CommandServiceExceptionHandler<FakeEntity<int>, int, Exception>>();
 
-			var exDecorator = (CommandServiceExceptionHandlerDecorator<FakeEntity<int>, int, Exception>)decorator.Tap;
+			var exDecorator = (CommandServiceExceptionHandler<FakeEntity<int>, int, Exception>)decorator.Tap;
 			exDecorator.Inner.Should().BeSameAs(_mockTap.Object);
 
 			_mockInner.VerifyAll();
@@ -129,15 +129,15 @@ namespace OnionSeed.Data
 
 			// Assert
 			result.Should().NotBeNull();
-			result.Should().BeOfType<CommandServiceTapDecorator<FakeEntity<int>, int>>();
+			result.Should().BeOfType<CommandServiceTap<FakeEntity<int>, int>>();
 
-			var decorator = (CommandServiceTapDecorator<FakeEntity<int>, int>)result;
+			var decorator = (CommandServiceTap<FakeEntity<int>, int>)result;
 			decorator.Inner.Should().BeSameAs(_mockInner.Object);
 			decorator.Logger.Should().BeSameAs(_mockLogger.Object);
 			decorator.Tap.Should().NotBeNull();
-			decorator.Tap.Should().BeOfType<CommandServiceExceptionHandlerDecorator<FakeEntity<int>, int, Exception>>();
+			decorator.Tap.Should().BeOfType<CommandServiceExceptionHandler<FakeEntity<int>, int, Exception>>();
 
-			var exDecorator = (CommandServiceExceptionHandlerDecorator<FakeEntity<int>, int, Exception>)decorator.Tap;
+			var exDecorator = (CommandServiceExceptionHandler<FakeEntity<int>, int, Exception>)decorator.Tap;
 			exDecorator.Inner.Should().BeSameAs(_mockTap.Object);
 
 			_mockInner.VerifyAll();
