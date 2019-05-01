@@ -25,7 +25,7 @@ namespace OnionSeed.Data.Decorators
 		/// <summary>
 		/// Gets a reference to the <see cref="IRepository{TEntity, TIdentity}"/> being decorated.
 		/// </summary>
-		protected IRepository<TEntity, TIdentity> Inner { get; }
+		public IRepository<TEntity, TIdentity> Inner { get; }
 
 		/// <inheritdoc/>
 		public virtual long GetCount() => Inner.GetCount();

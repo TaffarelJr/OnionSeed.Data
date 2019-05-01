@@ -24,7 +24,7 @@ namespace OnionSeed.Data.Decorators
 		/// <summary>
 		/// Gets a reference to the <see cref="ICommandService{TEntity, TIdentity}"/> being decorated.
 		/// </summary>
-		protected ICommandService<TEntity, TIdentity> Inner { get; }
+		public ICommandService<TEntity, TIdentity> Inner { get; }
 
 		/// <inheritdoc/>
 		public virtual void Add(TEntity item) => Inner.Add(item);

@@ -25,7 +25,7 @@ namespace OnionSeed.Data.Decorators
 		/// <summary>
 		/// Gets a reference to the <see cref="IAsyncCommandService{TEntity, TIdentity}"/> being decorated.
 		/// </summary>
-		protected IAsyncCommandService<TEntity, TIdentity> Inner { get; }
+		public IAsyncCommandService<TEntity, TIdentity> Inner { get; }
 
 		/// <inheritdoc/>
 		public virtual Task AddAsync(TEntity item) => Inner.AddAsync(item);

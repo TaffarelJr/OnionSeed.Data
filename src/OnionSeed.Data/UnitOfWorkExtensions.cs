@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Extensions.Logging;
 using OnionSeed.Data.Decorators;
 
 namespace OnionSeed.Data
@@ -23,6 +24,35 @@ namespace OnionSeed.Data
 			where TException : Exception
 		{
 			return new UnitOfWorkExceptionHandlerDecorator<TException>(inner, handler);
+		}
+
+		/// <summary>
+		/// Wraps the given <see cref="IUnitOfWork"/> in a <see cref="UnitOfWorkTapDecorator"/>,
+		/// mirroring all commands to the other given <see cref="IUnitOfWork"/>.
+		/// </summary>
+		/// <param name="inner">The <see cref="IUnitOfWork"/> to be wrapped.</param>
+		/// <param name="tap">The tap <see cref="IUnitOfWork"/>, where commands will be mirrored.</param>
+		/// <returns>A new <see cref="UnitOfWorkTapDecorator"/> wrapping the two given <see cref="IUnitOfWork"/> instances.</returns>
+		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
+		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
+		public static IUnitOfWork WithTap(this IUnitOfWork inner, IUnitOfWork tap)
+		{
+			return new UnitOfWorkTapDecorator(inner, tap);
+		}
+
+		/// <summary>
+		/// Wraps the given <see cref="IUnitOfWork"/> in a <see cref="UnitOfWorkTapDecorator"/>,
+		/// mirroring all commands to the other given <see cref="IUnitOfWork"/>.
+		/// </summary>
+		/// <param name="inner">The <see cref="IUnitOfWork"/> to be wrapped.</param>
+		/// <param name="tap">The tap <see cref="IUnitOfWork"/>, where commands will be mirrored.</param>
+		/// <param name="logger">The <see cref="ILogger"/> to which any tap exceptions should be written.</param>
+		/// <returns>A new <see cref="UnitOfWorkTapDecorator"/> wrapping the two given <see cref="IUnitOfWork"/> instances.</returns>
+		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
+		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
+		public static IUnitOfWork WithTap(this IUnitOfWork inner, IUnitOfWork tap, ILogger logger)
+		{
+			return new UnitOfWorkTapDecorator(inner, tap, logger);
 		}
 	}
 }
