@@ -44,9 +44,9 @@ namespace OnionSeed.Data
 
 			// Assert
 			result.Should().NotBeNull();
-			result.Should().BeOfType<AsyncUnitOfWorkExceptionHandlerDecorator<InvalidOperationException>>();
+			result.Should().BeOfType<AsyncUnitOfWorkExceptionHandler<InvalidOperationException>>();
 
-			var typedResult = (AsyncUnitOfWorkExceptionHandlerDecorator<InvalidOperationException>)result;
+			var typedResult = (AsyncUnitOfWorkExceptionHandler<InvalidOperationException>)result;
 			typedResult.Inner.Should().BeSameAs(_mockInner.Object);
 			typedResult.Handler.Should().BeSameAs(handler);
 
@@ -82,15 +82,15 @@ namespace OnionSeed.Data
 
 			// Assert
 			result.Should().NotBeNull();
-			result.Should().BeOfType<AsyncUnitOfWorkTapDecorator>();
+			result.Should().BeOfType<AsyncUnitOfWorkTap>();
 
-			var decorator = (AsyncUnitOfWorkTapDecorator)result;
+			var decorator = (AsyncUnitOfWorkTap)result;
 			decorator.Inner.Should().BeSameAs(_mockInner.Object);
 			decorator.Logger.Should().BeNull();
 			decorator.Tap.Should().NotBeNull();
-			decorator.Tap.Should().BeOfType<AsyncUnitOfWorkExceptionHandlerDecorator<Exception>>();
+			decorator.Tap.Should().BeOfType<AsyncUnitOfWorkExceptionHandler<Exception>>();
 
-			var exDecorator = (AsyncUnitOfWorkExceptionHandlerDecorator<Exception>)decorator.Tap;
+			var exDecorator = (AsyncUnitOfWorkExceptionHandler<Exception>)decorator.Tap;
 			exDecorator.Inner.Should().BeSameAs(_mockTap.Object);
 
 			_mockInner.VerifyAll();
@@ -131,15 +131,15 @@ namespace OnionSeed.Data
 
 			// Assert
 			result.Should().NotBeNull();
-			result.Should().BeOfType<AsyncUnitOfWorkTapDecorator>();
+			result.Should().BeOfType<AsyncUnitOfWorkTap>();
 
-			var decorator = (AsyncUnitOfWorkTapDecorator)result;
+			var decorator = (AsyncUnitOfWorkTap)result;
 			decorator.Inner.Should().BeSameAs(_mockInner.Object);
 			decorator.Logger.Should().BeSameAs(_mockLogger.Object);
 			decorator.Tap.Should().NotBeNull();
-			decorator.Tap.Should().BeOfType<AsyncUnitOfWorkExceptionHandlerDecorator<Exception>>();
+			decorator.Tap.Should().BeOfType<AsyncUnitOfWorkExceptionHandler<Exception>>();
 
-			var exDecorator = (AsyncUnitOfWorkExceptionHandlerDecorator<Exception>)decorator.Tap;
+			var exDecorator = (AsyncUnitOfWorkExceptionHandler<Exception>)decorator.Tap;
 			exDecorator.Inner.Should().BeSameAs(_mockTap.Object);
 
 			_mockInner.VerifyAll();
@@ -176,15 +176,15 @@ namespace OnionSeed.Data
 
 			// Assert
 			result.Should().NotBeNull();
-			result.Should().BeOfType<AsyncUnitOfWorkParallelTapDecorator>();
+			result.Should().BeOfType<AsyncUnitOfWorkParallelTap>();
 
-			var decorator = (AsyncUnitOfWorkParallelTapDecorator)result;
+			var decorator = (AsyncUnitOfWorkParallelTap)result;
 			decorator.Inner.Should().BeSameAs(_mockInner.Object);
 			decorator.Logger.Should().BeNull();
 			decorator.Tap.Should().NotBeNull();
-			decorator.Tap.Should().BeOfType<AsyncUnitOfWorkExceptionHandlerDecorator<Exception>>();
+			decorator.Tap.Should().BeOfType<AsyncUnitOfWorkExceptionHandler<Exception>>();
 
-			var exDecorator = (AsyncUnitOfWorkExceptionHandlerDecorator<Exception>)decorator.Tap;
+			var exDecorator = (AsyncUnitOfWorkExceptionHandler<Exception>)decorator.Tap;
 			exDecorator.Inner.Should().BeSameAs(_mockTap.Object);
 
 			_mockInner.VerifyAll();
@@ -225,15 +225,15 @@ namespace OnionSeed.Data
 
 			// Assert
 			result.Should().NotBeNull();
-			result.Should().BeOfType<AsyncUnitOfWorkParallelTapDecorator>();
+			result.Should().BeOfType<AsyncUnitOfWorkParallelTap>();
 
-			var decorator = (AsyncUnitOfWorkParallelTapDecorator)result;
+			var decorator = (AsyncUnitOfWorkParallelTap)result;
 			decorator.Inner.Should().BeSameAs(_mockInner.Object);
 			decorator.Logger.Should().BeSameAs(_mockLogger.Object);
 			decorator.Tap.Should().NotBeNull();
-			decorator.Tap.Should().BeOfType<AsyncUnitOfWorkExceptionHandlerDecorator<Exception>>();
+			decorator.Tap.Should().BeOfType<AsyncUnitOfWorkExceptionHandler<Exception>>();
 
-			var exDecorator = (AsyncUnitOfWorkExceptionHandlerDecorator<Exception>)decorator.Tap;
+			var exDecorator = (AsyncUnitOfWorkExceptionHandler<Exception>)decorator.Tap;
 			exDecorator.Inner.Should().BeSameAs(_mockTap.Object);
 
 			_mockInner.VerifyAll();
