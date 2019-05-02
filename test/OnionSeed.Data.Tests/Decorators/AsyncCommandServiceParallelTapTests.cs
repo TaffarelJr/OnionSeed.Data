@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
+using OnionSeed.Helpers.Async;
 using Xunit;
 
 namespace OnionSeed.Data.Decorators
@@ -44,10 +45,10 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(r => r.AddAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object);
 
@@ -71,7 +72,7 @@ namespace OnionSeed.Data.Decorators
 				.ThrowsAsync(new InvalidOperationException());
 			_mockTap
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object);
 
@@ -94,7 +95,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(u => u.AddAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(u => u.AddOrUpdateAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
@@ -144,10 +145,10 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(r => r.AddAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
@@ -171,7 +172,7 @@ namespace OnionSeed.Data.Decorators
 				.ThrowsAsync(new InvalidOperationException());
 			_mockTap
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
@@ -194,7 +195,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(u => u.AddAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(u => u.AddOrUpdateAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
@@ -246,10 +247,10 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object);
 
@@ -273,7 +274,7 @@ namespace OnionSeed.Data.Decorators
 				.ThrowsAsync(new InvalidOperationException());
 			_mockTap
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object);
 
@@ -296,7 +297,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(u => u.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(u => u.AddOrUpdateAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
@@ -346,10 +347,10 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
@@ -373,7 +374,7 @@ namespace OnionSeed.Data.Decorators
 				.ThrowsAsync(new InvalidOperationException());
 			_mockTap
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
@@ -396,7 +397,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(u => u.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(u => u.AddOrUpdateAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
@@ -448,10 +449,10 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(r => r.UpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object);
 
@@ -475,7 +476,7 @@ namespace OnionSeed.Data.Decorators
 				.ThrowsAsync(new InvalidOperationException());
 			_mockTap
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object);
 
@@ -498,7 +499,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(u => u.UpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(u => u.AddOrUpdateAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
@@ -548,10 +549,10 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(r => r.UpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
@@ -575,7 +576,7 @@ namespace OnionSeed.Data.Decorators
 				.ThrowsAsync(new InvalidOperationException());
 			_mockTap
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
@@ -598,7 +599,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(u => u.UpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(u => u.AddOrUpdateAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
@@ -650,10 +651,10 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(r => r.RemoveAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(r => r.RemoveAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object);
 
@@ -677,7 +678,7 @@ namespace OnionSeed.Data.Decorators
 				.ThrowsAsync(new InvalidOperationException());
 			_mockTap
 				.Setup(r => r.RemoveAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object);
 
@@ -700,7 +701,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(u => u.RemoveAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(u => u.RemoveAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
@@ -750,10 +751,10 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(r => r.RemoveAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(r => r.RemoveAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
@@ -777,7 +778,7 @@ namespace OnionSeed.Data.Decorators
 				.ThrowsAsync(new InvalidOperationException());
 			_mockTap
 				.Setup(r => r.RemoveAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
@@ -800,7 +801,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(u => u.RemoveAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(u => u.RemoveAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
@@ -852,10 +853,10 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(r => r.RemoveAsync(id))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(r => r.RemoveAsync(id))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object);
 
@@ -879,7 +880,7 @@ namespace OnionSeed.Data.Decorators
 				.ThrowsAsync(new InvalidOperationException());
 			_mockTap
 				.Setup(r => r.RemoveAsync(id))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object);
 
@@ -902,7 +903,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(u => u.RemoveAsync(id))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(u => u.RemoveAsync(id))
 				.ThrowsAsync(new InvalidOperationException());
@@ -952,10 +953,10 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(r => r.RemoveAsync(id))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(r => r.RemoveAsync(id))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
@@ -979,7 +980,7 @@ namespace OnionSeed.Data.Decorators
 				.ThrowsAsync(new InvalidOperationException());
 			_mockTap
 				.Setup(r => r.RemoveAsync(id))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
@@ -1002,7 +1003,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(u => u.RemoveAsync(id))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(u => u.RemoveAsync(id))
 				.ThrowsAsync(new InvalidOperationException());
@@ -1055,10 +1056,10 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(r => r.TryAddAsync(entity))
-				.Returns(Task.FromResult(expectedResult));
+				.ReturnsAsync(expectedResult);
 			_mockTap
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object);
 
@@ -1084,7 +1085,7 @@ namespace OnionSeed.Data.Decorators
 				.ThrowsAsync(new InvalidOperationException());
 			_mockTap
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object);
 
@@ -1108,7 +1109,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(u => u.TryAddAsync(entity))
-				.Returns(Task.FromResult(expectedResult));
+				.ReturnsAsync(expectedResult);
 			_mockTap
 				.Setup(u => u.AddOrUpdateAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
@@ -1161,10 +1162,10 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(r => r.TryAddAsync(entity))
-				.Returns(Task.FromResult(expectedResult));
+				.ReturnsAsync(expectedResult);
 			_mockTap
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
@@ -1190,7 +1191,7 @@ namespace OnionSeed.Data.Decorators
 				.ThrowsAsync(new InvalidOperationException());
 			_mockTap
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
@@ -1214,7 +1215,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(u => u.TryAddAsync(entity))
-				.Returns(Task.FromResult(expectedResult));
+				.ReturnsAsync(expectedResult);
 			_mockTap
 				.Setup(u => u.AddOrUpdateAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
@@ -1269,10 +1270,10 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(r => r.TryUpdateAsync(entity))
-				.Returns(Task.FromResult(expectedResult));
+				.ReturnsAsync(expectedResult);
 			_mockTap
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object);
 
@@ -1298,7 +1299,7 @@ namespace OnionSeed.Data.Decorators
 				.ThrowsAsync(new InvalidOperationException());
 			_mockTap
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object);
 
@@ -1322,7 +1323,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(u => u.TryUpdateAsync(entity))
-				.Returns(Task.FromResult(expectedResult));
+				.ReturnsAsync(expectedResult);
 			_mockTap
 				.Setup(u => u.AddOrUpdateAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
@@ -1375,10 +1376,10 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(r => r.TryUpdateAsync(entity))
-				.Returns(Task.FromResult(expectedResult));
+				.ReturnsAsync(expectedResult);
 			_mockTap
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
@@ -1404,7 +1405,7 @@ namespace OnionSeed.Data.Decorators
 				.ThrowsAsync(new InvalidOperationException());
 			_mockTap
 				.Setup(r => r.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
@@ -1428,7 +1429,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(u => u.TryUpdateAsync(entity))
-				.Returns(Task.FromResult(expectedResult));
+				.ReturnsAsync(expectedResult);
 			_mockTap
 				.Setup(u => u.AddOrUpdateAsync(entity))
 				.ThrowsAsync(new InvalidOperationException());
@@ -1487,7 +1488,7 @@ namespace OnionSeed.Data.Decorators
 				.Returns(Task.FromResult(expected));
 			_mockTap
 				.Setup(r => r.RemoveAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object);
 
@@ -1513,7 +1514,7 @@ namespace OnionSeed.Data.Decorators
 				.ThrowsAsync(new InvalidOperationException());
 			_mockTap
 				.Setup(r => r.RemoveAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object);
 
@@ -1595,7 +1596,7 @@ namespace OnionSeed.Data.Decorators
 				.Returns(Task.FromResult(expected));
 			_mockTap
 				.Setup(r => r.RemoveAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
@@ -1621,7 +1622,7 @@ namespace OnionSeed.Data.Decorators
 				.ThrowsAsync(new InvalidOperationException());
 			_mockTap
 				.Setup(r => r.RemoveAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
@@ -1705,7 +1706,7 @@ namespace OnionSeed.Data.Decorators
 				.Returns(Task.FromResult(expected));
 			_mockTap
 				.Setup(r => r.RemoveAsync(id))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object);
 
@@ -1731,7 +1732,7 @@ namespace OnionSeed.Data.Decorators
 				.ThrowsAsync(new InvalidOperationException());
 			_mockTap
 				.Setup(r => r.RemoveAsync(id))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object);
 
@@ -1813,7 +1814,7 @@ namespace OnionSeed.Data.Decorators
 				.Returns(Task.FromResult(expected));
 			_mockTap
 				.Setup(r => r.RemoveAsync(id))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
@@ -1839,7 +1840,7 @@ namespace OnionSeed.Data.Decorators
 				.ThrowsAsync(new InvalidOperationException());
 			_mockTap
 				.Setup(r => r.RemoveAsync(id))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceParallelTap<FakeEntity<int>, int>(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 

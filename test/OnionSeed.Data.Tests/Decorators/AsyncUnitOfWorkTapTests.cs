@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
+using OnionSeed.Helpers.Async;
 using Xunit;
 
 namespace OnionSeed.Data.Decorators
@@ -42,10 +43,10 @@ namespace OnionSeed.Data.Decorators
 			// Arrange
 			_mockInner
 				.Setup(r => r.CommitAsync())
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(r => r.CommitAsync())
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncUnitOfWorkTap(_mockInner.Object, _mockTap.Object);
 
@@ -85,7 +86,7 @@ namespace OnionSeed.Data.Decorators
 			// Arrange
 			_mockInner
 				.Setup(u => u.CommitAsync())
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(u => u.CommitAsync())
 				.ThrowsAsync(new InvalidOperationException());
@@ -107,10 +108,10 @@ namespace OnionSeed.Data.Decorators
 			// Arrange
 			_mockInner
 				.Setup(r => r.CommitAsync())
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(r => r.CommitAsync())
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncUnitOfWorkTap(_mockInner.Object, _mockTap.Object, _mockLogger.Object);
 
@@ -150,7 +151,7 @@ namespace OnionSeed.Data.Decorators
 			// Arrange
 			_mockInner
 				.Setup(u => u.CommitAsync())
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 			_mockTap
 				.Setup(u => u.CommitAsync())
 				.ThrowsAsync(new InvalidOperationException());

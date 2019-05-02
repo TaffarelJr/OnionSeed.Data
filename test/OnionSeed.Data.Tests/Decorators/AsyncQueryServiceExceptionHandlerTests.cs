@@ -43,7 +43,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(i => i.GetCountAsync())
-				.Returns(Task.FromResult(expectedResult));
+				.ReturnsAsync(expectedResult);
 
 			var subject = new AsyncQueryServiceExceptionHandler<FakeEntity<int>, int, InvalidOperationException>(_mockInner.Object, ex =>
 			{
@@ -272,7 +272,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(i => i.GetByIdAsync(id))
-				.Returns(Task.FromResult(expectedResult));
+				.ReturnsAsync(expectedResult);
 
 			var subject = new AsyncQueryServiceExceptionHandler<FakeEntity<int>, int, InvalidOperationException>(_mockInner.Object, ex =>
 			{
@@ -387,7 +387,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(i => i.TryGetByIdAsync(id))
-				.Returns(Task.FromResult(expectedResult));
+				.ReturnsAsync(expectedResult);
 
 			var subject = new AsyncQueryServiceExceptionHandler<FakeEntity<int>, int, InvalidOperationException>(_mockInner.Object, ex =>
 			{
