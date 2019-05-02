@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
+using OnionSeed.Helpers.Async;
 using Xunit;
 
 namespace OnionSeed.Data.Decorators
@@ -40,7 +41,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(i => i.CommitAsync())
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncUnitOfWorkExceptionHandler<InvalidOperationException>(_mockInner.Object, ex =>
 			{

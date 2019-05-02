@@ -103,5 +103,20 @@ namespace OnionSeed.Data
 		{
 			return new AsyncRepositoryParallelTap<TEntity, TIdentity>(inner, tap, logger);
 		}
+
+		/// <summary>
+		/// Wraps the given <see cref="IAsyncRepository{TEntity, TIdentity}"/> in a <see cref="SyncRepositoryAdapter{TEntity, TIdentity}"/>.
+		/// </summary>
+		/// <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+		/// <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
+		/// <param name="inner">The <see cref="IAsyncRepository{TEntity, TIdentity}"/> to be wrapped.</param>
+		/// <returns>A new <see cref="SyncRepositoryAdapter{TEntity, TIdentity}"/> wrapping the given <see cref="IAsyncRepository{TEntity, TIdentity}"/>.</returns>
+		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
+		public static IRepository<TEntity, TIdentity> ToSync<TEntity, TIdentity>(this IAsyncRepository<TEntity, TIdentity> inner)
+			where TEntity : IEntity<TIdentity>
+			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
+		{
+			return new SyncRepositoryAdapter<TEntity, TIdentity>(inner);
+		}
 	}
 }

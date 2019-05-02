@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
+using OnionSeed.Helpers.Async;
 using Xunit;
 
 namespace OnionSeed.Data.Decorators
@@ -41,7 +42,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(i => i.AddAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceExceptionHandler<FakeEntity<int>, int, InvalidOperationException>(_mockInner.Object, ex =>
 			{
@@ -151,7 +152,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(i => i.AddOrUpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceExceptionHandler<FakeEntity<int>, int, InvalidOperationException>(_mockInner.Object, ex =>
 			{
@@ -261,7 +262,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(i => i.UpdateAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceExceptionHandler<FakeEntity<int>, int, InvalidOperationException>(_mockInner.Object, ex =>
 			{
@@ -371,7 +372,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(i => i.RemoveAsync(entity))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceExceptionHandler<FakeEntity<int>, int, InvalidOperationException>(_mockInner.Object, ex =>
 			{
@@ -481,7 +482,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(i => i.RemoveAsync(id))
-				.Returns(Task.FromResult(0));
+				.Returns(TaskHelpers.CompletedTask);
 
 			var subject = new AsyncCommandServiceExceptionHandler<FakeEntity<int>, int, InvalidOperationException>(_mockInner.Object, ex =>
 			{
@@ -592,7 +593,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(i => i.TryAddAsync(entity))
-				.Returns(Task.FromResult(expectedResult));
+				.ReturnsAsync(expectedResult);
 
 			var subject = new AsyncCommandServiceExceptionHandler<FakeEntity<int>, int, InvalidOperationException>(_mockInner.Object, ex =>
 			{
@@ -707,7 +708,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(i => i.TryUpdateAsync(entity))
-				.Returns(Task.FromResult(expectedResult));
+				.ReturnsAsync(expectedResult);
 
 			var subject = new AsyncCommandServiceExceptionHandler<FakeEntity<int>, int, InvalidOperationException>(_mockInner.Object, ex =>
 			{
@@ -822,7 +823,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(i => i.TryRemoveAsync(entity))
-				.Returns(Task.FromResult(expectedResult));
+				.ReturnsAsync(expectedResult);
 
 			var subject = new AsyncCommandServiceExceptionHandler<FakeEntity<int>, int, InvalidOperationException>(_mockInner.Object, ex =>
 			{
@@ -937,7 +938,7 @@ namespace OnionSeed.Data.Decorators
 
 			_mockInner
 				.Setup(i => i.TryRemoveAsync(id))
-				.Returns(Task.FromResult(expectedResult));
+				.ReturnsAsync(expectedResult);
 
 			var subject = new AsyncCommandServiceExceptionHandler<FakeEntity<int>, int, InvalidOperationException>(_mockInner.Object, ex =>
 			{

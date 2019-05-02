@@ -10,6 +10,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="1.0.0" /><!-- DO NOT UPDATE -->
+		<PackageReference Include="OnionSeed.Helpers.Async" Version="1.0.4" />
 	</ItemGroup>
 
 </Project>

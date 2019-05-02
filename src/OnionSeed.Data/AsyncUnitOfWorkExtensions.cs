@@ -83,5 +83,16 @@ namespace OnionSeed.Data
 		{
 			return new AsyncUnitOfWorkParallelTap(inner, tap, logger);
 		}
+
+		/// <summary>
+		/// Wraps the given <see cref="IAsyncUnitOfWork"/> in a <see cref="SyncUnitOfWorkAdapter"/>.
+		/// </summary>
+		/// <param name="inner">The <see cref="IAsyncUnitOfWork"/> to be wrapped.</param>
+		/// <returns>A new <see cref="SyncUnitOfWorkAdapter"/> wrapping the given <see cref="IAsyncUnitOfWork"/>.</returns>
+		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
+		public static IUnitOfWork ToSync(this IAsyncUnitOfWork inner)
+		{
+			return new SyncUnitOfWorkAdapter(inner);
+		}
 	}
 }

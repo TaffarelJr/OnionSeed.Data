@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using OnionSeed.Data.Decorators;
 
@@ -65,6 +66,22 @@ namespace OnionSeed.Data
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 		{
 			return new CommandServiceTap<TEntity, TIdentity>(inner, tap, logger);
+		}
+
+		/// <summary>
+		/// Wraps the given <see cref="ICommandService{TEntity, TIdentity}"/> in an <see cref="AsyncCommandServiceAdapter{TEntity, TIdentity}"/>.
+		/// </summary>
+		/// <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+		/// <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
+		/// <param name="inner">The <see cref="ICommandService{TEntity, TIdentity}"/> to be wrapped.</param>
+		/// <returns>A new <see cref="AsyncCommandServiceAdapter{TEntity, TIdentity}"/> wrapping the given <see cref="ICommandService{TEntity, TIdentity}"/>.</returns>
+		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
+		[SuppressMessage("AsyncUsage.CSharp.Naming", "AvoidAsyncSuffix:Avoid Async suffix", Justification = "Name is appropriate in this case.")]
+		public static IAsyncCommandService<TEntity, TIdentity> ToAsync<TEntity, TIdentity>(this ICommandService<TEntity, TIdentity> inner)
+			where TEntity : IEntity<TIdentity>
+			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
+		{
+			return new AsyncCommandServiceAdapter<TEntity, TIdentity>(inner);
 		}
 	}
 }
