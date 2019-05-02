@@ -28,5 +28,20 @@ namespace OnionSeed.Data
 		{
 			return new AsyncQueryServiceExceptionHandler<TEntity, TIdentity, TException>(inner, handler);
 		}
+
+		/// <summary>
+		/// Wraps the given <see cref="IAsyncQueryService{TEntity, TIdentity}"/> in a <see cref="SyncQueryServiceAdapter{TEntity, TIdentity}"/>.
+		/// </summary>
+		/// <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+		/// <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
+		/// <param name="inner">The <see cref="IAsyncQueryService{TEntity, TIdentity}"/> to be wrapped.</param>
+		/// <returns>A new <see cref="SyncQueryServiceAdapter{TEntity, TIdentity}"/> wrapping the given <see cref="IAsyncQueryService{TEntity, TIdentity}"/>.</returns>
+		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
+		public static IQueryService<TEntity, TIdentity> ToSync<TEntity, TIdentity>(this IAsyncQueryService<TEntity, TIdentity> inner)
+			where TEntity : IEntity<TIdentity>
+			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
+		{
+			return new SyncQueryServiceAdapter<TEntity, TIdentity>(inner);
+		}
 	}
 }

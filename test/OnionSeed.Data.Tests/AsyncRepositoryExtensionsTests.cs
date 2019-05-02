@@ -240,5 +240,34 @@ namespace OnionSeed.Data
 			_mockTap.VerifyAll();
 			_mockLogger.VerifyAll();
 		}
+
+		[Fact]
+		public void ToSync_ShouldValidateParameter()
+		{
+			// Arrange
+			IAsyncRepository<FakeEntity<int>, int> inner = null;
+
+			// Act
+			Action action = () => inner.ToSync();
+
+			// Assert
+			action.Should().Throw<ArgumentNullException>();
+		}
+
+		[Fact]
+		public void ToSync_ShouldWrapInner()
+		{
+			// Act
+			var result = _mockInner.Object.ToSync();
+
+			// Assert
+			result.Should().NotBeNull();
+			result.Should().BeOfType<SyncRepositoryAdapter<FakeEntity<int>, int>>();
+
+			var adapter = (SyncRepositoryAdapter<FakeEntity<int>, int>)result;
+			adapter.Inner.Should().BeSameAs(_mockInner.Object);
+
+			_mockInner.VerifyAll();
+		}
 	}
 }

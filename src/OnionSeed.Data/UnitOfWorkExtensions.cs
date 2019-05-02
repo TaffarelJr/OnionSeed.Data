@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using OnionSeed.Data.Decorators;
 
@@ -53,6 +54,18 @@ namespace OnionSeed.Data
 		public static IUnitOfWork WithTap(this IUnitOfWork inner, IUnitOfWork tap, ILogger logger)
 		{
 			return new UnitOfWorkTap(inner, tap, logger);
+		}
+
+		/// <summary>
+		/// Wraps the given <see cref="IUnitOfWork"/> in an <see cref="AsyncUnitOfWorkAdapter"/>.
+		/// </summary>
+		/// <param name="inner">The <see cref="IUnitOfWork"/> to be wrapped.</param>
+		/// <returns>A new <see cref="AsyncUnitOfWorkAdapter"/> wrapping the given <see cref="IUnitOfWork"/>.</returns>
+		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
+		[SuppressMessage("AsyncUsage.CSharp.Naming", "AvoidAsyncSuffix:Avoid Async suffix", Justification = "Name is appropriate in this case.")]
+		public static IAsyncUnitOfWork ToAsync(this IUnitOfWork inner)
+		{
+			return new AsyncUnitOfWorkAdapter(inner);
 		}
 	}
 }

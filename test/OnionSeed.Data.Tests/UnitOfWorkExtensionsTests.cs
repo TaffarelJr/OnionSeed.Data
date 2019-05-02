@@ -144,5 +144,34 @@ namespace OnionSeed.Data
 			_mockTap.VerifyAll();
 			_mockLogger.VerifyAll();
 		}
+
+		[Fact]
+		public void ToAsync_ShouldValidateParameter()
+		{
+			// Arrange
+			IUnitOfWork inner = null;
+
+			// Act
+			Action action = () => inner.ToAsync();
+
+			// Assert
+			action.Should().Throw<ArgumentNullException>();
+		}
+
+		[Fact]
+		public void ToAsync_ShouldWrapInner()
+		{
+			// Act
+			var result = _mockInner.Object.ToAsync();
+
+			// Assert
+			result.Should().NotBeNull();
+			result.Should().BeOfType<AsyncUnitOfWorkAdapter>();
+
+			var adapter = (AsyncUnitOfWorkAdapter)result;
+			adapter.Inner.Should().BeSameAs(_mockInner.Object);
+
+			_mockInner.VerifyAll();
+		}
 	}
 }

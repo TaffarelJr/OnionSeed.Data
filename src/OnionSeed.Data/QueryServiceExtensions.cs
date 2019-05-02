@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using OnionSeed.Data.Decorators;
 
 namespace OnionSeed.Data
@@ -27,6 +28,22 @@ namespace OnionSeed.Data
 			where TException : Exception
 		{
 			return new QueryServiceExceptionHandler<TEntity, TIdentity, TException>(inner, handler);
+		}
+
+		/// <summary>
+		/// Wraps the given <see cref="IQueryService{TEntity, TIdentity}"/> in an <see cref="AsyncQueryServiceAdapter{TEntity, TIdentity}"/>.
+		/// </summary>
+		/// <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+		/// <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
+		/// <param name="inner">The <see cref="IQueryService{TEntity, TIdentity}"/> to be wrapped.</param>
+		/// <returns>A new <see cref="AsyncQueryServiceAdapter{TEntity, TIdentity}"/> wrapping the given <see cref="IQueryService{TEntity, TIdentity}"/>.</returns>
+		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
+		[SuppressMessage("AsyncUsage.CSharp.Naming", "AvoidAsyncSuffix:Avoid Async suffix", Justification = "Name is appropriate in this case.")]
+		public static IAsyncQueryService<TEntity, TIdentity> ToAsync<TEntity, TIdentity>(this IQueryService<TEntity, TIdentity> inner)
+			where TEntity : IEntity<TIdentity>
+			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
+		{
+			return new AsyncQueryServiceAdapter<TEntity, TIdentity>(inner);
 		}
 	}
 }
