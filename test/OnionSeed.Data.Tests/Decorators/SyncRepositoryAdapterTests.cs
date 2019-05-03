@@ -94,7 +94,7 @@ namespace OnionSeed.Data.Decorators
 			var subject = new SyncRepositoryAdapter<FakeEntity<int>, int>(_mockInner.Object);
 
 			// Act
-			var success = subject.TryGetById(id, out FakeEntity<int> result);
+			var success = subject.TryGetById(id, out var result);
 
 			// Assert
 			success.Should().BeFalse();
@@ -116,7 +116,7 @@ namespace OnionSeed.Data.Decorators
 			var subject = new SyncRepositoryAdapter<FakeEntity<int>, int>(_mockInner.Object);
 
 			// Act
-			var success = subject.TryGetById(entity.Id, out FakeEntity<int> result);
+			var success = subject.TryGetById(entity.Id, out var result);
 
 			// Assert
 			success.Should().BeTrue();
