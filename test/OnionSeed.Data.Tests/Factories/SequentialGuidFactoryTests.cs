@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using FluentAssertions;
 using Xunit;
@@ -18,44 +19,6 @@ namespace OnionSeed.Data.Factories
 
 			// Assert
 			action.Should().Throw<ArgumentOutOfRangeException>();
-		}
-
-		[Fact]
-		public void CreateNew_ShouldReturnNewGuid_WithoutCollisions_WhenTypeIsBinary()
-		{
-			// Arrange
-			var uniqueResults = new HashSet<Guid>();
-			var sequentialData = new string[TestIterations];
-			var subject = new SequentialGuidFactory(SequentialGuidType.Binary);
-
-			for (var i = 0; i < TestIterations; i++)
-			{
-				// Act
-				var result = subject.CreateNew();
-
-				// Assert
-				uniqueResults.Add(result).Should().BeTrue();
-				var sequentialBytes = result.ToByteArray().Take(SequentialGuidFactory.NumberOfSequentialBytes).ToArray();
-				sequentialData[i] = BitConverter.ToString(sequentialBytes);
-			}
-
-			uniqueResults.Should().HaveCount(TestIterations);
-			uniqueResults.Should().NotContain(Guid.Empty);
-
-			sequentialData.Should().BeInAscendingOrder();
-		}
-
-		[Fact]
-		public void CreateNew_Benchmark_WhenTypeIsBinary()
-		{
-			// Arrange
-			var subject = new SequentialGuidFactory(SequentialGuidType.Binary);
-
-			for (var i = 0; i < TestIterations; i++)
-			{
-				// Act
-				subject.CreateNew();
-			}
 		}
 
 		[Fact]
@@ -89,12 +52,60 @@ namespace OnionSeed.Data.Factories
 		{
 			// Arrange
 			var subject = new SequentialGuidFactory(SequentialGuidType.String);
+			var timer = Stopwatch.StartNew();
 
 			for (var i = 0; i < TestIterations; i++)
 			{
 				// Act
 				subject.CreateNew();
 			}
+
+			// Assert
+			timer.Stop();
+			timer.ElapsedMilliseconds.Should().BeLessOrEqualTo(500);
+		}
+
+		[Fact]
+		public void CreateNew_ShouldReturnNewGuid_WithoutCollisions_WhenTypeIsBinary()
+		{
+			// Arrange
+			var uniqueResults = new HashSet<Guid>();
+			var sequentialData = new string[TestIterations];
+			var subject = new SequentialGuidFactory(SequentialGuidType.Binary);
+
+			for (var i = 0; i < TestIterations; i++)
+			{
+				// Act
+				var result = subject.CreateNew();
+
+				// Assert
+				uniqueResults.Add(result).Should().BeTrue();
+				var sequentialBytes = result.ToByteArray().Take(SequentialGuidFactory.NumberOfSequentialBytes).ToArray();
+				sequentialData[i] = BitConverter.ToString(sequentialBytes);
+			}
+
+			uniqueResults.Should().HaveCount(TestIterations);
+			uniqueResults.Should().NotContain(Guid.Empty);
+
+			sequentialData.Should().BeInAscendingOrder();
+		}
+
+		[Fact]
+		public void CreateNew_Benchmark_WhenTypeIsBinary()
+		{
+			// Arrange
+			var subject = new SequentialGuidFactory(SequentialGuidType.Binary);
+			var timer = Stopwatch.StartNew();
+
+			for (var i = 0; i < TestIterations; i++)
+			{
+				// Act
+				subject.CreateNew();
+			}
+
+			// Assert
+			timer.Stop();
+			timer.ElapsedMilliseconds.Should().BeLessOrEqualTo(500);
 		}
 
 		[Fact]
@@ -129,12 +140,17 @@ namespace OnionSeed.Data.Factories
 		{
 			// Arrange
 			var subject = new SequentialGuidFactory(SequentialGuidType.BinaryEnd);
+			var timer = Stopwatch.StartNew();
 
 			for (var i = 0; i < TestIterations; i++)
 			{
 				// Act
 				subject.CreateNew();
 			}
+
+			// Assert
+			timer.Stop();
+			timer.ElapsedMilliseconds.Should().BeLessOrEqualTo(500);
 		}
 	}
 }

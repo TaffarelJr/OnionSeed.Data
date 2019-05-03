@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -37,12 +38,17 @@ namespace OnionSeed.Data.Factories
 		{
 			// Arrange
 			var subject = new GuidFactory();
+			var timer = Stopwatch.StartNew();
 
 			for (var i = 0; i < TestIterations; i++)
 			{
 				// Act
 				subject.CreateNew();
 			}
+
+			// Assert
+			timer.Stop();
+			timer.ElapsedMilliseconds.Should().BeLessOrEqualTo(400);
 		}
 
 		[Fact]
@@ -72,6 +78,7 @@ namespace OnionSeed.Data.Factories
 			// Arrange
 			var tasks = new Task<Guid>[TestIterations];
 			var subject = new GuidFactory();
+			var timer = Stopwatch.StartNew();
 
 			for (var i = 0; i < TestIterations; i++)
 			{
@@ -81,6 +88,10 @@ namespace OnionSeed.Data.Factories
 
 			// Assert
 			await Task.WhenAll(tasks).ConfigureAwait(false);
+
+			// Assert
+			timer.Stop();
+			timer.ElapsedMilliseconds.Should().BeLessOrEqualTo(400);
 		}
 	}
 }
