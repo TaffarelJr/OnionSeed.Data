@@ -1331,6 +1331,134 @@
         <member name="M:OnionSeed.Data.Decorators.CommandServiceTap`2.TryRemove(`1)">
             <inheritdoc/>
         </member>
+        <member name="T:OnionSeed.Data.Decorators.ComposedAsyncRepository`2">
+            <inheritdoc/>
+            <summary>
+            Joins an <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> and an <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> into a single <see cref="T:OnionSeed.Data.IAsyncRepository`2"/>.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedAsyncRepository`2.#ctor(OnionSeed.Data.IAsyncQueryService{`0,`1},OnionSeed.Data.IAsyncCommandService{`0,`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.ComposedAsyncRepository`2"/> class.
+            </summary>
+            <param name="queryService">The <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> to be joined.</param>
+            <param name="commandService">The <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>to be joined.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="queryService"/> is <c>null</c>.
+            -or- <paramref name="commandService"/> is <c>null</c>.</exception>
+        </member>
+        <member name="P:OnionSeed.Data.Decorators.ComposedAsyncRepository`2.QueryService">
+            <summary>
+            Gets a reference to the <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> being joined.
+            </summary>
+        </member>
+        <member name="P:OnionSeed.Data.Decorators.ComposedAsyncRepository`2.CommandService">
+            <summary>
+            Gets a reference to the <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> being joined.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedAsyncRepository`2.GetCountAsync">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedAsyncRepository`2.GetAllAsync">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedAsyncRepository`2.GetByIdAsync(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedAsyncRepository`2.TryGetByIdAsync(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedAsyncRepository`2.AddAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedAsyncRepository`2.AddOrUpdateAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedAsyncRepository`2.UpdateAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedAsyncRepository`2.RemoveAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedAsyncRepository`2.RemoveAsync(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedAsyncRepository`2.TryAddAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedAsyncRepository`2.TryUpdateAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedAsyncRepository`2.TryRemoveAsync(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedAsyncRepository`2.TryRemoveAsync(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="T:OnionSeed.Data.Decorators.ComposedRepository`2">
+            <inheritdoc/>
+            <summary>
+            Joins an <see cref="T:OnionSeed.Data.IQueryService`2"/> and an <see cref="T:OnionSeed.Data.ICommandService`2"/> into a single <see cref="T:OnionSeed.Data.IRepository`2"/>.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedRepository`2.#ctor(OnionSeed.Data.IQueryService{`0,`1},OnionSeed.Data.ICommandService{`0,`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Decorators.ComposedRepository`2"/> class.
+            </summary>
+            <param name="queryService">The <see cref="T:OnionSeed.Data.IQueryService`2"/> to be joined.</param>
+            <param name="commandService">The <see cref="T:OnionSeed.Data.ICommandService`2"/>to be joined.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="queryService"/> is <c>null</c>.
+            -or- <paramref name="commandService"/> is <c>null</c>.</exception>
+        </member>
+        <member name="P:OnionSeed.Data.Decorators.ComposedRepository`2.QueryService">
+            <summary>
+            Gets a reference to the <see cref="T:OnionSeed.Data.IQueryService`2"/> being joined.
+            </summary>
+        </member>
+        <member name="P:OnionSeed.Data.Decorators.ComposedRepository`2.CommandService">
+            <summary>
+            Gets a reference to the <see cref="T:OnionSeed.Data.ICommandService`2"/> being joined.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedRepository`2.GetCount">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedRepository`2.GetAll">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedRepository`2.GetById(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedRepository`2.TryGetById(`1,`0@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedRepository`2.Add(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedRepository`2.AddOrUpdate(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedRepository`2.Update(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedRepository`2.Remove(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedRepository`2.Remove(`1)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedRepository`2.TryAdd(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedRepository`2.TryUpdate(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedRepository`2.TryRemove(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Decorators.ComposedRepository`2.TryRemove(`1)">
+            <inheritdoc/>
+        </member>
         <member name="T:OnionSeed.Data.Decorators.QueryServiceDecorator`2">
             <inheritdoc/>
             <summary>
