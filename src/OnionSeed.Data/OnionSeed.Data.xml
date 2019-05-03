@@ -1983,6 +1983,66 @@
         <member name="M:OnionSeed.Data.Decorators.UnitOfWorkTap.Commit">
             <inheritdoc/>
         </member>
+        <member name="T:OnionSeed.Data.Factories.AsyncEntityFactory`2">
+            <inheritdoc/>
+            <summary>
+            A factory that can construct new entity instances and populate them with new unique identity values.
+            </summary>
+            <typeparam name="TEntity">The type of entities created by the factory.</typeparam>
+            <typeparam name="TIdentity">The type of the unique identity values.</typeparam>
+        </member>
+        <member name="M:OnionSeed.Data.Factories.AsyncEntityFactory`2.#ctor(OnionSeed.Factory.IAsyncFactory{`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Factories.AsyncEntityFactory`2"/> class.
+            </summary>
+            <param name="keyGenerator">The factory that will be used to generate unique identity values.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="keyGenerator"/> is <b>null</b>.</exception>
+        </member>
+        <member name="M:OnionSeed.Data.Factories.AsyncEntityFactory`2.#ctor(System.Func{System.Threading.Tasks.Task{`1}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Factories.AsyncEntityFactory`2"/> class.
+            </summary>
+            <param name="keyGenerator">The factory method that will be used to generate unique identity values.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="keyGenerator"/> is <c>null</c>.</exception>
+        </member>
+        <member name="P:OnionSeed.Data.Factories.AsyncEntityFactory`2.KeyGenerator">
+            <summary>
+            Gets the factory method that will be used to generate unique identity values.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.Factories.AsyncEntityFactory`2.CreateNewAsync">
+            <inheritdoc />
+        </member>
+        <member name="T:OnionSeed.Data.Factories.EntityFactory`2">
+            <inheritdoc/>
+            <summary>
+            A factory that can construct new entity instances and populate them with new unique identity values.
+            </summary>
+            <typeparam name="TEntity">The type of entities created by the factory.</typeparam>
+            <typeparam name="TIdentity">The type of the unique identity values.</typeparam>
+        </member>
+        <member name="M:OnionSeed.Data.Factories.EntityFactory`2.#ctor(OnionSeed.Factory.IFactory{`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Factories.EntityFactory`2"/> class.
+            </summary>
+            <param name="keyGenerator">The factory that will be used to generate unique identity values.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="keyGenerator"/> is <b>null</b>.</exception>
+        </member>
+        <member name="M:OnionSeed.Data.Factories.EntityFactory`2.#ctor(System.Func{`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:OnionSeed.Data.Factories.EntityFactory`2"/> class.
+            </summary>
+            <param name="keyGenerator">The factory method that will be used to generate unique identity values.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="keyGenerator"/> is <b>null</b>.</exception>
+        </member>
+        <member name="P:OnionSeed.Data.Factories.EntityFactory`2.KeyGenerator">
+            <summary>
+            Gets the factory method that will be used to generate unique identity values.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.Factories.EntityFactory`2.CreateNew">
+            <inheritdoc />
+        </member>
         <member name="T:OnionSeed.Data.Factories.GuidFactory">
             <inheritdoc/>
             <summary>
