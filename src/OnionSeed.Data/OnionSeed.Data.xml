@@ -1983,6 +1983,18 @@
         <member name="M:OnionSeed.Data.Decorators.UnitOfWorkTap.Commit">
             <inheritdoc/>
         </member>
+        <member name="T:OnionSeed.Data.Factories.GuidFactory">
+            <inheritdoc/>
+            <summary>
+            Generates random GUID values that can be used as unique identity values for entities.
+            </summary>
+        </member>
+        <member name="M:OnionSeed.Data.Factories.GuidFactory.CreateNew">
+            <inheritdoc/>
+        </member>
+        <member name="M:OnionSeed.Data.Factories.GuidFactory.CreateNewAsync">
+            <inheritdoc/>
+        </member>
         <member name="T:OnionSeed.Data.IAsyncCommandService`2">
             <summary>
             Defines a mechanism that can be used to asynchronously update entities in a data store.
