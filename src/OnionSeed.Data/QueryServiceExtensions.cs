@@ -45,5 +45,22 @@ namespace OnionSeed.Data
 		{
 			return new AsyncQueryServiceAdapter<TEntity, TIdentity>(inner);
 		}
+
+		/// <summary>
+		/// Joins the given <see cref="IQueryService{TEntity, TIdentity}"/> and <see cref="ICommandService{TEntity, TIdentity}"/> into a single <see cref="ComposedRepository{TEntity, TIdentity}"/>.
+		/// </summary>
+		/// <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+		/// <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
+		/// <param name="queryService">The <see cref="IQueryService{TEntity, TIdentity}"/> to be joined.</param>
+		/// <param name="commandService">The <see cref="ICommandService{TEntity, TIdentity}"/>to be joined.</param>
+		/// <returns>A new <see cref="ComposedRepository{TEntity, TIdentity}"/> joining the given <see cref="IQueryService{TEntity, TIdentity}"/> and <see cref="ICommandService{TEntity, TIdentity}"/>.</returns>
+		/// <exception cref="ArgumentNullException"><paramref name="queryService"/> is <c>null</c>.
+		/// -or- <paramref name="commandService"/> is <c>null</c>.</exception>
+		public static IRepository<TEntity, TIdentity> Join<TEntity, TIdentity>(this IQueryService<TEntity, TIdentity> queryService, ICommandService<TEntity, TIdentity> commandService)
+			where TEntity : IEntity<TIdentity>
+			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
+		{
+			return new ComposedRepository<TEntity, TIdentity>(queryService, commandService);
+		}
 	}
 }

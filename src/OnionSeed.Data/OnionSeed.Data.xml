@@ -88,6 +88,18 @@
             <returns>A new <see cref="T:OnionSeed.Data.Decorators.SyncCommandServiceAdapter`2"/> wrapping the given <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>.</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
         </member>
+        <member name="M:OnionSeed.Data.AsyncCommandServiceExtensions.Join``2(OnionSeed.Data.IAsyncCommandService{``0,``1},OnionSeed.Data.IAsyncQueryService{``0,``1})">
+            <summary>
+            Joins the given <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> and <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> into a single <see cref="T:OnionSeed.Data.Decorators.ComposedAsyncRepository`2"/>.
+            </summary>
+            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
+            <param name="commandService">The <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>to be joined.</param>
+            <param name="queryService">The <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> to be joined.</param>
+            <returns>A new <see cref="T:OnionSeed.Data.Decorators.ComposedAsyncRepository`2"/> joining the given <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> and <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="commandService"/> is <c>null</c>.
+            -or- <paramref name="queryService"/> is <c>null</c>.</exception>
+        </member>
         <member name="T:OnionSeed.Data.AsyncQueryServiceExtensions">
             <summary>
             Contains extension methods for <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/>.
@@ -117,6 +129,18 @@
             <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> to be wrapped.</param>
             <returns>A new <see cref="T:OnionSeed.Data.Decorators.SyncQueryServiceAdapter`2"/> wrapping the given <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/>.</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:OnionSeed.Data.AsyncQueryServiceExtensions.Join``2(OnionSeed.Data.IAsyncQueryService{``0,``1},OnionSeed.Data.IAsyncCommandService{``0,``1})">
+            <summary>
+            Joins the given <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> and <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> into a single <see cref="T:OnionSeed.Data.Decorators.ComposedAsyncRepository`2"/>.
+            </summary>
+            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
+            <param name="queryService">The <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> to be joined.</param>
+            <param name="commandService">The <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>to be joined.</param>
+            <returns>A new <see cref="T:OnionSeed.Data.Decorators.ComposedAsyncRepository`2"/> joining the given <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> and <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="queryService"/> is <c>null</c>.
+            -or- <paramref name="commandService"/> is <c>null</c>.</exception>
         </member>
         <member name="T:OnionSeed.Data.AsyncRepositoryExtensions">
             <summary>
@@ -330,6 +354,18 @@
             <param name="inner">The <see cref="T:OnionSeed.Data.ICommandService`2"/> to be wrapped.</param>
             <returns>A new <see cref="T:OnionSeed.Data.Decorators.AsyncCommandServiceAdapter`2"/> wrapping the given <see cref="T:OnionSeed.Data.ICommandService`2"/>.</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:OnionSeed.Data.CommandServiceExtensions.Join``2(OnionSeed.Data.ICommandService{``0,``1},OnionSeed.Data.IQueryService{``0,``1})">
+            <summary>
+            Joins the given <see cref="T:OnionSeed.Data.IQueryService`2"/> and <see cref="T:OnionSeed.Data.ICommandService`2"/> into a single <see cref="T:OnionSeed.Data.Decorators.ComposedRepository`2"/>.
+            </summary>
+            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
+            <param name="commandService">The <see cref="T:OnionSeed.Data.ICommandService`2"/>to be joined.</param>
+            <param name="queryService">The <see cref="T:OnionSeed.Data.IQueryService`2"/> to be joined.</param>
+            <returns>A new <see cref="T:OnionSeed.Data.Decorators.ComposedRepository`2"/> joining the given <see cref="T:OnionSeed.Data.IQueryService`2"/> and <see cref="T:OnionSeed.Data.ICommandService`2"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="commandService"/> is <c>null</c>.
+            -or- <paramref name="queryService"/> is <c>null</c>.</exception>
         </member>
         <member name="T:OnionSeed.Data.Decorators.AsyncCommandServiceAdapter`2">
             <inheritdoc/>
@@ -2303,6 +2339,18 @@
             <param name="inner">The <see cref="T:OnionSeed.Data.IQueryService`2"/> to be wrapped.</param>
             <returns>A new <see cref="T:OnionSeed.Data.Decorators.AsyncQueryServiceAdapter`2"/> wrapping the given <see cref="T:OnionSeed.Data.IQueryService`2"/>.</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:OnionSeed.Data.QueryServiceExtensions.Join``2(OnionSeed.Data.IQueryService{``0,``1},OnionSeed.Data.ICommandService{``0,``1})">
+            <summary>
+            Joins the given <see cref="T:OnionSeed.Data.IQueryService`2"/> and <see cref="T:OnionSeed.Data.ICommandService`2"/> into a single <see cref="T:OnionSeed.Data.Decorators.ComposedRepository`2"/>.
+            </summary>
+            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
+            <param name="queryService">The <see cref="T:OnionSeed.Data.IQueryService`2"/> to be joined.</param>
+            <param name="commandService">The <see cref="T:OnionSeed.Data.ICommandService`2"/>to be joined.</param>
+            <returns>A new <see cref="T:OnionSeed.Data.Decorators.ComposedRepository`2"/> joining the given <see cref="T:OnionSeed.Data.IQueryService`2"/> and <see cref="T:OnionSeed.Data.ICommandService`2"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="queryService"/> is <c>null</c>.
+            -or- <paramref name="commandService"/> is <c>null</c>.</exception>
         </member>
         <member name="T:OnionSeed.Data.RepositoryExtensions">
             <summary>

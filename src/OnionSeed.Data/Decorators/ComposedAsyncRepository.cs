@@ -8,7 +8,7 @@ namespace OnionSeed.Data.Decorators
 	/// <summary>
 	/// Joins an <see cref="IAsyncQueryService{TEntity, TIdentity}"/> and an <see cref="IAsyncCommandService{TEntity, TIdentity}"/> into a single <see cref="IAsyncRepository{TEntity, TIdentity}"/>.
 	/// </summary>
-	public class ComposedAsyncRepository<TEntity, TIdentity> : IAsyncQueryService<TEntity, TIdentity>, IAsyncCommandService<TEntity, TIdentity>
+	public class ComposedAsyncRepository<TEntity, TIdentity> : IAsyncRepository<TEntity, TIdentity>
 		where TEntity : IEntity<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
