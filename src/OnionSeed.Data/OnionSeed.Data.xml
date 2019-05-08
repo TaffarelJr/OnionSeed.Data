@@ -2133,6 +2133,15 @@
               </item>
             </list></p></summary>
         </member>
+        <member name="T:OnionSeed.Data.IAggregateRoot`1">
+            <summary>
+            Identifies the root entity of a collection of objects that are bound together (an aggregate).
+            </summary>
+            <typeparam name="TIdentity">The type of the unique identity value.</typeparam>
+            <remarks>The aggregate root is a special type of <see cref="T:OnionSeed.Data.IEntity`1"/> that
+            guarantees the consistency of changes being made within the aggregate by forbidding
+            external objects from holding references to its members.</remarks>
+        </member>
         <member name="T:OnionSeed.Data.IAsyncCommandService`2">
             <summary>
             Defines a mechanism that can be used to asynchronously update entities in a data store.
