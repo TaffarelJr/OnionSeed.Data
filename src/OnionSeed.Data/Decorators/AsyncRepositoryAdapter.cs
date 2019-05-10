@@ -6,19 +6,19 @@ namespace OnionSeed.Data.Decorators
 {
 	/// <inheritdoc/>
 	/// <summary>
-	/// Adapts an <see cref="IRepository{TEntity, TIdentity}"/> to work like an <see cref="IAsyncRepository{TEntity, TIdentity}"/>.
+	/// Adapts an <see cref="IRepository{TRoot, TIdentity}"/> to work like an <see cref="IAsyncRepository{TRoot, TIdentity}"/>.
 	/// </summary>
-	public class AsyncRepositoryAdapter<TEntity, TIdentity> : RepositoryDecorator<TEntity, TIdentity>, IAsyncRepository<TEntity, TIdentity>
-		where TEntity : IEntity<TIdentity>
+	public class AsyncRepositoryAdapter<TRoot, TIdentity> : RepositoryDecorator<TRoot, TIdentity>, IAsyncRepository<TRoot, TIdentity>
+		where TRoot : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 		/// <summary>
-		/// Initializes a new instance of the <see cref="AsyncRepositoryAdapter{TEntity, TIdentity}"/> class,
-		/// wrapping the given <see cref="IRepository{TEntity, TIdentity}"/>.
+		/// Initializes a new instance of the <see cref="AsyncRepositoryAdapter{TRoot, TIdentity}"/> class,
+		/// wrapping the given <see cref="IRepository{TRoot, TIdentity}"/>.
 		/// </summary>
-		/// <param name="inner">The <see cref="IRepository{TEntity, TIdentity}"/> to be wrapped.</param>
+		/// <param name="inner">The <see cref="IRepository{TRoot, TIdentity}"/> to be wrapped.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
-		public AsyncRepositoryAdapter(IRepository<TEntity, TIdentity> inner)
+		public AsyncRepositoryAdapter(IRepository<TRoot, TIdentity> inner)
 			: base(inner)
 		{
 		}
@@ -27,37 +27,37 @@ namespace OnionSeed.Data.Decorators
 		public Task<long> GetCountAsync() => Task.Run(() => Inner.GetCount());
 
 		/// <inheritdoc/>
-		public Task<IEnumerable<TEntity>> GetAllAsync() => Task.Run(() => Inner.GetAll());
+		public Task<IEnumerable<TRoot>> GetAllAsync() => Task.Run(() => Inner.GetAll());
 
 		/// <inheritdoc/>
-		public Task<TEntity> GetByIdAsync(TIdentity id) => Task.Run(() => Inner.GetById(id));
+		public Task<TRoot> GetByIdAsync(TIdentity id) => Task.Run(() => Inner.GetById(id));
 
 		/// <inheritdoc/>
-		public Task<TEntity> TryGetByIdAsync(TIdentity id) => Task.Run(() => Inner.TryGetById(id, out TEntity result) ? result : default);
+		public Task<TRoot> TryGetByIdAsync(TIdentity id) => Task.Run(() => Inner.TryGetById(id, out TRoot result) ? result : default);
 
 		/// <inheritdoc/>
-		public Task AddAsync(TEntity item) => Task.Run(() => Inner.Add(item));
+		public Task AddAsync(TRoot item) => Task.Run(() => Inner.Add(item));
 
 		/// <inheritdoc/>
-		public Task AddOrUpdateAsync(TEntity item) => Task.Run(() => Inner.AddOrUpdate(item));
+		public Task AddOrUpdateAsync(TRoot item) => Task.Run(() => Inner.AddOrUpdate(item));
 
 		/// <inheritdoc/>
-		public Task UpdateAsync(TEntity item) => Task.Run(() => Inner.Update(item));
+		public Task UpdateAsync(TRoot item) => Task.Run(() => Inner.Update(item));
 
 		/// <inheritdoc/>
-		public Task RemoveAsync(TEntity item) => Task.Run(() => Inner.Remove(item));
+		public Task RemoveAsync(TRoot item) => Task.Run(() => Inner.Remove(item));
 
 		/// <inheritdoc/>
 		public Task RemoveAsync(TIdentity id) => Task.Run(() => Inner.Remove(id));
 
 		/// <inheritdoc/>
-		public Task<bool> TryAddAsync(TEntity item) => Task.Run(() => Inner.TryAdd(item));
+		public Task<bool> TryAddAsync(TRoot item) => Task.Run(() => Inner.TryAdd(item));
 
 		/// <inheritdoc/>
-		public Task<bool> TryUpdateAsync(TEntity item) => Task.Run(() => Inner.TryUpdate(item));
+		public Task<bool> TryUpdateAsync(TRoot item) => Task.Run(() => Inner.TryUpdate(item));
 
 		/// <inheritdoc/>
-		public Task<bool> TryRemoveAsync(TEntity item) => Task.Run(() => Inner.TryRemove(item));
+		public Task<bool> TryRemoveAsync(TRoot item) => Task.Run(() => Inner.TryRemove(item));
 
 		/// <inheritdoc/>
 		public Task<bool> TryRemoveAsync(TIdentity id) => Task.Run(() => Inner.TryRemove(id));

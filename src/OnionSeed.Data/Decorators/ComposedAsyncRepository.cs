@@ -6,70 +6,70 @@ namespace OnionSeed.Data.Decorators
 {
 	/// <inheritdoc/>
 	/// <summary>
-	/// Joins an <see cref="IAsyncQueryService{TEntity, TIdentity}"/> and an <see cref="IAsyncCommandService{TEntity, TIdentity}"/> into a single <see cref="IAsyncRepository{TEntity, TIdentity}"/>.
+	/// Joins an <see cref="IAsyncQueryService{TRoot, TIdentity}"/> and an <see cref="IAsyncCommandService{TRoot, TIdentity}"/> into a single <see cref="IAsyncRepository{TRoot, TIdentity}"/>.
 	/// </summary>
-	public class ComposedAsyncRepository<TEntity, TIdentity> : IAsyncRepository<TEntity, TIdentity>
-		where TEntity : IEntity<TIdentity>
+	public class ComposedAsyncRepository<TRoot, TIdentity> : IAsyncRepository<TRoot, TIdentity>
+		where TRoot : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 		/// <summary>
-		/// Initializes a new instance of the <see cref="ComposedAsyncRepository{TEntity,TKey}"/> class.
+		/// Initializes a new instance of the <see cref="ComposedAsyncRepository{TRoot,TKey}"/> class.
 		/// </summary>
-		/// <param name="queryService">The <see cref="IAsyncQueryService{TEntity, TIdentity}"/> to be joined.</param>
-		/// <param name="commandService">The <see cref="IAsyncCommandService{TEntity, TIdentity}"/>to be joined.</param>
+		/// <param name="queryService">The <see cref="IAsyncQueryService{TRoot, TIdentity}"/> to be joined.</param>
+		/// <param name="commandService">The <see cref="IAsyncCommandService{TRoot, TIdentity}"/>to be joined.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="queryService"/> is <c>null</c>.
 		/// -or- <paramref name="commandService"/> is <c>null</c>.</exception>
-		public ComposedAsyncRepository(IAsyncQueryService<TEntity, TIdentity> queryService, IAsyncCommandService<TEntity, TIdentity> commandService)
+		public ComposedAsyncRepository(IAsyncQueryService<TRoot, TIdentity> queryService, IAsyncCommandService<TRoot, TIdentity> commandService)
 		{
 			QueryService = queryService ?? throw new ArgumentNullException(nameof(queryService));
 			CommandService = commandService ?? throw new ArgumentNullException(nameof(commandService));
 		}
 
 		/// <summary>
-		/// Gets a reference to the <see cref="IAsyncQueryService{TEntity, TIdentity}"/> being joined.
+		/// Gets a reference to the <see cref="IAsyncQueryService{TRoot, TIdentity}"/> being joined.
 		/// </summary>
-		public IAsyncQueryService<TEntity, TIdentity> QueryService { get; }
+		public IAsyncQueryService<TRoot, TIdentity> QueryService { get; }
 
 		/// <summary>
-		/// Gets a reference to the <see cref="IAsyncCommandService{TEntity, TIdentity}"/> being joined.
+		/// Gets a reference to the <see cref="IAsyncCommandService{TRoot, TIdentity}"/> being joined.
 		/// </summary>
-		public IAsyncCommandService<TEntity, TIdentity> CommandService { get; }
+		public IAsyncCommandService<TRoot, TIdentity> CommandService { get; }
 
 		/// <inheritdoc/>
 		public virtual Task<long> GetCountAsync() => QueryService.GetCountAsync();
 
 		/// <inheritdoc/>
-		public virtual Task<IEnumerable<TEntity>> GetAllAsync() => QueryService.GetAllAsync();
+		public virtual Task<IEnumerable<TRoot>> GetAllAsync() => QueryService.GetAllAsync();
 
 		/// <inheritdoc/>
-		public virtual Task<TEntity> GetByIdAsync(TIdentity id) => QueryService.GetByIdAsync(id);
+		public virtual Task<TRoot> GetByIdAsync(TIdentity id) => QueryService.GetByIdAsync(id);
 
 		/// <inheritdoc/>
-		public virtual Task<TEntity> TryGetByIdAsync(TIdentity id) => QueryService.TryGetByIdAsync(id);
+		public virtual Task<TRoot> TryGetByIdAsync(TIdentity id) => QueryService.TryGetByIdAsync(id);
 
 		/// <inheritdoc/>
-		public virtual Task AddAsync(TEntity item) => CommandService.AddAsync(item);
+		public virtual Task AddAsync(TRoot item) => CommandService.AddAsync(item);
 
 		/// <inheritdoc/>
-		public virtual Task AddOrUpdateAsync(TEntity item) => CommandService.AddOrUpdateAsync(item);
+		public virtual Task AddOrUpdateAsync(TRoot item) => CommandService.AddOrUpdateAsync(item);
 
 		/// <inheritdoc/>
-		public virtual Task UpdateAsync(TEntity item) => CommandService.UpdateAsync(item);
+		public virtual Task UpdateAsync(TRoot item) => CommandService.UpdateAsync(item);
 
 		/// <inheritdoc/>
-		public virtual Task RemoveAsync(TEntity item) => CommandService.RemoveAsync(item);
+		public virtual Task RemoveAsync(TRoot item) => CommandService.RemoveAsync(item);
 
 		/// <inheritdoc/>
 		public virtual Task RemoveAsync(TIdentity id) => CommandService.RemoveAsync(id);
 
 		/// <inheritdoc/>
-		public virtual Task<bool> TryAddAsync(TEntity item) => CommandService.TryAddAsync(item);
+		public virtual Task<bool> TryAddAsync(TRoot item) => CommandService.TryAddAsync(item);
 
 		/// <inheritdoc/>
-		public virtual Task<bool> TryUpdateAsync(TEntity item) => CommandService.TryUpdateAsync(item);
+		public virtual Task<bool> TryUpdateAsync(TRoot item) => CommandService.TryUpdateAsync(item);
 
 		/// <inheritdoc/>
-		public virtual Task<bool> TryRemoveAsync(TEntity item) => CommandService.TryRemoveAsync(item);
+		public virtual Task<bool> TryRemoveAsync(TRoot item) => CommandService.TryRemoveAsync(item);
 
 		/// <inheritdoc/>
 		public virtual Task<bool> TryRemoveAsync(TIdentity id) => CommandService.TryRemoveAsync(id);

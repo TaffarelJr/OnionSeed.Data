@@ -6,27 +6,27 @@ namespace OnionSeed.Data.Decorators
 {
 	/// <inheritdoc/>
 	/// <summary>
-	/// Wraps a given <see cref="IRepository{TEntity, TIdentity}"/> and handles any exceptions of the specified type.
+	/// Wraps a given <see cref="IRepository{TRoot, TIdentity}"/> and handles any exceptions of the specified type.
 	/// </summary>
-	/// <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+	/// <typeparam name="TRoot">The type of entities in the data store.</typeparam>
 	/// <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
 	/// <typeparam name="TException">"The type of exception to be handled.</typeparam>
-	public class RepositoryExceptionHandler<TEntity, TIdentity, TException> : RepositoryDecorator<TEntity, TIdentity>
-		where TEntity : IEntity<TIdentity>
+	public class RepositoryExceptionHandler<TRoot, TIdentity, TException> : RepositoryDecorator<TRoot, TIdentity>
+		where TRoot : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 		where TException : Exception
 	{
 		/// <summary>
-		/// Initializes a new instance of the <see cref="RepositoryExceptionHandler{TEntity, TIdentity, TException}"/> class,
-		/// decorating the given <see cref="IRepository{TEntity, TIdentity}"/>.
+		/// Initializes a new instance of the <see cref="RepositoryExceptionHandler{TRoot, TIdentity, TException}"/> class,
+		/// decorating the given <see cref="IRepository{TRoot, TIdentity}"/>.
 		/// </summary>
-		/// <param name="inner">The <see cref="IRepository{TEntity, TIdentity}"/> to be decorated.</param>
+		/// <param name="inner">The <see cref="IRepository{TRoot, TIdentity}"/> to be decorated.</param>
 		/// <param name="handler">The handler that will be called when an exception is caught.
 		/// This delegate must return a flag indicating if the exception was handled.
 		/// If it wasn't, it will be re-thrown after processing.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="handler"/> is <c>null</c>.</exception>
-		public RepositoryExceptionHandler(IRepository<TEntity, TIdentity> inner, Func<TException, bool> handler)
+		public RepositoryExceptionHandler(IRepository<TRoot, TIdentity> inner, Func<TException, bool> handler)
 			: base(inner)
 		{
 			Handler = handler ?? throw new ArgumentNullException(nameof(handler));
@@ -54,7 +54,7 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		/// <inheritdoc/>
-		public override IEnumerable<TEntity> GetAll()
+		public override IEnumerable<TRoot> GetAll()
 		{
 			try
 			{
@@ -63,14 +63,14 @@ namespace OnionSeed.Data.Decorators
 			catch (TException ex)
 			{
 				if (Handler.Invoke(ex))
-					return Enumerable.Empty<TEntity>();
+					return Enumerable.Empty<TRoot>();
 				else
 					throw;
 			}
 		}
 
 		/// <inheritdoc/>
-		public override TEntity GetById(TIdentity id)
+		public override TRoot GetById(TIdentity id)
 		{
 			try
 			{
@@ -86,7 +86,7 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		/// <inheritdoc/>
-		public override bool TryGetById(TIdentity id, out TEntity result)
+		public override bool TryGetById(TIdentity id, out TRoot result)
 		{
 			try
 			{
@@ -107,7 +107,7 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		/// <inheritdoc/>
-		public override void Add(TEntity item)
+		public override void Add(TRoot item)
 		{
 			try
 			{
@@ -121,7 +121,7 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		/// <inheritdoc/>
-		public override void AddOrUpdate(TEntity item)
+		public override void AddOrUpdate(TRoot item)
 		{
 			try
 			{
@@ -135,7 +135,7 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		/// <inheritdoc/>
-		public override void Update(TEntity item)
+		public override void Update(TRoot item)
 		{
 			try
 			{
@@ -149,7 +149,7 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		/// <inheritdoc/>
-		public override void Remove(TEntity item)
+		public override void Remove(TRoot item)
 		{
 			try
 			{
@@ -177,7 +177,7 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		/// <inheritdoc/>
-		public override bool TryAdd(TEntity item)
+		public override bool TryAdd(TRoot item)
 		{
 			try
 			{
@@ -193,7 +193,7 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		/// <inheritdoc/>
-		public override bool TryUpdate(TEntity item)
+		public override bool TryUpdate(TRoot item)
 		{
 			try
 			{
@@ -209,7 +209,7 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		/// <inheritdoc/>
-		public override bool TryRemove(TEntity item)
+		public override bool TryRemove(TRoot item)
 		{
 			try
 			{

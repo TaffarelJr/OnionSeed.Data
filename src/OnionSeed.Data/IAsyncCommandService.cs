@@ -7,10 +7,10 @@ namespace OnionSeed.Data
 	/// <summary>
 	/// Defines a mechanism that can be used to asynchronously update entities in a data store.
 	/// </summary>
-	/// <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+	/// <typeparam name="TRoot">The type of entities in the data store.</typeparam>
 	/// <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
-	public interface IAsyncCommandService<TEntity, in TIdentity>
-		where TEntity : IEntity<TIdentity>
+	public interface IAsyncCommandService<TRoot, in TIdentity>
+		where TRoot : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 		/// <summary>
@@ -21,7 +21,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="item"/> is <c>null</c>.
 		/// -or- <paramref name="item"/> was not assigned a unique identity value.</exception>
 		/// <exception cref="ArgumentException">The data store already contains an entity with a matching unique identity value.</exception>
-		Task AddAsync(TEntity item);
+		Task AddAsync(TRoot item);
 
 		/// <summary>
 		/// Adds an entity to the data store, or updates it if it already exists in the data store.
@@ -30,7 +30,7 @@ namespace OnionSeed.Data
 		/// <returns>A task representing the operation.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="item"/> is <c>null</c>.
 		/// -or- <paramref name="item"/> was not assigned a unique identity value.</exception>
-		Task AddOrUpdateAsync(TEntity item);
+		Task AddOrUpdateAsync(TRoot item);
 
 		/// <summary>
 		/// Updates the specified entity in the data store.
@@ -40,7 +40,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="item"/> is <c>null</c>.
 		/// -or- <paramref name="item"/> has a <c>null</c> unique identity value.</exception>
 		/// <exception cref="KeyNotFoundException">The specified entity was not found in the data store.</exception>
-		Task UpdateAsync(TEntity item);
+		Task UpdateAsync(TRoot item);
 
 		/// <summary>
 		/// Removes the given entity from the data store.
@@ -50,7 +50,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="item"/> is <c>null</c>.
 		/// -or- <paramref name="item"/> has a <c>null</c> unique identity value.</exception>
 		/// <remarks>If the given entity is not found in the data store, this method is a no-op.</remarks>
-		Task RemoveAsync(TEntity item);
+		Task RemoveAsync(TRoot item);
 
 		/// <summary>
 		/// Removes the specified entity from the data store.
@@ -69,7 +69,7 @@ namespace OnionSeed.Data
 		/// <c>true</c> if the entity was added successfully; otherwise, <c>false</c>.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="item"/> is <c>null</c>.
 		/// -or- <paramref name="item"/> has a <c>null</c> unique identity value.</exception>
-		Task<bool> TryAddAsync(TEntity item);
+		Task<bool> TryAddAsync(TRoot item);
 
 		/// <summary>
 		/// Attempts to update the specified entity in the data store.
@@ -79,7 +79,7 @@ namespace OnionSeed.Data
 		/// <c>true</c> if the entity was updated successfully; otherwise, <c>false</c>.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="item"/> is <c>null</c>.
 		/// -or- <paramref name="item"/> has a <c>null</c> unique identity value.</exception>
-		Task<bool> TryUpdateAsync(TEntity item);
+		Task<bool> TryUpdateAsync(TRoot item);
 
 		/// <summary>
 		/// Attempts to remove the given entity from the data store.
@@ -90,7 +90,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="item"/> is <c>null</c>.
 		/// -or- <paramref name="item"/> has a <c>null</c> unique identity value.</exception>
 		/// <remarks>If the given entity is not found in the data store, this method is a no-op.</remarks>
-		Task<bool> TryRemoveAsync(TEntity item);
+		Task<bool> TryRemoveAsync(TRoot item);
 
 		/// <summary>
 		/// Attempts to remove the specified entity from the data store.

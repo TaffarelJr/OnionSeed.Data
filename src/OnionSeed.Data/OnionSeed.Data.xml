@@ -13,7 +13,7 @@
             <summary>
             Wraps the given <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> in a <see cref="T:OnionSeed.Data.Decorators.AsyncCommandServiceExceptionHandler`3"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <typeparam name="TException">"The type of exception to be handled.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> to be wrapped.</param>
@@ -29,7 +29,7 @@
             Wraps the given <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> in a sequential <see cref="T:OnionSeed.Data.Decorators.AsyncCommandServiceTap`2"/>,
             mirroring all commands to the other given <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entitites in the data store.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> to be wrapped.</param>
             <param name="tap">The tap <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>, where commands will be mirrored.</param>
@@ -42,7 +42,7 @@
             Wraps the given <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> in a sequential <see cref="T:OnionSeed.Data.Decorators.AsyncCommandServiceTap`2"/>,
             mirroring all commands to the other given <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entitites in the data store.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> to be wrapped.</param>
             <param name="tap">The tap <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>, where commands will be mirrored.</param>
@@ -56,7 +56,7 @@
             Wraps the given <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> in a parallel <see cref="T:OnionSeed.Data.Decorators.AsyncCommandServiceTap`2"/>,
             mirroring all commands to the other given <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entitites in the data store.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> to be wrapped.</param>
             <param name="tap">The tap <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>, where commands will be mirrored.</param>
@@ -69,7 +69,7 @@
             Wraps the given <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> in a parallel <see cref="T:OnionSeed.Data.Decorators.AsyncCommandServiceTap`2"/>,
             mirroring all commands to the other given <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entitites in the data store.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> to be wrapped.</param>
             <param name="tap">The tap <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>, where commands will be mirrored.</param>
@@ -82,7 +82,7 @@
             <summary>
             Wraps the given <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> in a <see cref="T:OnionSeed.Data.Decorators.SyncCommandServiceAdapter`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> to be wrapped.</param>
             <returns>A new <see cref="T:OnionSeed.Data.Decorators.SyncCommandServiceAdapter`2"/> wrapping the given <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>.</returns>
@@ -92,7 +92,7 @@
             <summary>
             Joins the given <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> and <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> into a single <see cref="T:OnionSeed.Data.Decorators.ComposedAsyncRepository`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <param name="commandService">The <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>to be joined.</param>
             <param name="queryService">The <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> to be joined.</param>
@@ -109,7 +109,7 @@
             <summary>
             Wraps the given <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> in a <see cref="T:OnionSeed.Data.Decorators.AsyncQueryServiceExceptionHandler`3"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <typeparam name="TException">"The type of exception to be handled.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> to be wrapped.</param>
@@ -124,7 +124,7 @@
             <summary>
             Wraps the given <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> in a <see cref="T:OnionSeed.Data.Decorators.SyncQueryServiceAdapter`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> to be wrapped.</param>
             <returns>A new <see cref="T:OnionSeed.Data.Decorators.SyncQueryServiceAdapter`2"/> wrapping the given <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/>.</returns>
@@ -134,7 +134,7 @@
             <summary>
             Joins the given <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> and <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> into a single <see cref="T:OnionSeed.Data.Decorators.ComposedAsyncRepository`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <param name="queryService">The <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> to be joined.</param>
             <param name="commandService">The <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/>to be joined.</param>
@@ -151,7 +151,7 @@
             <summary>
             Wraps the given <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> in a <see cref="T:OnionSeed.Data.Decorators.AsyncRepositoryExceptionHandler`3"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <typeparam name="TException">"The type of exception to be handled.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> to be wrapped.</param>
@@ -167,7 +167,7 @@
             Wraps the given <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> in a sequential <see cref="T:OnionSeed.Data.Decorators.AsyncRepositoryTap`2"/>,
             mirroring all commands to the other given <see cref="T:OnionSeed.Data.IAsyncRepository`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entitites in the data store.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> to be wrapped.</param>
             <param name="tap">The tap <see cref="T:OnionSeed.Data.IAsyncRepository`2"/>, where commands will be mirrored.</param>
@@ -180,7 +180,7 @@
             Wraps the given <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> in a sequential <see cref="T:OnionSeed.Data.Decorators.AsyncRepositoryTap`2"/>,
             mirroring all commands to the other given <see cref="T:OnionSeed.Data.IAsyncRepository`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entitites in the data store.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> to be wrapped.</param>
             <param name="tap">The tap <see cref="T:OnionSeed.Data.IAsyncRepository`2"/>, where commands will be mirrored.</param>
@@ -194,7 +194,7 @@
             Wraps the given <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> in a parallel <see cref="T:OnionSeed.Data.Decorators.AsyncRepositoryTap`2"/>,
             mirroring all commands to the other given <see cref="T:OnionSeed.Data.IAsyncRepository`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entitites in the data store.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> to be wrapped.</param>
             <param name="tap">The tap <see cref="T:OnionSeed.Data.IAsyncRepository`2"/>, where commands will be mirrored.</param>
@@ -207,7 +207,7 @@
             Wraps the given <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> in a parallel <see cref="T:OnionSeed.Data.Decorators.AsyncRepositoryTap`2"/>,
             mirroring all commands to the other given <see cref="T:OnionSeed.Data.IAsyncRepository`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entitites in the data store.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> to be wrapped.</param>
             <param name="tap">The tap <see cref="T:OnionSeed.Data.IAsyncRepository`2"/>, where commands will be mirrored.</param>
@@ -220,7 +220,7 @@
             <summary>
             Wraps the given <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> in a <see cref="T:OnionSeed.Data.Decorators.SyncRepositoryAdapter`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> to be wrapped.</param>
             <returns>A new <see cref="T:OnionSeed.Data.Decorators.SyncRepositoryAdapter`2"/> wrapping the given <see cref="T:OnionSeed.Data.IAsyncRepository`2"/>.</returns>
@@ -307,7 +307,7 @@
             <summary>
             Wraps the given <see cref="T:OnionSeed.Data.ICommandService`2"/> in a <see cref="T:OnionSeed.Data.Decorators.CommandServiceExceptionHandler`3"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <typeparam name="TException">"The type of exception to be handled.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.ICommandService`2"/> to be wrapped.</param>
@@ -323,7 +323,7 @@
             Wraps the given <see cref="T:OnionSeed.Data.ICommandService`2"/> in a <see cref="T:OnionSeed.Data.Decorators.CommandServiceTap`2"/>,
             mirroring all commands to the other given <see cref="T:OnionSeed.Data.ICommandService`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entitites in the data store.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.ICommandService`2"/> to be wrapped.</param>
             <param name="tap">The tap <see cref="T:OnionSeed.Data.ICommandService`2"/>, where commands will be mirrored.</param>
@@ -336,7 +336,7 @@
             Wraps the given <see cref="T:OnionSeed.Data.ICommandService`2"/> in a <see cref="T:OnionSeed.Data.Decorators.CommandServiceTap`2"/>,
             mirroring all commands to the other given <see cref="T:OnionSeed.Data.ICommandService`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entitites in the data store.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.ICommandService`2"/> to be wrapped.</param>
             <param name="tap">The tap <see cref="T:OnionSeed.Data.ICommandService`2"/>, where commands will be mirrored.</param>
@@ -349,7 +349,7 @@
             <summary>
             Wraps the given <see cref="T:OnionSeed.Data.ICommandService`2"/> in an <see cref="T:OnionSeed.Data.Decorators.AsyncCommandServiceAdapter`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.ICommandService`2"/> to be wrapped.</param>
             <returns>A new <see cref="T:OnionSeed.Data.Decorators.AsyncCommandServiceAdapter`2"/> wrapping the given <see cref="T:OnionSeed.Data.ICommandService`2"/>.</returns>
@@ -359,7 +359,7 @@
             <summary>
             Joins the given <see cref="T:OnionSeed.Data.IQueryService`2"/> and <see cref="T:OnionSeed.Data.ICommandService`2"/> into a single <see cref="T:OnionSeed.Data.Decorators.ComposedRepository`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <param name="commandService">The <see cref="T:OnionSeed.Data.ICommandService`2"/>to be joined.</param>
             <param name="queryService">The <see cref="T:OnionSeed.Data.IQueryService`2"/> to be joined.</param>
@@ -459,7 +459,7 @@
             <summary>
             Wraps a given <see cref="T:OnionSeed.Data.IAsyncCommandService`2"/> and handles any exceptions of the specified type.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <typeparam name="TException">"The type of exception to be handled.</typeparam>
         </member>
@@ -704,7 +704,7 @@
             <summary>
             Wraps a given <see cref="T:OnionSeed.Data.IAsyncQueryService`2"/> and handles any exceptions of the specified type.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <typeparam name="TException">"The type of exception to be handled.</typeparam>
         </member>
@@ -853,7 +853,7 @@
             <summary>
             Wraps a given <see cref="T:OnionSeed.Data.IAsyncRepository`2"/> and handles any exceptions of the specified type.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <typeparam name="TException">"The type of exception to be handled.</typeparam>
         </member>
@@ -1252,7 +1252,7 @@
             <summary>
             Wraps a given <see cref="T:OnionSeed.Data.ICommandService`2"/> and handles any exceptions of the specified type.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <typeparam name="TException">"The type of exception to be handled.</typeparam>
         </member>
@@ -1531,7 +1531,7 @@
             <summary>
             Wraps a given <see cref="T:OnionSeed.Data.IQueryService`2"/> and handles any exceptions of the specified type.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <typeparam name="TException">"The type of exception to be handled.</typeparam>
         </member>
@@ -1627,7 +1627,7 @@
             <summary>
             Wraps a given <see cref="T:OnionSeed.Data.IRepository`2"/> and handles any exceptions of the specified type.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <typeparam name="TException">"The type of exception to be handled.</typeparam>
         </member>
@@ -2133,11 +2133,20 @@
               </item>
             </list></p></summary>
         </member>
+        <member name="T:OnionSeed.Data.IAggregateRoot`1">
+            <summary>
+            Identifies the root entity of a collection of objects that are bound together (an aggregate).
+            </summary>
+            <typeparam name="TIdentity">The type of the unique identity value.</typeparam>
+            <remarks>The aggregate root is a special type of <see cref="T:OnionSeed.Data.IEntity`1"/> that
+            guarantees the consistency of changes being made within the aggregate by forbidding
+            external objects from holding references to its members.</remarks>
+        </member>
         <member name="T:OnionSeed.Data.IAsyncCommandService`2">
             <summary>
             Defines a mechanism that can be used to asynchronously update entities in a data store.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
         </member>
         <member name="M:OnionSeed.Data.IAsyncCommandService`2.AddAsync(`0)">
@@ -2233,7 +2242,7 @@
             <summary>
             Defines a mechanism that can be used to asynchronously query entities from a data store.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
         </member>
         <member name="M:OnionSeed.Data.IAsyncQueryService`2.GetCountAsync">
@@ -2292,7 +2301,7 @@
             <summary>
             Defines a mechanism that can be used to update entities in a data store.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
         </member>
         <member name="M:OnionSeed.Data.ICommandService`2.Add(`0)">
@@ -2396,7 +2405,7 @@
             <summary>
             Defines a mechanism that can be used to query entities from a data store.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
         </member>
         <member name="M:OnionSeed.Data.IQueryService`2.GetCount">
@@ -2469,7 +2478,7 @@
             <summary>
             Wraps the given <see cref="T:OnionSeed.Data.IQueryService`2"/> in a <see cref="T:OnionSeed.Data.Decorators.QueryServiceExceptionHandler`3"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <typeparam name="TException">"The type of exception to be handled.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.IQueryService`2"/> to be wrapped.</param>
@@ -2484,7 +2493,7 @@
             <summary>
             Wraps the given <see cref="T:OnionSeed.Data.IQueryService`2"/> in an <see cref="T:OnionSeed.Data.Decorators.AsyncQueryServiceAdapter`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.IQueryService`2"/> to be wrapped.</param>
             <returns>A new <see cref="T:OnionSeed.Data.Decorators.AsyncQueryServiceAdapter`2"/> wrapping the given <see cref="T:OnionSeed.Data.IQueryService`2"/>.</returns>
@@ -2494,7 +2503,7 @@
             <summary>
             Joins the given <see cref="T:OnionSeed.Data.IQueryService`2"/> and <see cref="T:OnionSeed.Data.ICommandService`2"/> into a single <see cref="T:OnionSeed.Data.Decorators.ComposedRepository`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <param name="queryService">The <see cref="T:OnionSeed.Data.IQueryService`2"/> to be joined.</param>
             <param name="commandService">The <see cref="T:OnionSeed.Data.ICommandService`2"/>to be joined.</param>
@@ -2511,7 +2520,7 @@
             <summary>
             Wraps the given <see cref="T:OnionSeed.Data.IRepository`2"/> in a <see cref="T:OnionSeed.Data.Decorators.RepositoryExceptionHandler`3"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <typeparam name="TException">"The type of exception to be handled.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.IRepository`2"/> to be wrapped.</param>
@@ -2527,7 +2536,7 @@
             Wraps the given <see cref="T:OnionSeed.Data.IRepository`2"/> in a <see cref="T:OnionSeed.Data.Decorators.RepositoryTap`2"/>,
             mirroring all commands to the other given <see cref="T:OnionSeed.Data.IRepository`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entitites in the data store.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.IRepository`2"/> to be wrapped.</param>
             <param name="tap">The tap <see cref="T:OnionSeed.Data.IRepository`2"/>, where commands will be mirrored.</param>
@@ -2540,7 +2549,7 @@
             Wraps the given <see cref="T:OnionSeed.Data.IRepository`2"/> in a <see cref="T:OnionSeed.Data.Decorators.RepositoryTap`2"/>,
             mirroring all commands to the other given <see cref="T:OnionSeed.Data.IRepository`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entitites in the data store.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.IRepository`2"/> to be wrapped.</param>
             <param name="tap">The tap <see cref="T:OnionSeed.Data.IRepository`2"/>, where commands will be mirrored.</param>
@@ -2553,7 +2562,7 @@
             <summary>
             Wraps the given <see cref="T:OnionSeed.Data.IRepository`2"/> in an <see cref="T:OnionSeed.Data.Decorators.AsyncRepositoryAdapter`2"/>.
             </summary>
-            <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+            <typeparam name="TRoot">The type of entities in the data store.</typeparam>
             <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
             <param name="inner">The <see cref="T:OnionSeed.Data.IRepository`2"/> to be wrapped.</param>
             <returns>A new <see cref="T:OnionSeed.Data.Decorators.AsyncRepositoryAdapter`2"/> wrapping the given <see cref="T:OnionSeed.Data.IRepository`2"/>.</returns>

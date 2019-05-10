@@ -6,63 +6,63 @@ namespace OnionSeed.Data.Decorators
 {
 	/// <inheritdoc/>
 	/// <summary>
-	/// The base class for decorators for <see cref="IAsyncRepository{TEntity, TIdentity}"/>.
+	/// The base class for decorators for <see cref="IAsyncRepository{TRoot, TIdentity}"/>.
 	/// </summary>
-	public abstract class AsyncRepositoryDecorator<TEntity, TIdentity> : IAsyncRepository<TEntity, TIdentity>
-		where TEntity : IEntity<TIdentity>
+	public abstract class AsyncRepositoryDecorator<TRoot, TIdentity> : IAsyncRepository<TRoot, TIdentity>
+		where TRoot : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 		/// <summary>
-		/// Initializes a new instance of the <see cref="AsyncRepositoryDecorator{TEntity, TIdentity}"/> class,
-		/// decorating the given <see cref="IAsyncRepository{TEntity, TIdentity}"/>.
+		/// Initializes a new instance of the <see cref="AsyncRepositoryDecorator{TRoot, TIdentity}"/> class,
+		/// decorating the given <see cref="IAsyncRepository{TRoot, TIdentity}"/>.
 		/// </summary>
-		/// <param name="inner">The <see cref="IAsyncRepository{TEntity, TIdentity}"/> to be decorated.</param>
+		/// <param name="inner">The <see cref="IAsyncRepository{TRoot, TIdentity}"/> to be decorated.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
-		public AsyncRepositoryDecorator(IAsyncRepository<TEntity, TIdentity> inner)
+		public AsyncRepositoryDecorator(IAsyncRepository<TRoot, TIdentity> inner)
 		{
 			Inner = inner ?? throw new ArgumentNullException(nameof(inner));
 		}
 
 		/// <summary>
-		/// Gets a reference to the <see cref="IAsyncRepository{TEntity, TIdentity}"/> being decorated.
+		/// Gets a reference to the <see cref="IAsyncRepository{TRoot, TIdentity}"/> being decorated.
 		/// </summary>
-		public IAsyncRepository<TEntity, TIdentity> Inner { get; }
+		public IAsyncRepository<TRoot, TIdentity> Inner { get; }
 
 		/// <inheritdoc/>
 		public virtual Task<long> GetCountAsync() => Inner.GetCountAsync();
 
 		/// <inheritdoc/>
-		public virtual Task<IEnumerable<TEntity>> GetAllAsync() => Inner.GetAllAsync();
+		public virtual Task<IEnumerable<TRoot>> GetAllAsync() => Inner.GetAllAsync();
 
 		/// <inheritdoc/>
-		public virtual Task<TEntity> GetByIdAsync(TIdentity id) => Inner.GetByIdAsync(id);
+		public virtual Task<TRoot> GetByIdAsync(TIdentity id) => Inner.GetByIdAsync(id);
 
 		/// <inheritdoc/>
-		public virtual Task<TEntity> TryGetByIdAsync(TIdentity id) => Inner.TryGetByIdAsync(id);
+		public virtual Task<TRoot> TryGetByIdAsync(TIdentity id) => Inner.TryGetByIdAsync(id);
 
 		/// <inheritdoc/>
-		public virtual Task AddAsync(TEntity item) => Inner.AddAsync(item);
+		public virtual Task AddAsync(TRoot item) => Inner.AddAsync(item);
 
 		/// <inheritdoc/>
-		public virtual Task AddOrUpdateAsync(TEntity item) => Inner.AddOrUpdateAsync(item);
+		public virtual Task AddOrUpdateAsync(TRoot item) => Inner.AddOrUpdateAsync(item);
 
 		/// <inheritdoc/>
-		public virtual Task UpdateAsync(TEntity item) => Inner.UpdateAsync(item);
+		public virtual Task UpdateAsync(TRoot item) => Inner.UpdateAsync(item);
 
 		/// <inheritdoc/>
-		public virtual Task RemoveAsync(TEntity item) => Inner.RemoveAsync(item);
+		public virtual Task RemoveAsync(TRoot item) => Inner.RemoveAsync(item);
 
 		/// <inheritdoc/>
 		public virtual Task RemoveAsync(TIdentity id) => Inner.RemoveAsync(id);
 
 		/// <inheritdoc/>
-		public virtual Task<bool> TryAddAsync(TEntity item) => Inner.TryAddAsync(item);
+		public virtual Task<bool> TryAddAsync(TRoot item) => Inner.TryAddAsync(item);
 
 		/// <inheritdoc/>
-		public virtual Task<bool> TryUpdateAsync(TEntity item) => Inner.TryUpdateAsync(item);
+		public virtual Task<bool> TryUpdateAsync(TRoot item) => Inner.TryUpdateAsync(item);
 
 		/// <inheritdoc/>
-		public virtual Task<bool> TryRemoveAsync(TEntity item) => Inner.TryRemoveAsync(item);
+		public virtual Task<bool> TryRemoveAsync(TRoot item) => Inner.TryRemoveAsync(item);
 
 		/// <inheritdoc/>
 		public virtual Task<bool> TryRemoveAsync(TIdentity id) => Inner.TryRemoveAsync(id);

@@ -6,19 +6,19 @@ namespace OnionSeed.Data.Decorators
 {
 	/// <inheritdoc/>
 	/// <summary>
-	/// Adapts an <see cref="IAsyncQueryService{TEntity, TIdentity}"/> to work like an <see cref="IQueryService{TEntity, TIdentity}"/>.
+	/// Adapts an <see cref="IAsyncQueryService{TRoot, TIdentity}"/> to work like an <see cref="IQueryService{TRoot, TIdentity}"/>.
 	/// </summary>
-	public class SyncQueryServiceAdapter<TEntity, TIdentity> : AsyncQueryServiceDecorator<TEntity, TIdentity>, IQueryService<TEntity, TIdentity>
-		where TEntity : IEntity<TIdentity>
+	public class SyncQueryServiceAdapter<TRoot, TIdentity> : AsyncQueryServiceDecorator<TRoot, TIdentity>, IQueryService<TRoot, TIdentity>
+		where TRoot : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 		/// <summary>
-		/// Initializes a new instance of the <see cref="SyncQueryServiceAdapter{TEntity, TIdentity}"/> class,
-		/// wrapping the given <see cref="IAsyncQueryService{TEntity, TIdentity}"/>.
+		/// Initializes a new instance of the <see cref="SyncQueryServiceAdapter{TRoot, TIdentity}"/> class,
+		/// wrapping the given <see cref="IAsyncQueryService{TRoot, TIdentity}"/>.
 		/// </summary>
-		/// <param name="inner">The <see cref="IAsyncQueryService{TEntity, TIdentity}"/> to be wrapped.</param>
+		/// <param name="inner">The <see cref="IAsyncQueryService{TRoot, TIdentity}"/> to be wrapped.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
-		public SyncQueryServiceAdapter(IAsyncQueryService<TEntity, TIdentity> inner)
+		public SyncQueryServiceAdapter(IAsyncQueryService<TRoot, TIdentity> inner)
 			: base(inner)
 		{
 		}
@@ -27,16 +27,16 @@ namespace OnionSeed.Data.Decorators
 		public long GetCount() => AsyncExtensions.RunSynchronously(() => Inner.GetCountAsync());
 
 		/// <inheritdoc/>
-		public IEnumerable<TEntity> GetAll() => AsyncExtensions.RunSynchronously(() => Inner.GetAllAsync());
+		public IEnumerable<TRoot> GetAll() => AsyncExtensions.RunSynchronously(() => Inner.GetAllAsync());
 
 		/// <inheritdoc/>
-		public TEntity GetById(TIdentity id) => AsyncExtensions.RunSynchronously(() => Inner.GetByIdAsync(id));
+		public TRoot GetById(TIdentity id) => AsyncExtensions.RunSynchronously(() => Inner.GetByIdAsync(id));
 
 		/// <inheritdoc/>
-		public bool TryGetById(TIdentity id, out TEntity result)
+		public bool TryGetById(TIdentity id, out TRoot result)
 		{
 			result = AsyncExtensions.RunSynchronously(() => Inner.TryGetByIdAsync(id));
-			return !Equals(result, default(TEntity));
+			return !Equals(result, default(TRoot));
 		}
 	}
 }

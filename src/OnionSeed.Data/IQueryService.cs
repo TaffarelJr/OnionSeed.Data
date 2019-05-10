@@ -6,10 +6,10 @@ namespace OnionSeed.Data
 	/// <summary>
 	/// Defines a mechanism that can be used to query entities from a data store.
 	/// </summary>
-	/// <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+	/// <typeparam name="TRoot">The type of entities in the data store.</typeparam>
 	/// <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
-	public interface IQueryService<TEntity, in TIdentity>
-		where TEntity : IEntity<TIdentity>
+	public interface IQueryService<TRoot, in TIdentity>
+		where TRoot : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 		/// <summary>
@@ -22,7 +22,7 @@ namespace OnionSeed.Data
 		/// Begins an enumeration of all entities in the data store.
 		/// </summary>
 		/// <returns>An enumeration of all entities in the data store.</returns>
-		IEnumerable<TEntity> GetAll();
+		IEnumerable<TRoot> GetAll();
 
 		/// <summary>
 		/// Gets a specific entity from the data store by its unique identity value.
@@ -31,7 +31,7 @@ namespace OnionSeed.Data
 		/// <returns>The entity that has the given unique identity value.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="id"/> is <c>null</c>.</exception>
 		/// <exception cref="KeyNotFoundException">The specified unique identity value does not exist in the data store.</exception>
-		TEntity GetById(TIdentity id);
+		TRoot GetById(TIdentity id);
 
 		/// <summary>
 		/// Attempts to get a specific entity from the data store by its unique identity value.
@@ -42,6 +42,6 @@ namespace OnionSeed.Data
 		/// any value originally supplied in <paramref name="result"/> will be overwritten.</param>
 		/// <returns><c>true</c> if the specified entity was found; otherwise, <c>false</c>.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="id"/> is <c>null</c>.</exception>
-		bool TryGetById(TIdentity id, out TEntity result);
+		bool TryGetById(TIdentity id, out TRoot result);
 	}
 }
