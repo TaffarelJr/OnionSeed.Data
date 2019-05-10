@@ -6,7 +6,7 @@ namespace OnionSeed.Data.Decorators
 {
 	/// <inheritdoc/>
 	/// <summary>
-	/// Decorates an <see cref="IAsyncRepository{TEntity, TIdentity}"/>, mirroring commands to a secondary, "tap" <see cref="IAsyncRepository{TEntity, TIdentity}"/>.
+	/// Decorates an <see cref="IAsyncRepository{TRoot, TIdentity}"/>, mirroring commands to a secondary, "tap" <see cref="IAsyncRepository{TRoot, TIdentity}"/>.
 	/// </summary>
 	/// <remarks>This decorator functions like a parallel network tap: commands are executed against the inner repository
 	/// and the tap repository at the same time. This can be more performant than the regular, sequential type of tap;
@@ -14,31 +14,31 @@ namespace OnionSeed.Data.Decorators
 	/// <para>Any values returned or exceptions thrown from the tap repository are ignored.</para>
 	/// <para>This essentially allows for the creation of a duplicate copy of the data,
 	/// and is intended to be used for things like caching, backup, or reporting.</para></remarks>
-	public class AsyncRepositoryParallelTap<TEntity, TIdentity> : AsyncRepositoryDecorator<TEntity, TIdentity>
-		where TEntity : IAggregateRoot<TIdentity>
+	public class AsyncRepositoryParallelTap<TRoot, TIdentity> : AsyncRepositoryDecorator<TRoot, TIdentity>
+		where TRoot : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 		/// <summary>
-		/// Initializes a new instance of the <see cref="AsyncRepositoryParallelTap{TEntity,TKey}"/> class.
+		/// Initializes a new instance of the <see cref="AsyncRepositoryParallelTap{TRoot,TKey}"/> class.
 		/// </summary>
-		/// <param name="inner">The <see cref="IAsyncRepository{TEntity, TIdentity}"/> to be decorated.</param>
-		/// <param name="tap">The tap <see cref="IAsyncRepository{TEntity, TIdentity}"/>, where commands will be duplicated.</param>
+		/// <param name="inner">The <see cref="IAsyncRepository{TRoot, TIdentity}"/> to be decorated.</param>
+		/// <param name="tap">The tap <see cref="IAsyncRepository{TRoot, TIdentity}"/>, where commands will be duplicated.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
-		public AsyncRepositoryParallelTap(IAsyncRepository<TEntity, TIdentity> inner, IAsyncRepository<TEntity, TIdentity> tap)
+		public AsyncRepositoryParallelTap(IAsyncRepository<TRoot, TIdentity> inner, IAsyncRepository<TRoot, TIdentity> tap)
 			: this(inner, tap, null)
 		{
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="AsyncRepositoryParallelTap{TEntity,TKey}"/> class.
+		/// Initializes a new instance of the <see cref="AsyncRepositoryParallelTap{TRoot,TKey}"/> class.
 		/// </summary>
-		/// <param name="inner">The <see cref="IAsyncRepository{TEntity, TIdentity}"/> to be decorated.</param>
-		/// <param name="tap">The tap <see cref="IAsyncRepository{TEntity, TIdentity}"/>, where commands will be duplicated.</param>
+		/// <param name="inner">The <see cref="IAsyncRepository{TRoot, TIdentity}"/> to be decorated.</param>
+		/// <param name="tap">The tap <see cref="IAsyncRepository{TRoot, TIdentity}"/>, where commands will be duplicated.</param>
 		/// <param name="logger">The logger where tap exceptions should be written.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
-		public AsyncRepositoryParallelTap(IAsyncRepository<TEntity, TIdentity> inner, IAsyncRepository<TEntity, TIdentity> tap, ILogger logger)
+		public AsyncRepositoryParallelTap(IAsyncRepository<TRoot, TIdentity> inner, IAsyncRepository<TRoot, TIdentity> tap, ILogger logger)
 			: base(inner)
 		{
 			Logger = logger;
@@ -51,9 +51,9 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		/// <summary>
-		/// Gets a reference to the tap <see cref="IAsyncRepository{TEntity, TIdentity}"/>.
+		/// Gets a reference to the tap <see cref="IAsyncRepository{TRoot, TIdentity}"/>.
 		/// </summary>
-		public IAsyncRepository<TEntity, TIdentity> Tap { get; }
+		public IAsyncRepository<TRoot, TIdentity> Tap { get; }
 
 		/// <summary>
 		/// Gets a reference to the <see cref="ILogger"/>, if any, where tap exceptions should be written.
@@ -61,7 +61,7 @@ namespace OnionSeed.Data.Decorators
 		public ILogger Logger { get; }
 
 		/// <inheritdoc/>
-		public override async Task AddAsync(TEntity item)
+		public override async Task AddAsync(TRoot item)
 		{
 			await Task.WhenAll(
 				Inner.AddAsync(item),
@@ -69,7 +69,7 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		/// <inheritdoc/>
-		public override async Task AddOrUpdateAsync(TEntity item)
+		public override async Task AddOrUpdateAsync(TRoot item)
 		{
 			await Task.WhenAll(
 				Inner.AddOrUpdateAsync(item),
@@ -77,7 +77,7 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		/// <inheritdoc/>
-		public override async Task UpdateAsync(TEntity item)
+		public override async Task UpdateAsync(TRoot item)
 		{
 			await Task.WhenAll(
 				Inner.UpdateAsync(item),
@@ -85,7 +85,7 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		/// <inheritdoc/>
-		public override async Task RemoveAsync(TEntity item)
+		public override async Task RemoveAsync(TRoot item)
 		{
 			await Task.WhenAll(
 				Inner.RemoveAsync(item),
@@ -101,7 +101,7 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		/// <inheritdoc/>
-		public override async Task<bool> TryAddAsync(TEntity item)
+		public override async Task<bool> TryAddAsync(TRoot item)
 		{
 			var resultTask = Inner.TryAddAsync(item);
 			await Task.WhenAll(resultTask, Tap.AddOrUpdateAsync(item)).ConfigureAwait(false);
@@ -109,7 +109,7 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		/// <inheritdoc/>
-		public override async Task<bool> TryUpdateAsync(TEntity item)
+		public override async Task<bool> TryUpdateAsync(TRoot item)
 		{
 			var resultTask = Inner.TryUpdateAsync(item);
 			await Task.WhenAll(resultTask, Tap.AddOrUpdateAsync(item)).ConfigureAwait(false);
@@ -117,7 +117,7 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		/// <inheritdoc/>
-		public override async Task<bool> TryRemoveAsync(TEntity item)
+		public override async Task<bool> TryRemoveAsync(TRoot item)
 		{
 			var resultTask = Inner.TryRemoveAsync(item);
 			await Task.WhenAll(resultTask, Tap.RemoveAsync(item)).ConfigureAwait(false);

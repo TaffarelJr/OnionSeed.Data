@@ -5,38 +5,38 @@ namespace OnionSeed.Data.Decorators
 {
 	/// <inheritdoc/>
 	/// <summary>
-	/// Decorates an <see cref="IRepository{TEntity, TIdentity}"/>, mirroring commands to a secondary, "tap" <see cref="IRepository{TEntity, TIdentity}"/>.
+	/// Decorates an <see cref="IRepository{TRoot, TIdentity}"/>, mirroring commands to a secondary, "tap" <see cref="IRepository{TRoot, TIdentity}"/>.
 	/// </summary>
 	/// <remarks>This decorator functions like a network tap: commands are executed first against the inner repository;
 	/// if they succeed, they are then executed against the tap repository as well.
 	/// <para>Any values returned or exceptions thrown from the tap repository are ignored.</para>
 	/// <para>This essentially allows for the creation of a duplicate copy of the data,
 	/// and is intended to be used for things like caching, backup, or reporting.</para></remarks>
-	public class RepositoryTap<TEntity, TIdentity> : RepositoryDecorator<TEntity, TIdentity>
-		where TEntity : IAggregateRoot<TIdentity>
+	public class RepositoryTap<TRoot, TIdentity> : RepositoryDecorator<TRoot, TIdentity>
+		where TRoot : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 		/// <summary>
-		/// Initializes a new instance of the <see cref="RepositoryTap{TEntity,TKey}"/> class.
+		/// Initializes a new instance of the <see cref="RepositoryTap{TRoot,TKey}"/> class.
 		/// </summary>
-		/// <param name="inner">The <see cref="IRepository{TEntity, TIdentity}"/> to be decorated.</param>
-		/// <param name="tap">The tap <see cref="IRepository{TEntity, TIdentity}"/>, where commands will be mirrored.</param>
+		/// <param name="inner">The <see cref="IRepository{TRoot, TIdentity}"/> to be decorated.</param>
+		/// <param name="tap">The tap <see cref="IRepository{TRoot, TIdentity}"/>, where commands will be mirrored.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
-		public RepositoryTap(IRepository<TEntity, TIdentity> inner, IRepository<TEntity, TIdentity> tap)
+		public RepositoryTap(IRepository<TRoot, TIdentity> inner, IRepository<TRoot, TIdentity> tap)
 			: this(inner, tap, null)
 		{
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="RepositoryTap{TEntity,TKey}"/> class.
+		/// Initializes a new instance of the <see cref="RepositoryTap{TRoot,TKey}"/> class.
 		/// </summary>
-		/// <param name="inner">The <see cref="IRepository{TEntity, TIdentity}"/> to be decorated.</param>
-		/// <param name="tap">The tap <see cref="IRepository{TEntity, TIdentity}"/>, where commands will be mirrored.</param>
+		/// <param name="inner">The <see cref="IRepository{TRoot, TIdentity}"/> to be decorated.</param>
+		/// <param name="tap">The tap <see cref="IRepository{TRoot, TIdentity}"/>, where commands will be mirrored.</param>
 		/// <param name="logger">The logger where tap exceptions should be written.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
-		public RepositoryTap(IRepository<TEntity, TIdentity> inner, IRepository<TEntity, TIdentity> tap, ILogger logger)
+		public RepositoryTap(IRepository<TRoot, TIdentity> inner, IRepository<TRoot, TIdentity> tap, ILogger logger)
 			: base(inner)
 		{
 			Logger = logger;
@@ -49,9 +49,9 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		/// <summary>
-		/// Gets a reference to the tap <see cref="IRepository{TEntity, TIdentity}"/>.
+		/// Gets a reference to the tap <see cref="IRepository{TRoot, TIdentity}"/>.
 		/// </summary>
-		public IRepository<TEntity, TIdentity> Tap { get; }
+		public IRepository<TRoot, TIdentity> Tap { get; }
 
 		/// <summary>
 		/// Gets a reference to the <see cref="ILogger"/>, if any, where tap exceptions should be written.
@@ -59,28 +59,28 @@ namespace OnionSeed.Data.Decorators
 		public ILogger Logger { get; }
 
 		/// <inheritdoc/>
-		public override void Add(TEntity item)
+		public override void Add(TRoot item)
 		{
 			Inner.Add(item);
 			Tap.AddOrUpdate(item);
 		}
 
 		/// <inheritdoc/>
-		public override void AddOrUpdate(TEntity item)
+		public override void AddOrUpdate(TRoot item)
 		{
 			Inner.AddOrUpdate(item);
 			Tap.AddOrUpdate(item);
 		}
 
 		/// <inheritdoc/>
-		public override void Update(TEntity item)
+		public override void Update(TRoot item)
 		{
 			Inner.Update(item);
 			Tap.AddOrUpdate(item);
 		}
 
 		/// <inheritdoc/>
-		public override void Remove(TEntity item)
+		public override void Remove(TRoot item)
 		{
 			Inner.Remove(item);
 			Tap.Remove(item);
@@ -94,7 +94,7 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		/// <inheritdoc/>
-		public override bool TryAdd(TEntity item)
+		public override bool TryAdd(TRoot item)
 		{
 			var success = Inner.TryAdd(item);
 			if (success)
@@ -103,7 +103,7 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		/// <inheritdoc/>
-		public override bool TryUpdate(TEntity item)
+		public override bool TryUpdate(TRoot item)
 		{
 			var success = Inner.TryUpdate(item);
 			if (success)
@@ -112,7 +112,7 @@ namespace OnionSeed.Data.Decorators
 		}
 
 		/// <inheritdoc/>
-		public override bool TryRemove(TEntity item)
+		public override bool TryRemove(TRoot item)
 		{
 			var success = Inner.TryRemove(item);
 			Tap.Remove(item);

@@ -5,51 +5,51 @@ namespace OnionSeed.Data.Decorators
 {
 	/// <inheritdoc/>
 	/// <summary>
-	/// The base class for decorators for <see cref="IAsyncCommandService{TEntity, TIdentity}"/>.
+	/// The base class for decorators for <see cref="IAsyncCommandService{TRoot, TIdentity}"/>.
 	/// </summary>
-	public abstract class AsyncCommandServiceDecorator<TEntity, TIdentity> : IAsyncCommandService<TEntity, TIdentity>
-		where TEntity : IAggregateRoot<TIdentity>
+	public abstract class AsyncCommandServiceDecorator<TRoot, TIdentity> : IAsyncCommandService<TRoot, TIdentity>
+		where TRoot : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 		/// <summary>
-		/// Initializes a new instance of the <see cref="AsyncCommandServiceDecorator{TEntity, TIdentity}"/> class,
-		/// decorating the given <see cref="IAsyncCommandService{TEntity, TIdentity}"/>.
+		/// Initializes a new instance of the <see cref="AsyncCommandServiceDecorator{TRoot, TIdentity}"/> class,
+		/// decorating the given <see cref="IAsyncCommandService{TRoot, TIdentity}"/>.
 		/// </summary>
-		/// <param name="inner">The <see cref="IAsyncCommandService{TEntity, TIdentity}"/> to be decorated.</param>
+		/// <param name="inner">The <see cref="IAsyncCommandService{TRoot, TIdentity}"/> to be decorated.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
-		public AsyncCommandServiceDecorator(IAsyncCommandService<TEntity, TIdentity> inner)
+		public AsyncCommandServiceDecorator(IAsyncCommandService<TRoot, TIdentity> inner)
 		{
 			Inner = inner ?? throw new ArgumentNullException(nameof(inner));
 		}
 
 		/// <summary>
-		/// Gets a reference to the <see cref="IAsyncCommandService{TEntity, TIdentity}"/> being decorated.
+		/// Gets a reference to the <see cref="IAsyncCommandService{TRoot, TIdentity}"/> being decorated.
 		/// </summary>
-		public IAsyncCommandService<TEntity, TIdentity> Inner { get; }
+		public IAsyncCommandService<TRoot, TIdentity> Inner { get; }
 
 		/// <inheritdoc/>
-		public virtual Task AddAsync(TEntity item) => Inner.AddAsync(item);
+		public virtual Task AddAsync(TRoot item) => Inner.AddAsync(item);
 
 		/// <inheritdoc/>
-		public virtual Task AddOrUpdateAsync(TEntity item) => Inner.AddOrUpdateAsync(item);
+		public virtual Task AddOrUpdateAsync(TRoot item) => Inner.AddOrUpdateAsync(item);
 
 		/// <inheritdoc/>
-		public virtual Task UpdateAsync(TEntity item) => Inner.UpdateAsync(item);
+		public virtual Task UpdateAsync(TRoot item) => Inner.UpdateAsync(item);
 
 		/// <inheritdoc/>
-		public virtual Task RemoveAsync(TEntity item) => Inner.RemoveAsync(item);
+		public virtual Task RemoveAsync(TRoot item) => Inner.RemoveAsync(item);
 
 		/// <inheritdoc/>
 		public virtual Task RemoveAsync(TIdentity id) => Inner.RemoveAsync(id);
 
 		/// <inheritdoc/>
-		public virtual Task<bool> TryAddAsync(TEntity item) => Inner.TryAddAsync(item);
+		public virtual Task<bool> TryAddAsync(TRoot item) => Inner.TryAddAsync(item);
 
 		/// <inheritdoc/>
-		public virtual Task<bool> TryUpdateAsync(TEntity item) => Inner.TryUpdateAsync(item);
+		public virtual Task<bool> TryUpdateAsync(TRoot item) => Inner.TryUpdateAsync(item);
 
 		/// <inheritdoc/>
-		public virtual Task<bool> TryRemoveAsync(TEntity item) => Inner.TryRemoveAsync(item);
+		public virtual Task<bool> TryRemoveAsync(TRoot item) => Inner.TryRemoveAsync(item);
 
 		/// <inheritdoc/>
 		public virtual Task<bool> TryRemoveAsync(TIdentity id) => Inner.TryRemoveAsync(id);

@@ -7,10 +7,10 @@ namespace OnionSeed.Data
 	/// <summary>
 	/// Defines a mechanism that can be used to asynchronously query entities from a data store.
 	/// </summary>
-	/// <typeparam name="TEntity">The type of entities in the data store.</typeparam>
+	/// <typeparam name="TRoot">The type of entities in the data store.</typeparam>
 	/// <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
-	public interface IAsyncQueryService<TEntity, in TIdentity>
-		where TEntity : IAggregateRoot<TIdentity>
+	public interface IAsyncQueryService<TRoot, in TIdentity>
+		where TRoot : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 		/// <summary>
@@ -25,7 +25,7 @@ namespace OnionSeed.Data
 		/// </summary>
 		/// <returns>A task representing the operation. Upon completion, it will contain
 		/// an enumeration of all entities in the data store.</returns>
-		Task<IEnumerable<TEntity>> GetAllAsync();
+		Task<IEnumerable<TRoot>> GetAllAsync();
 
 		/// <summary>
 		/// Gets a specific entity from the data store by its unique identity value.
@@ -35,7 +35,7 @@ namespace OnionSeed.Data
 		/// the entity that has the given unique identity value.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="id"/> is <c>null</c>.</exception>
 		/// <exception cref="KeyNotFoundException">The specified unique identity value does not exist in the data store.</exception>
-		Task<TEntity> GetByIdAsync(TIdentity id);
+		Task<TRoot> GetByIdAsync(TIdentity id);
 
 		/// <summary>
 		/// Attempts to get a specific entity from the data store by its unique identity value.
@@ -45,6 +45,6 @@ namespace OnionSeed.Data
 		/// the entity that has the given unique identity value,
 		/// or <c>null</c> if the specified entity was not found.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="id"/> is <c>null</c>.</exception>
-		Task<TEntity> TryGetByIdAsync(TIdentity id);
+		Task<TRoot> TryGetByIdAsync(TIdentity id);
 	}
 }

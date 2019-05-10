@@ -6,19 +6,19 @@ namespace OnionSeed.Data.Decorators
 {
 	/// <inheritdoc/>
 	/// <summary>
-	/// Adapts an <see cref="IQueryService{TEntity, TIdentity}"/> to work like an <see cref="IAsyncQueryService{TEntity, TIdentity}"/>.
+	/// Adapts an <see cref="IQueryService{TRoot, TIdentity}"/> to work like an <see cref="IAsyncQueryService{TRoot, TIdentity}"/>.
 	/// </summary>
-	public class AsyncQueryServiceAdapter<TEntity, TIdentity> : QueryServiceDecorator<TEntity, TIdentity>, IAsyncQueryService<TEntity, TIdentity>
-		where TEntity : IAggregateRoot<TIdentity>
+	public class AsyncQueryServiceAdapter<TRoot, TIdentity> : QueryServiceDecorator<TRoot, TIdentity>, IAsyncQueryService<TRoot, TIdentity>
+		where TRoot : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 		/// <summary>
-		/// Initializes a new instance of the <see cref="AsyncQueryServiceAdapter{TEntity, TIdentity}"/> class,
-		/// wrapping the given <see cref="IQueryService{TEntity, TIdentity}"/>.
+		/// Initializes a new instance of the <see cref="AsyncQueryServiceAdapter{TRoot, TIdentity}"/> class,
+		/// wrapping the given <see cref="IQueryService{TRoot, TIdentity}"/>.
 		/// </summary>
-		/// <param name="inner">The <see cref="IQueryService{TEntity, TIdentity}"/> to be wrapped.</param>
+		/// <param name="inner">The <see cref="IQueryService{TRoot, TIdentity}"/> to be wrapped.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
-		public AsyncQueryServiceAdapter(IQueryService<TEntity, TIdentity> inner)
+		public AsyncQueryServiceAdapter(IQueryService<TRoot, TIdentity> inner)
 			: base(inner)
 		{
 		}
@@ -27,12 +27,12 @@ namespace OnionSeed.Data.Decorators
 		public Task<long> GetCountAsync() => Task.Run(() => Inner.GetCount());
 
 		/// <inheritdoc/>
-		public Task<IEnumerable<TEntity>> GetAllAsync() => Task.Run(() => Inner.GetAll());
+		public Task<IEnumerable<TRoot>> GetAllAsync() => Task.Run(() => Inner.GetAll());
 
 		/// <inheritdoc/>
-		public Task<TEntity> GetByIdAsync(TIdentity id) => Task.Run(() => Inner.GetById(id));
+		public Task<TRoot> GetByIdAsync(TIdentity id) => Task.Run(() => Inner.GetById(id));
 
 		/// <inheritdoc/>
-		public Task<TEntity> TryGetByIdAsync(TIdentity id) => Task.Run(() => Inner.TryGetById(id, out TEntity result) ? result : default);
+		public Task<TRoot> TryGetByIdAsync(TIdentity id) => Task.Run(() => Inner.TryGetById(id, out TRoot result) ? result : default);
 	}
 }
