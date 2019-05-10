@@ -11,7 +11,7 @@ namespace OnionSeed.Data.Decorators
 	/// <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
 	/// <typeparam name="TException">"The type of exception to be handled.</typeparam>
 	public class AsyncCommandServiceExceptionHandler<TEntity, TIdentity, TException> : AsyncCommandServiceDecorator<TEntity, TIdentity>
-		where TEntity : IEntity<TIdentity>
+		where TEntity : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 		where TException : Exception
 	{

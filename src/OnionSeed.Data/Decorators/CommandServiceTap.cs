@@ -13,7 +13,7 @@ namespace OnionSeed.Data.Decorators
 	/// <para>This essentially allows for the creation of a duplicate copy of the data,
 	/// and is intended to be used for things like caching, backup, or reporting.</para></remarks>
 	public class CommandServiceTap<TEntity, TIdentity> : CommandServiceDecorator<TEntity, TIdentity>
-		where TEntity : IEntity<TIdentity>
+		where TEntity : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 		/// <summary>

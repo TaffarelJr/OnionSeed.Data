@@ -9,7 +9,7 @@ namespace OnionSeed.Data.Decorators
 	/// Adapts an <see cref="IQueryService{TEntity, TIdentity}"/> to work like an <see cref="IAsyncQueryService{TEntity, TIdentity}"/>.
 	/// </summary>
 	public class AsyncQueryServiceAdapter<TEntity, TIdentity> : QueryServiceDecorator<TEntity, TIdentity>, IAsyncQueryService<TEntity, TIdentity>
-		where TEntity : IEntity<TIdentity>
+		where TEntity : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 		/// <summary>

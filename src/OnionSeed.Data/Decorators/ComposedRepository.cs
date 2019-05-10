@@ -8,7 +8,7 @@ namespace OnionSeed.Data.Decorators
 	/// Joins an <see cref="IQueryService{TEntity, TIdentity}"/> and an <see cref="ICommandService{TEntity, TIdentity}"/> into a single <see cref="IRepository{TEntity, TIdentity}"/>.
 	/// </summary>
 	public class ComposedRepository<TEntity, TIdentity> : IRepository<TEntity, TIdentity>
-		where TEntity : IEntity<TIdentity>
+		where TEntity : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 		/// <summary>

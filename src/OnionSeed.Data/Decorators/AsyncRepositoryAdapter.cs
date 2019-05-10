@@ -9,7 +9,7 @@ namespace OnionSeed.Data.Decorators
 	/// Adapts an <see cref="IRepository{TEntity, TIdentity}"/> to work like an <see cref="IAsyncRepository{TEntity, TIdentity}"/>.
 	/// </summary>
 	public class AsyncRepositoryAdapter<TEntity, TIdentity> : RepositoryDecorator<TEntity, TIdentity>, IAsyncRepository<TEntity, TIdentity>
-		where TEntity : IEntity<TIdentity>
+		where TEntity : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 		/// <summary>

@@ -8,7 +8,7 @@ namespace OnionSeed.Data.Decorators
 	/// The base class for decorators for <see cref="IRepository{TEntity, TIdentity}"/>.
 	/// </summary>
 	public abstract class RepositoryDecorator<TEntity, TIdentity> : IRepository<TEntity, TIdentity>
-		where TEntity : IEntity<TIdentity>
+		where TEntity : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 		/// <summary>

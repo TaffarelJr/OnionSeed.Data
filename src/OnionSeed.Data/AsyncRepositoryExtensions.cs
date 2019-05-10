@@ -23,7 +23,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="handler"/> is <c>null</c>.</exception>
 		public static IAsyncRepository<TEntity, TIdentity> Catch<TEntity, TIdentity, TException>(this IAsyncRepository<TEntity, TIdentity> inner, Func<TException, bool> handler)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 			where TException : Exception
 		{
@@ -42,7 +42,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
 		public static IAsyncRepository<TEntity, TIdentity> WithSequentialTap<TEntity, TIdentity>(this IAsyncRepository<TEntity, TIdentity> inner, IAsyncRepository<TEntity, TIdentity> tap)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 		{
 			return new AsyncRepositoryTap<TEntity, TIdentity>(inner, tap);
@@ -61,7 +61,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
 		public static IAsyncRepository<TEntity, TIdentity> WithSequentialTap<TEntity, TIdentity>(this IAsyncRepository<TEntity, TIdentity> inner, IAsyncRepository<TEntity, TIdentity> tap, ILogger logger)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 		{
 			return new AsyncRepositoryTap<TEntity, TIdentity>(inner, tap, logger);
@@ -79,7 +79,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
 		public static IAsyncRepository<TEntity, TIdentity> WithParallelTap<TEntity, TIdentity>(this IAsyncRepository<TEntity, TIdentity> inner, IAsyncRepository<TEntity, TIdentity> tap)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 		{
 			return new AsyncRepositoryParallelTap<TEntity, TIdentity>(inner, tap);
@@ -98,7 +98,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
 		public static IAsyncRepository<TEntity, TIdentity> WithParallelTap<TEntity, TIdentity>(this IAsyncRepository<TEntity, TIdentity> inner, IAsyncRepository<TEntity, TIdentity> tap, ILogger logger)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 		{
 			return new AsyncRepositoryParallelTap<TEntity, TIdentity>(inner, tap, logger);
@@ -113,7 +113,7 @@ namespace OnionSeed.Data
 		/// <returns>A new <see cref="SyncRepositoryAdapter{TEntity, TIdentity}"/> wrapping the given <see cref="IAsyncRepository{TEntity, TIdentity}"/>.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
 		public static IRepository<TEntity, TIdentity> ToSync<TEntity, TIdentity>(this IAsyncRepository<TEntity, TIdentity> inner)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 		{
 			return new SyncRepositoryAdapter<TEntity, TIdentity>(inner);

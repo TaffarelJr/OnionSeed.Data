@@ -24,7 +24,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="handler"/> is <c>null</c>.</exception>
 		public static ICommandService<TEntity, TIdentity> Catch<TEntity, TIdentity, TException>(this ICommandService<TEntity, TIdentity> inner, Func<TException, bool> handler)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 			where TException : Exception
 		{
@@ -43,7 +43,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
 		public static ICommandService<TEntity, TIdentity> WithTap<TEntity, TIdentity>(this ICommandService<TEntity, TIdentity> inner, ICommandService<TEntity, TIdentity> tap)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 		{
 			return new CommandServiceTap<TEntity, TIdentity>(inner, tap);
@@ -62,7 +62,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
 		public static ICommandService<TEntity, TIdentity> WithTap<TEntity, TIdentity>(this ICommandService<TEntity, TIdentity> inner, ICommandService<TEntity, TIdentity> tap, ILogger logger)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 		{
 			return new CommandServiceTap<TEntity, TIdentity>(inner, tap, logger);
@@ -78,7 +78,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
 		[SuppressMessage("AsyncUsage.CSharp.Naming", "AvoidAsyncSuffix:Avoid Async suffix", Justification = "Name is appropriate in this case.")]
 		public static IAsyncCommandService<TEntity, TIdentity> ToAsync<TEntity, TIdentity>(this ICommandService<TEntity, TIdentity> inner)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 		{
 			return new AsyncCommandServiceAdapter<TEntity, TIdentity>(inner);
@@ -95,7 +95,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="commandService"/> is <c>null</c>.
 		/// -or- <paramref name="queryService"/> is <c>null</c>.</exception>
 		public static IRepository<TEntity, TIdentity> Join<TEntity, TIdentity>(this ICommandService<TEntity, TIdentity> commandService, IQueryService<TEntity, TIdentity> queryService)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 		{
 			return new ComposedRepository<TEntity, TIdentity>(queryService, commandService);

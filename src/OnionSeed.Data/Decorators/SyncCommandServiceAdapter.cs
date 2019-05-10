@@ -8,7 +8,7 @@ namespace OnionSeed.Data.Decorators
 	/// Adapts an <see cref="IAsyncCommandService{TEntity, TIdentity}"/> to work like an <see cref="ICommandService{TEntity, TIdentity}"/>.
 	/// </summary>
 	public class SyncCommandServiceAdapter<TEntity, TIdentity> : AsyncCommandServiceDecorator<TEntity, TIdentity>, ICommandService<TEntity, TIdentity>
-		where TEntity : IEntity<TIdentity>
+		where TEntity : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 		/// <summary>

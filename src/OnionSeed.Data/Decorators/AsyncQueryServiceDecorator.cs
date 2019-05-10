@@ -9,7 +9,7 @@ namespace OnionSeed.Data.Decorators
 	/// The base class for decorators for <see cref="IAsyncQueryService{TEntity, TIdentity}"/>.
 	/// </summary>
 	public abstract class AsyncQueryServiceDecorator<TEntity, TIdentity> : IAsyncQueryService<TEntity, TIdentity>
-		where TEntity : IEntity<TIdentity>
+		where TEntity : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 		/// <summary>

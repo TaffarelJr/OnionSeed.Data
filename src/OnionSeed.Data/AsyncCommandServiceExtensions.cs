@@ -23,7 +23,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="handler"/> is <c>null</c>.</exception>
 		public static IAsyncCommandService<TEntity, TIdentity> Catch<TEntity, TIdentity, TException>(this IAsyncCommandService<TEntity, TIdentity> inner, Func<TException, bool> handler)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 			where TException : Exception
 		{
@@ -42,7 +42,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
 		public static IAsyncCommandService<TEntity, TIdentity> WithSequentialTap<TEntity, TIdentity>(this IAsyncCommandService<TEntity, TIdentity> inner, IAsyncCommandService<TEntity, TIdentity> tap)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 		{
 			return new AsyncCommandServiceTap<TEntity, TIdentity>(inner, tap);
@@ -61,7 +61,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
 		public static IAsyncCommandService<TEntity, TIdentity> WithSequentialTap<TEntity, TIdentity>(this IAsyncCommandService<TEntity, TIdentity> inner, IAsyncCommandService<TEntity, TIdentity> tap, ILogger logger)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 		{
 			return new AsyncCommandServiceTap<TEntity, TIdentity>(inner, tap, logger);
@@ -79,7 +79,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
 		public static IAsyncCommandService<TEntity, TIdentity> WithParallelTap<TEntity, TIdentity>(this IAsyncCommandService<TEntity, TIdentity> inner, IAsyncCommandService<TEntity, TIdentity> tap)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 		{
 			return new AsyncCommandServiceParallelTap<TEntity, TIdentity>(inner, tap);
@@ -98,7 +98,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="tap"/> is <c>null</c>.</exception>
 		public static IAsyncCommandService<TEntity, TIdentity> WithParallelTap<TEntity, TIdentity>(this IAsyncCommandService<TEntity, TIdentity> inner, IAsyncCommandService<TEntity, TIdentity> tap, ILogger logger)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 		{
 			return new AsyncCommandServiceParallelTap<TEntity, TIdentity>(inner, tap, logger);
@@ -113,7 +113,7 @@ namespace OnionSeed.Data
 		/// <returns>A new <see cref="SyncCommandServiceAdapter{TEntity, TIdentity}"/> wrapping the given <see cref="IAsyncCommandService{TEntity, TIdentity}"/>.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
 		public static ICommandService<TEntity, TIdentity> ToSync<TEntity, TIdentity>(this IAsyncCommandService<TEntity, TIdentity> inner)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 		{
 			return new SyncCommandServiceAdapter<TEntity, TIdentity>(inner);
@@ -130,7 +130,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="commandService"/> is <c>null</c>.
 		/// -or- <paramref name="queryService"/> is <c>null</c>.</exception>
 		public static IAsyncRepository<TEntity, TIdentity> Join<TEntity, TIdentity>(this IAsyncCommandService<TEntity, TIdentity> commandService, IAsyncQueryService<TEntity, TIdentity> queryService)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 		{
 			return new ComposedAsyncRepository<TEntity, TIdentity>(queryService, commandService);

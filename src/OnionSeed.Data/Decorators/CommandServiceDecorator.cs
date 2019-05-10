@@ -7,7 +7,7 @@ namespace OnionSeed.Data.Decorators
 	/// The base class for decorators for <see cref="ICommandService{TEntity, TIdentity}"/>.
 	/// </summary>
 	public abstract class CommandServiceDecorator<TEntity, TIdentity> : ICommandService<TEntity, TIdentity>
-		where TEntity : IEntity<TIdentity>
+		where TEntity : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 		/// <summary>

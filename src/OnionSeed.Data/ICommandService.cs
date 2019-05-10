@@ -9,7 +9,7 @@ namespace OnionSeed.Data
 	/// <typeparam name="TEntity">The type of entities in the data store.</typeparam>
 	/// <typeparam name="TIdentity">The type of the unique identity value of the entities in the data store.</typeparam>
 	public interface ICommandService<TEntity, in TIdentity>
-		where TEntity : IEntity<TIdentity>
+		where TEntity : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 		/// <summary>

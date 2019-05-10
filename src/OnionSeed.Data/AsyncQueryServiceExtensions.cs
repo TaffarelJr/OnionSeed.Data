@@ -22,7 +22,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.
 		/// -or- <paramref name="handler"/> is <c>null</c>.</exception>
 		public static IAsyncQueryService<TEntity, TIdentity> Catch<TEntity, TIdentity, TException>(this IAsyncQueryService<TEntity, TIdentity> inner, Func<TException, bool> handler)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 			where TException : Exception
 		{
@@ -38,7 +38,7 @@ namespace OnionSeed.Data
 		/// <returns>A new <see cref="SyncQueryServiceAdapter{TEntity, TIdentity}"/> wrapping the given <see cref="IAsyncQueryService{TEntity, TIdentity}"/>.</returns>
 		/// <exception cref="ArgumentNullException"><paramref name="inner"/> is <c>null</c>.</exception>
 		public static IQueryService<TEntity, TIdentity> ToSync<TEntity, TIdentity>(this IAsyncQueryService<TEntity, TIdentity> inner)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 		{
 			return new SyncQueryServiceAdapter<TEntity, TIdentity>(inner);
@@ -55,7 +55,7 @@ namespace OnionSeed.Data
 		/// <exception cref="ArgumentNullException"><paramref name="queryService"/> is <c>null</c>.
 		/// -or- <paramref name="commandService"/> is <c>null</c>.</exception>
 		public static IAsyncRepository<TEntity, TIdentity> Join<TEntity, TIdentity>(this IAsyncQueryService<TEntity, TIdentity> queryService, IAsyncCommandService<TEntity, TIdentity> commandService)
-			where TEntity : IEntity<TIdentity>
+			where TEntity : IAggregateRoot<TIdentity>
 			where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 		{
 			return new ComposedAsyncRepository<TEntity, TIdentity>(queryService, commandService);

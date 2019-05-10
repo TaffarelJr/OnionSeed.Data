@@ -8,7 +8,7 @@ namespace OnionSeed.Data
 	/// and query them back out again.
 	/// </summary>
 	public interface IAsyncRepository<TEntity, in TIdentity> : IAsyncQueryService<TEntity, TIdentity>, IAsyncCommandService<TEntity, TIdentity>
-		where TEntity : IEntity<TIdentity>
+		where TEntity : IAggregateRoot<TIdentity>
 		where TIdentity : IEquatable<TIdentity>, IComparable<TIdentity>
 	{
 	}
